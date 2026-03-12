@@ -882,7 +882,7 @@ function DetailView({ opportunity: opp, onBack, dark }) {
         <p style={{ color: t.textSecondary, fontSize: 14, marginBottom: 18, lineHeight: 1.5 }}>
           On vous accompagne pour transformer cette opportunité en projet concret — de l'idée au lancement.
         </p>
-        <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.accent, color: "#FFFFFF", padding: "12px 28px", borderRadius: 10, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s ease", cursor: "pointer", border: "none", fontFamily: "inherit" }}
+        <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.accent, color: "#FFFFFF", padding: "12px 28px", borderRadius: 10, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s ease", cursor: "pointer", border: "none", fontFamily: "inherit" }}
           onMouseEnter={e => e.currentTarget.style.background = t.accentLight}
           onMouseLeave={e => e.currentTarget.style.background = t.accent}>
           Prendre rendez-vous →
@@ -921,7 +921,7 @@ function ContactView({ dark }) {
           ))}
         </div>
 
-        <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" style={{
+        <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
           display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
           background: t.accent, color: "#FFFFFF", padding: "14px 28px", borderRadius: 12,
           fontSize: 15, fontWeight: 600, textDecoration: "none", cursor: "pointer",
@@ -1242,7 +1242,7 @@ export default function Trendora() {
 
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <ThemeToggle dark={dark} setDark={setDark} />
-            <a href="https://calendly.com" target="_blank" rel="noopener noreferrer"
+            <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer"
               onClick={(e) => { e.preventDefault(); handleNavigate("contact"); }}
               style={{
                 background: t.accent, color: "#FFF", padding: "8px 18px", borderRadius: 10,
