@@ -1,69 +1,42 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
-// ─── DESIGN TOKENS ───
-const tokens = {
-  light: {
-    bg: "#FFFCF9",
-    bgSecondary: "#F7F3EE",
-    bgTertiary: "#EFEBE5",
-    bgCard: "#FFFFFF",
-    bgCardHover: "#FDFAF6",
-    border: "#E8E2DA",
-    borderLight: "#F0EBE4",
-    text: "#1A1613",
-    textSecondary: "#6B6259",
-    textTertiary: "#9C9389",
-    accent: "#C75B2A",
-    accentLight: "#E8845A",
-    accentBg: "#FDF0EA",
-    accentBorder: "#F5D4C4",
-    green: "#2D8A56",
-    greenBg: "#EBF5F0",
-    greenBorder: "#C4E1D1",
-    blue: "#3A7BC8",
-    blueBg: "#EDF3FB",
-    yellow: "#B8860B",
-    yellowBg: "#FDF6E3",
-    red: "#C0392B",
-    shadow: "0 1px 3px rgba(26,22,19,0.06), 0 1px 2px rgba(26,22,19,0.04)",
-    shadowHover: "0 4px 12px rgba(26,22,19,0.08), 0 2px 4px rgba(26,22,19,0.04)",
-  },
-  dark: {
-    bg: "#1A1714",
-    bgSecondary: "#231F1B",
-    bgTertiary: "#2C2722",
-    bgCard: "#252118",
-    bgCardHover: "#2E2A24",
-    border: "#3A352E",
-    borderLight: "#322D27",
-    text: "#F0EBE4",
-    textSecondary: "#A89E93",
-    textTertiary: "#7A7068",
-    accent: "#E8845A",
-    accentLight: "#F0A07A",
-    accentBg: "#3A271E",
-    accentBorder: "#5C3D2E",
-    green: "#4CAF7A",
-    greenBg: "#1E3028",
-    greenBorder: "#2E4A38",
-    blue: "#5A9BE0",
-    blueBg: "#1E2A38",
-    yellow: "#D4A024",
-    yellowBg: "#2E2818",
-    red: "#E05A4E",
-    shadow: "0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15)",
-    shadowHover: "0 4px 12px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15)",
-  },
+// ─── DESIGN TOKENS (Dark Only) ───
+const t = {
+  bg: "#0A0A0A",
+  bgAlt: "#111111",
+  bgCard: "rgba(255,255,255,0.03)",
+  bgCardHover: "rgba(255,255,255,0.06)",
+  bgGlass: "rgba(255,255,255,0.04)",
+  border: "rgba(255,255,255,0.08)",
+  borderHover: "rgba(255,255,255,0.16)",
+  borderAccent: "rgba(245,158,11,0.3)",
+  text: "#F5F5F7",
+  textSecondary: "#A1A1A6",
+  textTertiary: "#6E6E73",
+  accent: "#F59E0B",
+  accentLight: "#FBBF24",
+  accentDim: "rgba(245,158,11,0.12)",
+  accentGlow: "rgba(245,158,11,0.08)",
+  green: "#34D399",
+  greenDim: "rgba(52,211,153,0.12)",
+  blue: "#60A5FA",
+  blueDim: "rgba(96,165,250,0.12)",
+  yellow: "#FBBF24",
+  yellowDim: "rgba(251,191,36,0.12)",
+  red: "#F87171",
+  shadow: "0 1px 2px rgba(0,0,0,0.4)",
+  shadowHover: "0 8px 32px rgba(0,0,0,0.5)",
+  glowAccent: "0 0 60px rgba(245,158,11,0.06), 0 0 120px rgba(245,158,11,0.03)",
 };
 
 // ─── DATA ───
 const CATEGORIES = [
-  { id: "all", label: "Toutes", icon: "◎" },
-  { id: "tech", label: "Tech & SaaS", icon: "⬡" },
-  { id: "sante", label: "Santé", icon: "♡" },
-  { id: "immobilier", label: "Immobilier", icon: "△" },
-  { id: "btp", label: "BTP", icon: "⬢" },
-  { id: "marketing", label: "Marketing & Com", icon: "◈" },
+  { id: "all", label: "Toutes", icon: "grid" },
+  { id: "tech", label: "Tech & SaaS", icon: "cpu" },
+  { id: "sante", label: "Santé", icon: "heart" },
+  { id: "immobilier", label: "Immobilier", icon: "building" },
+  { id: "btp", label: "BTP", icon: "hammer" },
+  { id: "marketing", label: "Marketing & Com", icon: "megaphone" },
 ];
 
 const OPPORTUNITIES = [
@@ -175,7 +148,6 @@ const OPPORTUNITIES = [
     competitors: "Moka.care, Teale existent mais le marché reste très fragmenté et en forte croissance.",
     weekTrend: "up",
   },
-  // ─── TECH & SaaS (additional) ───
   {
     id: 13, name: "Générateur de contrats freelance par IA", category: "tech", score: 82,
     scores: { demande: 20, croissance: 19, concurrence: 17, monetisation: 13, faisabilite: 13 },
@@ -248,7 +220,6 @@ const OPPORTUNITIES = [
     competitors: "Les cabinets d'avocats font ça manuellement. Pas d'outil IA accessible pour les PME.",
     weekTrend: "new",
   },
-  // ─── SANTÉ (additional) ───
   {
     id: 21, name: "App de suivi nutritionnel IA personnalisé", category: "sante", score: 76,
     scores: { demande: 20, croissance: 18, concurrence: 14, monetisation: 12, faisabilite: 12 },
@@ -307,17 +278,16 @@ const OPPORTUNITIES = [
     id: 27, name: "Plateforme de second avis médical IA", category: "sante", score: 55,
     scores: { demande: 14, croissance: 14, concurrence: 11, monetisation: 9, faisabilite: 7 },
     trend: "+42%", market: "€580M", type: "Marketplace / App", mentions: 190, sources: "Reddit, Google Trends",
-    problem: "Quand un patient reçoit un diagnostic grave ou incertain, obtenir un second avis médical est long (6-12 semaines), coûteux et compliqué. Les patients ne savent pas vers quel spécialiste se tourner ni comment transmettre leur dossier.",
-    solution: "Une plateforme de second avis : le patient upload son dossier médical, l'IA pré-analyse et oriente vers le bon spécialiste, le médecin rend son avis sous 48-72h. Dossier structuré automatiquement. Cible : patients, mutuelles. Pricing suggéré : 150-300€ par avis ou prise en charge mutuelle.",
+    problem: "Quand un patient reçoit un diagnostic grave ou incertain, obtenir un second avis médical est long (6-12 semaines), coûteux et compliqué.",
+    solution: "Une plateforme de second avis : le patient upload son dossier médical, l'IA pré-analyse et oriente vers le bon spécialiste, le médecin rend son avis sous 48-72h. Cible : patients, mutuelles. Pricing suggéré : 150-300€ par avis.",
     competitors: "Deuxième Avis existe mais le marché reste embryonnaire en France.",
     weekTrend: "stable",
   },
-  // ─── IMMOBILIER (additional) ───
   {
     id: 28, name: "Outil de scoring locataire pour propriétaires", category: "immobilier", score: 78,
     scores: { demande: 19, croissance: 19, concurrence: 16, monetisation: 12, faisabilite: 12 },
     trend: "+125%", market: "€780M", type: "SaaS", mentions: 510, sources: "Reddit, Forums immo, Google Trends",
-    problem: "Les propriétaires reçoivent des dizaines de dossiers locataires et doivent les trier manuellement. Vérifier la solvabilité, l'authenticité des documents, comparer les profils — tout est chronophage. Les fraudes aux faux bulletins de salaire augmentent.",
+    problem: "Les propriétaires reçoivent des dizaines de dossiers locataires et doivent les trier manuellement. Vérifier la solvabilité, l'authenticité des documents, comparer les profils — tout est chronophage.",
     solution: "Un outil de scoring automatique : upload du dossier, vérification IA des documents, score de solvabilité, comparaison entre candidats, alertes fraude. Cible : propriétaires bailleurs et agences. Pricing suggéré : 5€ par dossier ou 29€/mois illimité.",
     competitors: "Dossierfacile.fr existe mais ne fait pas de scoring ni de détection de fraude.",
     weekTrend: "up",
@@ -326,8 +296,8 @@ const OPPORTUNITIES = [
     id: 29, name: "Simulateur investissement locatif IA", category: "immobilier", score: 72,
     scores: { demande: 18, croissance: 17, concurrence: 14, monetisation: 12, faisabilite: 11 },
     trend: "+95%", market: "€1.4B", type: "SaaS / App", mentions: 460, sources: "Reddit, YouTube, Google Trends",
-    problem: "Les investisseurs immobiliers débutants ne savent pas évaluer la rentabilité réelle d'un bien. Les simulateurs existants sont basiques et ne prennent pas en compte la fiscalité réelle, les charges, la vacance locative.",
-    solution: "Un simulateur avancé : estimation du rendement net-net, simulation fiscale (LMNP, Pinel, SCI), projection sur 10-20 ans, comparaison avec d'autres investissements, analyse du marché local. Cible : investisseurs particuliers. Pricing suggéré : freemium, 14.99€/mois premium.",
+    problem: "Les investisseurs immobiliers débutants ne savent pas évaluer la rentabilité réelle d'un bien.",
+    solution: "Un simulateur avancé : estimation du rendement net-net, simulation fiscale (LMNP, Pinel, SCI), projection sur 10-20 ans. Cible : investisseurs particuliers. Pricing suggéré : freemium, 14.99€/mois premium.",
     competitors: "Quelques simulateurs basiques en ligne mais aucun avec IA et données marché intégrées.",
     weekTrend: "stable",
   },
@@ -335,8 +305,8 @@ const OPPORTUNITIES = [
     id: 30, name: "Outil de visite virtuelle IA pour agences", category: "immobilier", score: 66,
     scores: { demande: 17, croissance: 16, concurrence: 13, monetisation: 11, faisabilite: 9 },
     trend: "+80%", market: "€620M", type: "SaaS", mentions: 350, sources: "Product Hunt, Google Trends, Twitter/X",
-    problem: "Créer des visites virtuelles coûte cher (photographe + Matterport). Les petites agences n'ont pas le budget. Les annonces sans visite virtuelle génèrent 40% moins de contacts.",
-    solution: "Un outil qui transforme de simples photos smartphone en visite virtuelle 3D grâce à l'IA : prise de photos guidée, reconstruction 3D auto, intégration SeLoger/LeBonCoin, home staging virtuel en option. Cible : agences et mandataires. Pricing suggéré : 39€/mois.",
+    problem: "Créer des visites virtuelles coûte cher (photographe + Matterport). Les petites agences n'ont pas le budget.",
+    solution: "Un outil qui transforme de simples photos smartphone en visite virtuelle 3D grâce à l'IA. Cible : agences et mandataires. Pricing suggéré : 39€/mois.",
     competitors: "Matterport domine le haut de gamme. Très peu d'offre accessible smartphone-only avec IA.",
     weekTrend: "new",
   },
@@ -344,8 +314,8 @@ const OPPORTUNITIES = [
     id: 31, name: "Plateforme de coliving intelligent", category: "immobilier", score: 59,
     scores: { demande: 15, croissance: 14, concurrence: 12, monetisation: 10, faisabilite: 8 },
     trend: "+65%", market: "€480M", type: "Marketplace", mentions: 280, sources: "Reddit, Facebook Groups, Twitter/X",
-    problem: "Trouver des colocataires compatibles est un cauchemar. Les plateformes actuelles sont de simples petites annonces sans matching. Les conflits sont la première cause de départ anticipé.",
-    solution: "Une plateforme de matching par IA : profil détaillé, algorithme de compatibilité, visite virtuelle, contrat de colocation généré, gestion des dépenses partagées. Cible : étudiants et jeunes actifs. Commission : 1 mois de loyer ou abonnement propriétaire.",
+    problem: "Trouver des colocataires compatibles est un cauchemar. Les plateformes actuelles sont de simples petites annonces sans matching.",
+    solution: "Une plateforme de matching par IA : profil détaillé, algorithme de compatibilité. Cible : étudiants et jeunes actifs. Commission : 1 mois de loyer.",
     competitors: "La Carte des Colocs est le leader mais sans matching intelligent.",
     weekTrend: "stable",
   },
@@ -353,8 +323,8 @@ const OPPORTUNITIES = [
     id: 32, name: "Outil de gestion de copropriété simplifié", category: "immobilier", score: 55,
     scores: { demande: 14, croissance: 13, concurrence: 11, monetisation: 9, faisabilite: 8 },
     trend: "+45%", market: "€890M", type: "SaaS", mentions: 190, sources: "Forums immo, Google Trends",
-    problem: "Les petites copropriétés ne trouvent pas de syndic professionnel ou paient trop cher. Le syndic bénévole est un casse-tête administratif.",
-    solution: "Un outil de syndic assistant : gestion des charges, convocation d'AG, votes en ligne, suivi travaux, comptabilité simplifiée, rappels réglementaires. Cible : syndics bénévoles, petites copropriétés. Pricing suggéré : 9€/mois par copropriété.",
+    problem: "Les petites copropriétés ne trouvent pas de syndic professionnel ou paient trop cher.",
+    solution: "Un outil de syndic assistant : gestion des charges, convocation d'AG, votes en ligne. Cible : syndics bénévoles, petites copropriétés. Pricing suggéré : 9€/mois par copropriété.",
     competitors: "Matera et Cotoit visent les copros moyennes à grandes.",
     weekTrend: "stable",
   },
@@ -362,8 +332,8 @@ const OPPORTUNITIES = [
     id: 33, name: "Outil de rédaction d'annonces immo IA", category: "immobilier", score: 70,
     scores: { demande: 17, croissance: 17, concurrence: 14, monetisation: 11, faisabilite: 11 },
     trend: "+90%", market: "€320M", type: "SaaS", mentions: 350, sources: "Twitter/X, Forums immo, Google Trends",
-    problem: "Les agents rédigent des dizaines d'annonces par mois avec les mêmes formules creuses. Une bonne annonce génère 3x plus de contacts mais prend 30 minutes à rédiger.",
-    solution: "Un outil qui génère des annonces uniques et vendeuses : caractéristiques du bien → annonce persuasive adaptée à la cible, optimisée SEO portails. Multi-langue en option. Cible : agents et mandataires. Pricing suggéré : 25€/mois.",
+    problem: "Les agents rédigent des dizaines d'annonces par mois avec les mêmes formules creuses.",
+    solution: "Un outil qui génère des annonces uniques et vendeuses. Cible : agents et mandataires. Pricing suggéré : 25€/mois.",
     competitors: "Rien de spécialisé immobilier avec les bonnes données métier.",
     weekTrend: "new",
   },
@@ -371,18 +341,17 @@ const OPPORTUNITIES = [
     id: 34, name: "SaaS gestion de parc immobilier pour SCI", category: "immobilier", score: 58,
     scores: { demande: 15, croissance: 14, concurrence: 12, monetisation: 9, faisabilite: 8 },
     trend: "+52%", market: "€340M", type: "SaaS", mentions: 230, sources: "Forums immo, Reddit",
-    problem: "Les SCI familiales n'ont aucun outil adapté. La comptabilité SCI est spécifique, les obligations déclaratives complexes, et tout est géré entre Excel et le comptable.",
-    solution: "Un outil dédié SCI : comptabilité simplifiée, suivi de rentabilité par bien, simulation fiscale, gestion des AG, documents obligatoires, tableau de bord patrimonial. Cible : gérants de SCI. Pricing suggéré : 19€/mois par SCI.",
+    problem: "Les SCI familiales n'ont aucun outil adapté.",
+    solution: "Un outil dédié SCI : comptabilité simplifiée, suivi de rentabilité par bien. Cible : gérants de SCI. Pricing suggéré : 19€/mois par SCI.",
     competitors: "Les logiciels comptables classiques ne gèrent pas les spécificités SCI.",
     weekTrend: "stable",
   },
-  // ─── BTP (additional) ───
   {
     id: 35, name: "App de suivi de chantier par photo IA", category: "btp", score: 80,
     scores: { demande: 20, croissance: 20, concurrence: 16, monetisation: 12, faisabilite: 12 },
     trend: "+150%", market: "€1.8B", type: "App", mentions: 680, sources: "Forums BTP, Reddit, Google Trends",
-    problem: "Le suivi de chantier se fait par WhatsApp et photos en vrac. Les comptes-rendus sont rédigés à la main. Les litiges avec les clients sont fréquents car il n'y a pas de preuve structurée.",
-    solution: "Une app mobile ultra simple : photo → l'IA catégorise, géolocalise et horodate, génère un rapport d'avancement automatique, timeline visuelle partageable avec le client. Cible : artisans et chefs de chantier TPE. Pricing suggéré : 19€/mois.",
+    problem: "Le suivi de chantier se fait par WhatsApp et photos en vrac.",
+    solution: "Une app mobile ultra simple : photo → l'IA catégorise, géolocalise et horodate. Cible : artisans et chefs de chantier TPE. Pricing suggéré : 19€/mois.",
     competitors: "Finalcad et BatiScript visent les grands groupes. Quasi rien pour les TPE.",
     weekTrend: "up",
   },
@@ -390,8 +359,8 @@ const OPPORTUNITIES = [
     id: 36, name: "Marketplace matériaux BTP entre pros", category: "btp", score: 69,
     scores: { demande: 17, croissance: 17, concurrence: 14, monetisation: 11, faisabilite: 10 },
     trend: "+80%", market: "€2.1B", type: "Marketplace", mentions: 390, sources: "Forums BTP, Reddit",
-    problem: "Les artisans achètent chez 2-3 fournisseurs habituels sans comparer. Les surplus de chantier finissent à la déchetterie. Pas de plateforme pour revendre du stock entre pros ou comparer les prix.",
-    solution: "Une marketplace B2B : comparateur de prix fournisseurs locaux, revente de surplus entre artisans, livraison mutualisée, historique des prix. Cible : artisans et PME du bâtiment. Commission : 5-8% par transaction.",
+    problem: "Les artisans achètent chez 2-3 fournisseurs habituels sans comparer.",
+    solution: "Une marketplace B2B : comparateur de prix fournisseurs locaux, revente de surplus entre artisans. Commission : 5-8% par transaction.",
     competitors: "StockPro fait les surplus mais pas de plateforme complète prix + surplus.",
     weekTrend: "stable",
   },
@@ -399,8 +368,8 @@ const OPPORTUNITIES = [
     id: 37, name: "Outil de conformité RE2020 automatisé", category: "btp", score: 63,
     scores: { demande: 16, croissance: 16, concurrence: 13, monetisation: 10, faisabilite: 8 },
     trend: "+70%", market: "€560M", type: "SaaS", mentions: 310, sources: "Forums BTP, LinkedIn, Google Trends",
-    problem: "La RE2020 impose de nouvelles normes thermiques et carbone. Les bureaux d'études sont submergés, les artisans ne comprennent pas les exigences, et les outils de calcul sont réservés aux experts.",
-    solution: "Un outil simplifié : caractéristiques du projet → calcul conformité, points de blocage, alternatives suggérées, rapport conforme aux normes. Cible : constructeurs, architectes. Pricing suggéré : 79€/mois.",
+    problem: "La RE2020 impose de nouvelles normes thermiques et carbone.",
+    solution: "Un outil simplifié : caractéristiques du projet → calcul conformité. Cible : constructeurs, architectes. Pricing suggéré : 79€/mois.",
     competitors: "Pleiades, ClimaWin sont complexes et chers. Pas d'offre simplifiée IA.",
     weekTrend: "new",
   },
@@ -408,8 +377,8 @@ const OPPORTUNITIES = [
     id: 38, name: "Plateforme mise en relation chantier/artisan", category: "btp", score: 56,
     scores: { demande: 15, croissance: 13, concurrence: 11, monetisation: 9, faisabilite: 8 },
     trend: "+45%", market: "€1.3B", type: "Marketplace", mentions: 260, sources: "Google Trends, Forums BTP",
-    problem: "Les particuliers galèrent à trouver des artisans fiables. Les plateformes existantes vendent des leads en masse. Les artisans reçoivent des demandes non qualifiées.",
-    solution: "Une plateforme avec meilleur matching : description projet assistée par IA, matching intelligent par spécialité et zone, avis vérifiés post-chantier. Cible : particuliers + artisans. Commission : 15€ par mise en relation.",
+    problem: "Les particuliers galèrent à trouver des artisans fiables.",
+    solution: "Une plateforme avec meilleur matching par IA. Commission : 15€ par mise en relation.",
     competitors: "Marché concurrentiel mais la qualité du matching reste le point faible de tous.",
     weekTrend: "stable",
   },
@@ -417,8 +386,8 @@ const OPPORTUNITIES = [
     id: 39, name: "Logiciel planification de chantier IA", category: "btp", score: 52,
     scores: { demande: 13, croissance: 13, concurrence: 11, monetisation: 8, faisabilite: 7 },
     trend: "+40%", market: "€720M", type: "SaaS", mentions: 180, sources: "Forums BTP, LinkedIn",
-    problem: "La planification pour les petites entreprises se fait sur Excel. Les retards s'accumulent car les dépendances entre corps de métier ne sont pas gérées — effet domino non anticipé.",
-    solution: "Un planning visuel intelligent : Gantt simplifié, gestion des dépendances entre lots, alertes retard, recalcul IA du planning en temps réel. Cible : chefs de chantier TPE/PME. Pricing suggéré : 39€/mois.",
+    problem: "La planification pour les petites entreprises se fait sur Excel.",
+    solution: "Un planning visuel intelligent : Gantt simplifié, gestion des dépendances. Cible : chefs de chantier TPE/PME. Pricing suggéré : 39€/mois.",
     competitors: "MS Project est surdimensionné. Quelques apps existent mais sans IA.",
     weekTrend: "stable",
   },
@@ -426,36 +395,35 @@ const OPPORTUNITIES = [
     id: 40, name: "Plateforme formation IA pour artisans", category: "btp", score: 48,
     scores: { demande: 12, croissance: 12, concurrence: 10, monetisation: 8, faisabilite: 6 },
     trend: "+35%", market: "€380M", type: "Plateforme", mentions: 150, sources: "Forums BTP, YouTube",
-    problem: "Les artisans doivent se former continuellement (nouvelles normes, matériaux, techniques) mais les formations classiques sont chères et peu adaptées à leur emploi du temps.",
-    solution: "Micro-formations vidéo de 10-15 minutes, certifiantes, accessibles sur mobile au chantier, contenu mis à jour par IA. Cible : artisans en activité. Pricing suggéré : 19€/mois ou OPCO.",
-    competitors: "Peu de formation en ligne spécifique BTP. Les organismes classiques sont rigides.",
+    problem: "Les artisans doivent se former continuellement mais les formations classiques sont chères.",
+    solution: "Micro-formations vidéo de 10-15 minutes, certifiantes. Cible : artisans en activité. Pricing suggéré : 19€/mois.",
+    competitors: "Peu de formation en ligne spécifique BTP.",
     weekTrend: "stable",
   },
   {
     id: 41, name: "Outil calcul bilan carbone chantier", category: "btp", score: 51,
     scores: { demande: 13, croissance: 12, concurrence: 11, monetisation: 8, faisabilite: 7 },
     trend: "+38%", market: "€290M", type: "SaaS", mentions: 170, sources: "LinkedIn, Forums BTP",
-    problem: "La réglementation pousse au calcul de l'empreinte carbone mais les outils sont complexes et réservés aux bureaux d'études. Les PME n'ont ni les compétences ni le budget.",
-    solution: "Un outil simplifié : matériaux et quantités → empreinte calculée, alternatives moins carbonées suggérées, rapport conforme. Cible : PME BTP, maîtres d'œuvre. Pricing suggéré : 49€/mois.",
+    problem: "La réglementation pousse au calcul de l'empreinte carbone mais les outils sont complexes.",
+    solution: "Un outil simplifié : matériaux et quantités → empreinte calculée. Cible : PME BTP. Pricing suggéré : 49€/mois.",
     competitors: "Elodie, Vizcab sont experts. Rien de simplifié pour TPE/PME.",
     weekTrend: "stable",
   },
-  // ─── MARKETING & COM (additional) ───
   {
     id: 42, name: "Générateur de landing pages IA", category: "marketing", score: 80,
     scores: { demande: 20, croissance: 19, concurrence: 16, monetisation: 13, faisabilite: 12 },
     trend: "+140%", market: "€1.6B", type: "SaaS", mentions: 720, sources: "Product Hunt, Reddit, Twitter/X",
-    problem: "Créer une landing page qui convertit demande des compétences en copywriting, design et technique. Les freelances passent des jours dessus. Les builders facilitent la technique mais pas la stratégie de conversion.",
-    solution: "L'utilisateur décrit son offre en 3 phrases → l'IA génère une landing page complète : structure persuasive, copywriting optimisé, design pro, responsive, hébergement inclus, A/B testing des headlines. Cible : freelances, solopreneurs, PME. Pricing suggéré : 19€/mois.",
-    competitors: "Carrd, Unbounce, Leadpages existent mais aucun ne fait la stratégie + le copy par IA.",
+    problem: "Créer une landing page qui convertit demande des compétences en copywriting, design et technique.",
+    solution: "L'utilisateur décrit son offre → l'IA génère une landing page complète. Cible : freelances, solopreneurs, PME. Pricing suggéré : 19€/mois.",
+    competitors: "Carrd, Unbounce existent mais aucun ne fait la stratégie + le copy par IA.",
     weekTrend: "up",
   },
   {
     id: 43, name: "Outil d'analyse de concurrents par IA", category: "marketing", score: 76,
     scores: { demande: 19, croissance: 18, concurrence: 15, monetisation: 12, faisabilite: 12 },
     trend: "+105%", market: "€920M", type: "SaaS", mentions: 480, sources: "Reddit, Indie Hackers, Product Hunt",
-    problem: "Surveiller ses concurrents demande de checker manuellement leurs sites, réseaux sociaux, prix, features, campagnes pub. Les outils de veille sont chers et orientés SEO uniquement.",
-    solution: "Un radar concurrentiel IA : suivi automatique des changements, analyse des stratégies, alertes temps réel, benchmark vs son propre produit, rapport mensuel. Cible : fondateurs SaaS, directeurs marketing. Pricing suggéré : 39€/mois.",
+    problem: "Surveiller ses concurrents demande de checker manuellement leurs sites, réseaux sociaux, prix.",
+    solution: "Un radar concurrentiel IA : suivi automatique des changements, analyse des stratégies. Cible : fondateurs SaaS. Pricing suggéré : 39€/mois.",
     competitors: "Crayon, Kompyte sont orientés enterprise à +200€/mois.",
     weekTrend: "new",
   },
@@ -463,8 +431,8 @@ const OPPORTUNITIES = [
     id: 44, name: "Plateforme de création de newsletters IA", category: "marketing", score: 73,
     scores: { demande: 18, croissance: 18, concurrence: 14, monetisation: 12, faisabilite: 11 },
     trend: "+115%", market: "€780M", type: "SaaS", mentions: 520, sources: "Twitter/X, Product Hunt, Reddit",
-    problem: "Lancer et maintenir une newsletter demande énormément de travail. Beaucoup de créateurs abandonnent après quelques numéros. Les outils actuels gèrent la distribution mais pas la création de contenu.",
-    solution: "Suggestion de sujets tendance dans la niche, rédaction assistée avec le ton de l'auteur, templates visuels, optimisation de l'objet par IA, analyse des performances avec suggestions. Cible : créateurs, solopreneurs. Pricing suggéré : 15€/mois.",
+    problem: "Lancer et maintenir une newsletter demande énormément de travail.",
+    solution: "Suggestion de sujets tendance, rédaction assistée avec le ton de l'auteur. Cible : créateurs, solopreneurs. Pricing suggéré : 15€/mois.",
     competitors: "Substack et Beehiiv dominent la distribution. L'angle création IA est le différenciateur.",
     weekTrend: "up",
   },
@@ -472,17 +440,17 @@ const OPPORTUNITIES = [
     id: 45, name: "Outil de repurposing de contenu IA", category: "marketing", score: 71,
     scores: { demande: 18, croissance: 17, concurrence: 14, monetisation: 11, faisabilite: 11 },
     trend: "+100%", market: "€620M", type: "SaaS", mentions: 440, sources: "Twitter/X, Reddit, YouTube",
-    problem: "Les créateurs passent des heures sur un contenu long puis n'ont plus le temps de le décliner. Un article pourrait devenir 10 posts LinkedIn, 5 tweets, 3 carrousels — mais personne ne le fait manuellement.",
-    solution: "Un outil qui prend un contenu source et génère des déclinaisons pour chaque plateforme : posts LinkedIn, threads Twitter, carrousels, scripts de shorts, extraits newsletter — dans le ton de l'auteur. Cible : créateurs, marketeurs. Pricing suggéré : 25€/mois.",
-    competitors: "Repurpose.io fait de la vidéo. Typeshare fait du texte. Aucun ne fait tout avec IA.",
+    problem: "Les créateurs passent des heures sur un contenu long puis n'ont plus le temps de le décliner.",
+    solution: "Un outil qui prend un contenu source et génère des déclinaisons pour chaque plateforme. Cible : créateurs, marketeurs. Pricing suggéré : 25€/mois.",
+    competitors: "Repurpose.io fait de la vidéo. Aucun ne fait tout avec IA.",
     weekTrend: "up",
   },
   {
     id: 46, name: "Outil de social proof automatisé", category: "marketing", score: 67,
     scores: { demande: 16, croissance: 16, concurrence: 14, monetisation: 11, faisabilite: 10 },
     trend: "+75%", market: "€340M", type: "SaaS", mentions: 310, sources: "Indie Hackers, Product Hunt, Twitter/X",
-    problem: "Collecter et afficher des témoignages clients est manuel. Les widgets existants sont limités. La vidéo testimoniale est puissante mais difficile à obtenir.",
-    solution: "Collecte automatisée (email + SMS), formulaire vidéo simplifié (1 clic), mur de témoignages intégrable, widget notifications, import avis Google/Trustpilot. Cible : SaaS, freelances, e-commerce. Pricing suggéré : 25€/mois.",
+    problem: "Collecter et afficher des témoignages clients est manuel.",
+    solution: "Collecte automatisée, formulaire vidéo simplifié. Cible : SaaS, freelances, e-commerce. Pricing suggéré : 25€/mois.",
     competitors: "Senja, Testimonial.to émergent mais marché fragmenté.",
     weekTrend: "stable",
   },
@@ -490,8 +458,8 @@ const OPPORTUNITIES = [
     id: 47, name: "Générateur de stratégie SEO par IA", category: "marketing", score: 69,
     scores: { demande: 17, croissance: 17, concurrence: 13, monetisation: 11, faisabilite: 11 },
     trend: "+88%", market: "€1.2B", type: "SaaS", mentions: 380, sources: "Reddit, Twitter/X, Product Hunt",
-    problem: "Les freelances et PME savent que le SEO est important mais ne savent pas par où commencer. Les outils donnent des données brutes sans stratégie. La plupart des petits sites n'exploitent pas 10% de leur potentiel.",
-    solution: "Analyse du site → opportunités de mots-clés accessibles → plan de contenu SEO priorisé : quels articles écrire, dans quel ordre, quelle structure. Plan sur 3 mois en 5 minutes. Cible : freelances, PME, blogueurs. Pricing suggéré : 29€/mois.",
+    problem: "Les freelances et PME savent que le SEO est important mais ne savent pas par où commencer.",
+    solution: "Analyse du site → opportunités de mots-clés → plan de contenu SEO priorisé. Cible : freelances, PME. Pricing suggéré : 29€/mois.",
     competitors: "SEMrush et Ahrefs dominent les données. L'angle stratégie actionnable IA est libre.",
     weekTrend: "new",
   },
@@ -499,26 +467,26 @@ const OPPORTUNITIES = [
     id: 48, name: "CRM gestion d'influenceurs pour PME", category: "marketing", score: 62,
     scores: { demande: 15, croissance: 15, concurrence: 13, monetisation: 10, faisabilite: 9 },
     trend: "+65%", market: "€480M", type: "SaaS", mentions: 280, sources: "Twitter/X, LinkedIn, Reddit",
-    problem: "Les PME veulent travailler avec des micro-influenceurs mais ne savent pas comment les trouver, contacter, négocier et mesurer le ROI. Les plateformes d'influence sont conçues pour les grandes marques à +500€/mois.",
-    solution: "Un CRM simplifié : recherche d'influenceurs par niche et localisation, templates de contact, suivi des collaborations, calcul du ROI, gestion des envois produits. Cible : PME et e-commerçants. Pricing suggéré : 39€/mois.",
-    competitors: "Kolsquare, Upfluence visent les grands comptes. Pas d'offre abordable pour PME.",
+    problem: "Les PME veulent travailler avec des micro-influenceurs mais ne savent pas comment.",
+    solution: "Un CRM simplifié : recherche d'influenceurs par niche et localisation. Cible : PME et e-commerçants. Pricing suggéré : 39€/mois.",
+    competitors: "Kolsquare, Upfluence visent les grands comptes.",
     weekTrend: "stable",
   },
   {
     id: 49, name: "Outil gestion des avis Google pour PME", category: "marketing", score: 66,
     scores: { demande: 17, croissance: 15, concurrence: 13, monetisation: 11, faisabilite: 10 },
     trend: "+72%", market: "€460M", type: "SaaS", mentions: 290, sources: "Google Trends, Reddit, Forums PME",
-    problem: "Les avis Google sont le premier critère de choix pour les commerces locaux. Mais les PME ne demandent pas d'avis systématiquement, ne répondent pas aux négatifs, et ne savent pas comment améliorer leur note.",
-    solution: "Demande automatisée d'avis après chaque prestation, réponses générées par IA, analyse du sentiment, suggestions d'amélioration, benchmark concurrents locaux. Cible : commerces, restaurants, artisans. Pricing suggéré : 29€/mois.",
-    competitors: "Partoo, Localranker existent mais marché fragmenté et IA peu exploitée.",
+    problem: "Les avis Google sont le premier critère de choix pour les commerces locaux.",
+    solution: "Demande automatisée d'avis après chaque prestation, réponses générées par IA. Cible : commerces, restaurants. Pricing suggéré : 29€/mois.",
+    competitors: "Partoo, Localranker existent mais marché fragmenté.",
     weekTrend: "up",
   },
   {
     id: 50, name: "Bot LinkedIn lead gen pour agences", category: "marketing", score: 64,
     scores: { demande: 16, croissance: 15, concurrence: 13, monetisation: 11, faisabilite: 9 },
     trend: "+70%", market: "€560M", type: "SaaS", mentions: 340, sources: "Reddit, Twitter/X, LinkedIn",
-    problem: "Les agences prospectent sur LinkedIn manuellement : recherche, demandes de connexion, messages, relances. Efficace mais chronophage. Les outils d'automatisation risquent le ban et ne personnalisent pas assez.",
-    solution: "Identification des prospects par IA, messages hyper-personnalisés (analyse profil, contenu, problématiques), séquences adaptatives, respect des limites LinkedIn. Cible : agences marketing et commerciales. Pricing suggéré : 59€/mois.",
+    problem: "Les agences prospectent sur LinkedIn manuellement.",
+    solution: "Identification des prospects par IA, messages hyper-personnalisés. Cible : agences marketing. Pricing suggéré : 59€/mois.",
     competitors: "Waalaxy, Phantombuster existent. La personnalisation IA profonde est le différenciateur.",
     weekTrend: "stable",
   },
@@ -526,8 +494,8 @@ const OPPORTUNITIES = [
     id: 51, name: "Plateforme micro-learning marketing", category: "marketing", score: 54,
     scores: { demande: 14, croissance: 13, concurrence: 11, monetisation: 9, faisabilite: 7 },
     trend: "+48%", market: "€420M", type: "Plateforme", mentions: 210, sources: "Reddit, Twitter/X",
-    problem: "Les freelances doivent constamment apprendre de nouvelles compétences marketing mais n'ont pas le temps pour des formations longues. Les contenus gratuits sont dispersés et inégaux.",
-    solution: "Micro-formations de 10 minutes : un sujet = un module actionnable, exercices pratiques, progression gamifiée, contenu mis à jour par IA. Cible : freelances marketing, solopreneurs. Pricing suggéré : 15€/mois.",
+    problem: "Les freelances doivent constamment apprendre de nouvelles compétences marketing.",
+    solution: "Micro-formations de 10 minutes. Cible : freelances marketing. Pricing suggéré : 15€/mois.",
     competitors: "Udemy et Coursera sont généralistes. Le micro-learning marketing spécialisé est libre.",
     weekTrend: "stable",
   },
@@ -535,7 +503,6 @@ const OPPORTUNITIES = [
 
 const WEEK_LABEL = "Semaine du 10 mars 2026";
 
-// ─── SCORING CRITERIA ───
 const SCORE_LABELS = {
   demande: { label: "Demande", max: 25, desc: "Volume de mentions et recherches détectées" },
   croissance: { label: "Croissance", max: 25, desc: "Vitesse d'évolution de la tendance" },
@@ -544,86 +511,183 @@ const SCORE_LABELS = {
   faisabilite: { label: "Faisabilité", max: 15, desc: "Facilité à lancer un MVP" },
 };
 
-// ─── COMPONENTS ───
+// ─── SVG ICONS ───
+const Icons = {
+  grid: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>,
+  cpu: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>,
+  heart: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>,
+  building: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M12 14h.01M8 14h.01M16 14h.01"/></svg>,
+  hammer: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 010-3L12 9"/><path d="M17.64 15L22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 00-3.94-1.64H9l.92.82A6.18 6.18 0 0112 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>,
+  megaphone: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/></svg>,
+  arrowRight: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
+  arrowLeft: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>,
+  sparkle: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill={props.color||"currentColor"}><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>,
+  radar: (props) => <svg width={props.size||20} height={props.size||20} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/></svg>,
+  trendUp: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>,
+  check: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>,
+  calendar: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
+};
 
-function ThemeToggle({ dark, setDark }) {
-  const t = dark ? tokens.dark : tokens.light;
+const CategoryIcon = ({ id, size = 20, color }) => {
+  const cat = CATEGORIES.find(c => c.id === id);
+  const IconComp = Icons[cat?.icon] || Icons.grid;
+  return <IconComp size={size} color={color || t.accent} />;
+};
+
+// ─── HOOKS ───
+function useScrollProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          setProgress(docHeight > 0 ? scrollY / docHeight : 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return progress;
+}
+
+function useScrollReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
+// ─── STELLAR ORB ───
+function StellarOrb({ progress }) {
+  // Moves from left (-20%) to right (120%) as user scrolls
+  const x = -20 + progress * 140;
+  // Slight vertical wave using sine
+  const yWave = Math.sin(progress * Math.PI * 2) * 8;
+  // Subtle size pulse
+  const scale = 1 + Math.sin(progress * Math.PI) * 0.15;
+  // Opacity: fade in then fade out at extremes
+  const opacity = 0.12 + Math.sin(progress * Math.PI) * 0.08;
+
   return (
-    <button onClick={() => setDark(!dark)} style={{ background: t.bgTertiary, border: `1px solid ${t.border}`, color: t.textSecondary, borderRadius: 10, padding: "6px 12px", cursor: "pointer", fontSize: 13, transition: "all 0.3s ease", display: "flex", alignItems: "center", gap: 6 }}>
-      {dark ? "☀" : "☾"} {dark ? "Light" : "Dark"}
-    </button>
+    <div style={{
+      position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+      pointerEvents: "none", zIndex: 0, overflow: "hidden",
+    }}>
+      {/* Main orb */}
+      <div style={{
+        position: "absolute",
+        top: `calc(18% + ${yWave}px)`,
+        left: `${x}%`,
+        width: 600, height: 600,
+        borderRadius: "50%",
+        background: `radial-gradient(circle, rgba(245,158,11,${opacity}) 0%, rgba(245,158,11,${opacity * 0.4}) 30%, rgba(217,119,6,${opacity * 0.15}) 55%, transparent 75%)`,
+        filter: `blur(80px)`,
+        transform: `scale(${scale})`,
+        transition: "left 0.15s linear, top 0.15s linear, transform 0.3s ease-out",
+        willChange: "left, top, transform",
+      }} />
+      {/* Secondary smaller orb — trailing, cooler color */}
+      <div style={{
+        position: "absolute",
+        top: `calc(30% + ${-yWave * 0.6}px)`,
+        left: `${x - 15}%`,
+        width: 300, height: 300,
+        borderRadius: "50%",
+        background: `radial-gradient(circle, rgba(96,165,250,${opacity * 0.5}) 0%, rgba(96,165,250,${opacity * 0.15}) 40%, transparent 70%)`,
+        filter: "blur(60px)",
+        transform: `scale(${scale * 0.8})`,
+        transition: "left 0.25s linear, top 0.25s linear",
+        willChange: "left, top",
+      }} />
+    </div>
   );
 }
 
-function ScoreRing({ score, size = 48, strokeWidth = 3.5, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+// ─── COMPONENTS ───
+
+function ScoreRing({ score, size = 52, strokeWidth = 3.5 }) {
   const r = (size - strokeWidth) / 2;
   const circ = 2 * Math.PI * r;
   const offset = circ - (score / 100) * circ;
-  const color = score >= 85 ? t.green : score >= 70 ? t.blue : t.yellow;
+  const color = score >= 85 ? t.green : score >= 70 ? t.blue : score >= 55 ? t.yellow : t.red;
+  const glow = score >= 85 ? `0 0 12px ${t.green}40` : score >= 70 ? `0 0 12px ${t.blue}30` : "none";
   return (
-    <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
+    <div style={{ position: "relative", width: size, height: size, flexShrink: 0, filter: `drop-shadow(${glow})` }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={t.borderLight} strokeWidth={strokeWidth} />
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={strokeWidth} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" style={{ transition: "stroke-dashoffset 0.8s ease" }} />
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={t.border} strokeWidth={strokeWidth} />
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth={strokeWidth} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1)" }} />
       </svg>
-      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: size * 0.28, fontWeight: 700, color: t.text, fontFamily: "'Fraunces', Georgia, serif" }}>
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: size * 0.3, fontWeight: 700, color: t.text, fontFamily: "'JetBrains Mono', monospace" }}>
         {score}
       </div>
     </div>
   );
 }
 
-function TrendBadge({ value, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function TrendBadge({ value }) {
   const num = parseInt(value);
   const color = num >= 200 ? t.green : num >= 100 ? t.blue : t.textSecondary;
   return (
-    <span style={{ color, fontSize: 12, fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace" }}>{value}</span>
+    <span style={{ display: "inline-flex", alignItems: "center", gap: 3, color, fontSize: 13, fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>
+      <Icons.trendUp size={12} color={color} />
+      {value}
+    </span>
   );
 }
 
-function WeekBadge({ type, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function WeekBadge({ type }) {
   const config = {
-    new: { label: "Nouveau", bg: t.accentBg, color: t.accent, border: t.accentBorder },
-    up: { label: "En hausse", bg: t.greenBg, color: t.green, border: t.greenBorder },
-    stable: { label: "Stable", bg: t.bgTertiary, color: t.textSecondary, border: t.border },
+    new: { label: "Nouveau", bg: t.accentDim, color: t.accent, border: t.borderAccent },
+    up: { label: "En hausse", bg: t.greenDim, color: t.green, border: `rgba(52,211,153,0.2)` },
+    stable: { label: "Stable", bg: "rgba(255,255,255,0.04)", color: t.textTertiary, border: t.border },
   };
   const c = config[type] || config.stable;
   return (
-    <span style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}`, padding: "3px 8px", borderRadius: 6, fontSize: 11, fontWeight: 600, letterSpacing: "0.02em" }}>
+    <span style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}`, padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, letterSpacing: "0.02em" }}>
       {c.label}
     </span>
   );
 }
 
-function Tag({ children, dark, color }) {
-  const t = dark ? tokens.dark : tokens.light;
-  const c = color || t.textSecondary;
+function Tag({ children, color }) {
+  const c = color || t.textTertiary;
   return (
-    <span style={{ color: c, background: `${c}10`, border: `1px solid ${c}20`, padding: "2px 8px", borderRadius: 6, fontSize: 11, fontWeight: 500 }}>
+    <span style={{ color: c, background: `${c}10`, border: `1px solid ${c}18`, padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 500 }}>
       {children}
     </span>
   );
 }
 
-function ScoreBreakdown({ scores, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function ScoreBreakdown({ scores }) {
   return (
-    <div style={{ display: "grid", gap: 10 }}>
+    <div style={{ display: "grid", gap: 12 }}>
       {Object.entries(SCORE_LABELS).map(([key, meta]) => {
         const val = scores[key];
         const pct = (val / meta.max) * 100;
         const color = pct >= 85 ? t.green : pct >= 65 ? t.blue : t.yellow;
         return (
           <div key={key}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-              <span style={{ fontSize: 12, color: t.textSecondary, fontWeight: 500 }}>{meta.label}</span>
-              <span style={{ fontSize: 12, fontWeight: 700, color, fontFamily: "'IBM Plex Mono', monospace" }}>{val}/{meta.max}</span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+              <span style={{ fontSize: 13, color: t.textSecondary, fontWeight: 500 }}>{meta.label}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color, fontFamily: "'JetBrains Mono', monospace" }}>{val}/{meta.max}</span>
             </div>
-            <div style={{ height: 4, borderRadius: 2, background: t.bgTertiary, overflow: "hidden" }}>
-              <div style={{ height: "100%", width: `${pct}%`, borderRadius: 2, background: color, transition: "width 0.8s ease" }} />
+            <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,0.06)", overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${pct}%`, borderRadius: 2, background: `linear-gradient(90deg, ${color}80, ${color})`, transition: "width 1s cubic-bezier(0.4,0,0.2,1)" }} />
             </div>
           </div>
         );
@@ -632,10 +696,377 @@ function ScoreBreakdown({ scores, dark }) {
   );
 }
 
+function GlassCard({ children, style, onClick, hover = true, glow = false }) {
+  const baseStyle = {
+    background: t.bgCard,
+    backdropFilter: "blur(20px)",
+    WebkitBackdropFilter: "blur(20px)",
+    border: `1px solid ${t.border}`,
+    borderRadius: 16,
+    transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
+    ...(glow ? { boxShadow: t.glowAccent } : { boxShadow: t.shadow }),
+    ...(onClick ? { cursor: "pointer" } : {}),
+    ...style,
+  };
+  return (
+    <div
+      style={baseStyle}
+      onClick={onClick}
+      onMouseEnter={hover && onClick ? (e) => {
+        e.currentTarget.style.borderColor = t.borderHover;
+        e.currentTarget.style.background = t.bgCardHover;
+        e.currentTarget.style.transform = "translateY(-2px)";
+        e.currentTarget.style.boxShadow = glow ? `0 0 80px rgba(245,158,11,0.1), ${t.shadowHover}` : t.shadowHover;
+      } : undefined}
+      onMouseLeave={hover && onClick ? (e) => {
+        e.currentTarget.style.borderColor = t.border;
+        e.currentTarget.style.background = t.bgCard;
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = glow ? t.glowAccent : t.shadow;
+      } : undefined}
+    >
+      {children}
+    </div>
+  );
+}
+
+function RevealSection({ children, style, delay = 0 }) {
+  const [ref, visible] = useScrollReveal(0.1);
+  return (
+    <div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(30px)",
+      transition: `opacity 0.7s cubic-bezier(0.4,0,0.2,1) ${delay}s, transform 0.7s cubic-bezier(0.4,0,0.2,1) ${delay}s`,
+      ...style,
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function OpportunityRow({ opp, index, onSelect, showRank = false }) {
+  return (
+    <GlassCard onClick={() => onSelect(opp)} style={{ padding: "18px 22px", display: "flex", alignItems: "center", gap: 16 }}>
+      {showRank && (
+        <div style={{ fontSize: 18, fontWeight: 800, color: t.textTertiary, width: 28, textAlign: "center", fontFamily: "'JetBrains Mono', monospace", opacity: 0.4 }}>{index}</div>
+      )}
+      <ScoreRing score={opp.score} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontSize: 15, fontWeight: 600, color: t.text, marginBottom: 6, lineHeight: 1.4 }}>{opp.name}</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+          <Tag>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
+          <Tag>{opp.type}</Tag>
+          <WeekBadge type={opp.weekTrend} />
+        </div>
+      </div>
+      <div style={{ textAlign: "right", flexShrink: 0 }}>
+        <TrendBadge value={opp.trend} />
+        <div style={{ fontSize: 12, color: t.textTertiary, marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>{opp.market}</div>
+      </div>
+      <div style={{ color: t.textTertiary, flexShrink: 0, marginLeft: 4 }}>
+        <Icons.arrowRight size={16} color={t.textTertiary} />
+      </div>
+    </GlassCard>
+  );
+}
+
 // ─── VIEWS ───
 
-function TopView({ opportunities, onSelect, onSwitchView, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function HomeView({ opportunities, onSelect, onNavigate }) {
+  const sorted = [...opportunities].sort((a, b) => b.score - a.score);
+  const top5 = sorted.slice(0, 5);
+  const newOpps = opportunities.filter(o => o.weekTrend === "new");
+  const risingOpps = opportunities.filter(o => o.weekTrend === "up");
+  const avgScore = Math.round(opportunities.reduce((a, b) => a + b.score, 0) / opportunities.length);
+  const totalMentions = opportunities.reduce((a, b) => a + b.mentions, 0);
+  const catCounts = CATEGORIES.filter(c => c.id !== "all").map(c => ({
+    ...c,
+    count: opportunities.filter(o => o.category === c.id).length,
+    avgScore: Math.round(opportunities.filter(o => o.category === c.id).reduce((a, b) => a + b.score, 0) / opportunities.filter(o => o.category === c.id).length),
+    best: [...opportunities.filter(o => o.category === c.id)].sort((a, b) => b.score - a.score)[0],
+  }));
+
+  return (
+    <div>
+      {/* ─── HERO ─── */}
+      <div style={{ position: "relative", textAlign: "center", padding: "80px 20px 100px", overflow: "hidden" }}>
+        {/* Aurora Background */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 0,
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245,158,11,0.12) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 40% at 30% 50%, rgba(245,158,11,0.06) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 70% 50%, rgba(96,165,250,0.04) 0%, transparent 50%)
+          `,
+        }} />
+        {/* Grain */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, opacity: 0.03, pointerEvents: "none" }}>
+          <svg width="100%" height="100%"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+        </div>
+
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 800, margin: "0 auto" }}>
+          <RevealSection>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.accentDim, border: `1px solid ${t.borderAccent}`, borderRadius: 24, padding: "6px 16px", marginBottom: 24, fontSize: 13, color: t.accent, fontWeight: 600 }}>
+              <Icons.sparkle size={14} color={t.accent} />
+              Propulsé par l'intelligence artificielle
+            </div>
+          </RevealSection>
+
+          <RevealSection delay={0.1}>
+            <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 800, color: t.text, margin: "0 0 20px", lineHeight: 1.1, letterSpacing: "-0.03em", fontFamily: "'Inter', system-ui, sans-serif" }}>
+              Votre radar<br />
+              <span style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24, #F59E0B)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                d'opportunités business
+              </span>
+            </h1>
+          </RevealSection>
+
+          <RevealSection delay={0.2}>
+            <p style={{ color: t.textSecondary, fontSize: "clamp(16px, 2vw, 20px)", margin: "0 auto 40px", maxWidth: 560, lineHeight: 1.6, fontWeight: 400 }}>
+              Chaque semaine, notre IA analyse des milliers de signaux pour détecter les meilleures opportunités de marché.
+            </p>
+          </RevealSection>
+
+          <RevealSection delay={0.3}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+              <button onClick={() => onNavigate("top")} style={{
+                background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 32px", borderRadius: 12,
+                fontSize: 15, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "inherit",
+                transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                Explorer le Top 10
+              </button>
+              <button onClick={() => onNavigate("contact")} style={{
+                background: "transparent", color: t.text, padding: "14px 32px", borderRadius: 12,
+                fontSize: 15, fontWeight: 600, border: `1px solid ${t.border}`, cursor: "pointer",
+                fontFamily: "inherit", transition: "all 0.3s ease", backdropFilter: "blur(10px)",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = t.borderHover; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.background = "transparent"; }}>
+                Prendre rendez-vous
+              </button>
+            </div>
+          </RevealSection>
+        </div>
+      </div>
+
+      {/* ─── STATS ─── */}
+      <RevealSection style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12 }}>
+          {[
+            { label: "Opportunités", value: opportunities.length, color: t.accent },
+            { label: "Score moyen", value: avgScore, color: t.blue },
+            { label: "Nouvelles", value: newOpps.length, sub: "cette semaine", color: t.green },
+            { label: "En hausse", value: risingOpps.length, sub: "cette semaine", color: t.yellow },
+            { label: "Mentions", value: totalMentions.toLocaleString(), color: t.textSecondary },
+            { label: "Secteurs", value: catCounts.length, color: t.accent },
+          ].map((s, i) => (
+            <GlassCard key={i} style={{ padding: "18px 20px" }} hover={false}>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 8 }}>{s.label}</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: s.color, fontFamily: "'JetBrains Mono', monospace", letterSpacing: "-0.02em" }}>{s.value}</div>
+              {s.sub && <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 4 }}>{s.sub}</div>}
+            </GlassCard>
+          ))}
+        </div>
+      </RevealSection>
+
+      {/* ─── HOW IT WORKS ─── */}
+      <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 64px" }}>
+        <RevealSection>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Comment ça marche</h2>
+            <p style={{ color: t.textTertiary, fontSize: 16, margin: "12px 0 0", lineHeight: 1.6 }}>3 étapes, chaque semaine, automatiquement</p>
+          </div>
+        </RevealSection>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+          {[
+            { icon: <Icons.radar size={28} color={t.accent} />, step: "01", title: "Analyse IA", desc: "Notre IA scanne des milliers de sources : Reddit, Google Trends, Product Hunt, forums spécialisés et réseaux sociaux." },
+            { icon: <Icons.sparkle size={28} color={t.accent} />, step: "02", title: "Scoring multi-critères", desc: "Chaque opportunité est évaluée sur 5 axes : demande, croissance, concurrence, monétisation et faisabilité." },
+            { icon: <Icons.trendUp size={28} color={t.accent} />, step: "03", title: "Top classement", desc: "Les meilleures opportunités sont classées et mises à jour chaque lundi avec les données fraîches." },
+          ].map((item, i) => (
+            <RevealSection key={i} delay={i * 0.15}>
+              <GlassCard style={{ padding: 28, height: "100%" }} hover={false} glow={i === 0}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: t.accentDim, border: `1px solid ${t.borderAccent}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {item.icon}
+                  </div>
+                  <span style={{ fontSize: 40, fontWeight: 900, color: "rgba(255,255,255,0.04)", fontFamily: "'JetBrains Mono', monospace" }}>{item.step}</span>
+                </div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: "0 0 10px" }}>{item.title}</h3>
+                <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+              </GlassCard>
+            </RevealSection>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── ALERT BANNER ─── */}
+      {newOpps.length > 0 && (
+        <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+          <RevealSection>
+            <GlassCard onClick={() => onSelect(newOpps.sort((a,b) => b.score - a.score)[0])} glow style={{ padding: "22px 28px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.accent, display: "inline-block", animation: "pulse 2s ease-in-out infinite", boxShadow: `0 0 12px ${t.accent}60` }} />
+                <span style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: t.accent }}>Alerte opportunité</span>
+              </div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: t.text, marginBottom: 6 }}>
+                {newOpps.sort((a,b) => b.score - a.score)[0].name}
+              </div>
+              <div style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.5, display: "flex", alignItems: "center", gap: 8 }}>
+                Score {newOpps.sort((a,b) => b.score - a.score)[0].score}/100 · {newOpps.sort((a,b) => b.score - a.score)[0].trend} de croissance
+                <Icons.arrowRight size={14} color={t.accent} />
+              </div>
+            </GlassCard>
+          </RevealSection>
+        </div>
+      )}
+
+      {/* ─── TOP 5 ─── */}
+      <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+        <RevealSection>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Top 5 de la semaine</h2>
+            <button onClick={() => onNavigate("top")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
+              Voir le Top 10 <Icons.arrowRight size={14} color={t.accent} />
+            </button>
+          </div>
+        </RevealSection>
+        <div style={{ display: "grid", gap: 10 }}>
+          {top5.map((opp, i) => (
+            <RevealSection key={opp.id} delay={i * 0.05}>
+              <OpportunityRow opp={opp} index={i + 1} onSelect={onSelect} showRank />
+            </RevealSection>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── SECTORS ─── */}
+      <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+        <RevealSection>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Par secteur</h2>
+            <button onClick={() => onNavigate("categories")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
+              Toutes les catégories <Icons.arrowRight size={14} color={t.accent} />
+            </button>
+          </div>
+        </RevealSection>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 14 }}>
+          {catCounts.map((cat, i) => (
+            <RevealSection key={cat.id} delay={i * 0.08}>
+              <GlassCard onClick={() => onNavigate("categories", cat.id)} style={{ padding: 22 }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <div style={{ width: 40, height: 40, borderRadius: 10, background: t.accentDim, border: `1px solid ${t.borderAccent}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <CategoryIcon id={cat.id} size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: t.text }}>{cat.label}</div>
+                      <div style={{ fontSize: 12, color: t.textTertiary }}>{cat.count} opportunités</div>
+                    </div>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700 }}>Score moy.</div>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: t.blue, fontFamily: "'JetBrains Mono', monospace" }}>{cat.avgScore}</div>
+                  </div>
+                </div>
+                {cat.best && (
+                  <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: "12px 14px", border: `1px solid ${t.border}` }}>
+                    <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700, marginBottom: 6 }}>Meilleure opportunité</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: t.text, lineHeight: 1.4, marginBottom: 6 }}>{cat.best.name}</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: t.green, fontFamily: "'JetBrains Mono', monospace" }}>{cat.best.score}/100</span>
+                      <TrendBadge value={cat.best.trend} />
+                    </div>
+                  </div>
+                )}
+              </GlassCard>
+            </RevealSection>
+          ))}
+        </div>
+      </div>
+
+      {/* ─── NEW THIS WEEK ─── */}
+      {newOpps.length > 0 && (
+        <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+          <RevealSection>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 20px", display: "flex", alignItems: "center", gap: 10 }}>
+              Nouvelles cette semaine
+              <span style={{ background: t.accentDim, color: t.accent, border: `1px solid ${t.borderAccent}`, padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{newOpps.length}</span>
+            </h2>
+          </RevealSection>
+          <div style={{ display: "grid", gap: 10 }}>
+            {newOpps.sort((a, b) => b.score - a.score).map((opp, i) => (
+              <RevealSection key={opp.id} delay={i * 0.05}>
+                <OpportunityRow opp={opp} onSelect={onSelect} />
+              </RevealSection>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ─── RISING ─── */}
+      {risingOpps.length > 0 && (
+        <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+          <RevealSection>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 20px", display: "flex", alignItems: "center", gap: 10 }}>
+              En hausse
+              <span style={{ background: t.greenDim, color: t.green, border: `1px solid rgba(52,211,153,0.2)`, padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{risingOpps.length}</span>
+            </h2>
+          </RevealSection>
+          <div style={{ display: "grid", gap: 10 }}>
+            {risingOpps.sort((a, b) => b.score - a.score).map((opp, i) => (
+              <RevealSection key={opp.id} delay={i * 0.05}>
+                <OpportunityRow opp={opp} onSelect={onSelect} />
+              </RevealSection>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ─── CTA ─── */}
+      <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 64px" }}>
+        <RevealSection>
+          <div style={{
+            position: "relative", borderRadius: 20, padding: "48px 32px", textAlign: "center", overflow: "hidden",
+            border: `1px solid ${t.borderAccent}`,
+          }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)" }} />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, color: t.text, margin: "0 0 12px", letterSpacing: "-0.02em" }}>Une opportunité vous parle ?</h2>
+              <p style={{ color: t.textSecondary, fontSize: 16, margin: "0 auto 28px", maxWidth: 480, lineHeight: 1.6 }}>
+                On vous accompagne de l'idée au lancement — stratégie, MVP, acquisition clients.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
+                <button onClick={() => onNavigate("top")} style={{
+                  background: "transparent", color: t.text, padding: "14px 28px", borderRadius: 12,
+                  fontSize: 14, fontWeight: 600, border: `1px solid ${t.border}`, cursor: "pointer", fontFamily: "inherit",
+                  transition: "all 0.3s ease",
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = t.borderHover; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = t.border; }}>
+                  Explorer le Top 10
+                </button>
+                <button onClick={() => onNavigate("contact")} style={{
+                  background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 28px", borderRadius: 12,
+                  fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "inherit",
+                  transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  Prendre rendez-vous
+                </button>
+              </div>
+            </div>
+          </div>
+        </RevealSection>
+      </div>
+    </div>
+  );
+}
+
+function TopView({ opportunities, onSelect }) {
   const sorted = [...opportunities].sort((a, b) => b.score - a.score);
   const top10 = sorted.slice(0, 10);
   const rest = sorted.slice(10);
@@ -645,86 +1076,62 @@ function TopView({ opportunities, onSelect, onSwitchView, dark }) {
 
   return (
     <div>
-      {/* Stats bar */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 12, marginBottom: 28 }}>
-        {[
-          { label: "Opportunités", value: opportunities.length, color: t.accent },
-          { label: "Score moyen", value: avgScore + "/100", color: t.blue },
-          { label: "Nouvelles", value: newCount, color: t.green },
-          { label: "Catégories", value: CATEGORIES.length - 1, color: t.textSecondary },
-        ].map((s, i) => (
-          <div key={i} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "14px 18px", boxShadow: t.shadow }}>
-            <div style={{ fontSize: 11, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>{s.label}</div>
-            <div style={{ fontSize: 22, fontWeight: 700, color: s.color, fontFamily: "'Fraunces', Georgia, serif" }}>{s.value}</div>
-          </div>
-        ))}
-      </div>
+      <RevealSection>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 32 }}>
+          {[
+            { label: "Opportunités", value: opportunities.length, color: t.accent },
+            { label: "Score moyen", value: avgScore + "/100", color: t.blue },
+            { label: "Nouvelles", value: newCount, color: t.green },
+            { label: "Catégories", value: CATEGORIES.length - 1, color: t.textSecondary },
+          ].map((s, i) => (
+            <GlassCard key={i} style={{ padding: "16px 20px" }} hover={false}>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: s.color, fontFamily: "'JetBrains Mono', monospace" }}>{s.value}</div>
+            </GlassCard>
+          ))}
+        </div>
+      </RevealSection>
 
-      <div style={{ marginBottom: 24 }}>
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>Top 10 de la semaine</h2>
-        <p style={{ color: t.textTertiary, fontSize: 13, margin: "6px 0 0", lineHeight: 1.5 }}>
-          Les opportunités business les mieux scorées cette semaine — analyse IA mise à jour chaque lundi.
-        </p>
-      </div>
-      <div style={{ display: "grid", gap: 12 }}>
+      <RevealSection>
+        <div style={{ marginBottom: 24 }}>
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Top 10 de la semaine</h2>
+          <p style={{ color: t.textTertiary, fontSize: 14, margin: "8px 0 0", lineHeight: 1.6 }}>
+            Les opportunités business les mieux scorées — analyse IA mise à jour chaque lundi.
+          </p>
+        </div>
+      </RevealSection>
+
+      <div style={{ display: "grid", gap: 10 }}>
         {top10.map((opp, i) => (
-          <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 14, padding: "18px 20px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 16 }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "40"; e.currentTarget.style.background = t.bgCardHover; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; e.currentTarget.style.background = t.bgCard; }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: t.textTertiary, width: 32, textAlign: "center", fontFamily: "'Fraunces', Georgia, serif", opacity: 0.5 }}>{i + 1}</div>
-            <ScoreRing score={opp.score} dark={dark} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, marginBottom: 6, lineHeight: 1.3 }}>{opp.name}</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-                <Tag dark={dark}>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-                <Tag dark={dark}>{opp.type}</Tag>
-                <WeekBadge type={opp.weekTrend} dark={dark} />
-              </div>
-            </div>
-            <div style={{ textAlign: "right", flexShrink: 0 }}>
-              <TrendBadge value={opp.trend} dark={dark} />
-              <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 4 }}>{opp.market}</div>
-            </div>
-            <div style={{ color: t.textTertiary, fontSize: 18, flexShrink: 0, marginLeft: 4 }}>→</div>
-          </div>
+          <RevealSection key={opp.id} delay={i * 0.04}>
+            <OpportunityRow opp={opp} index={i + 1} onSelect={onSelect} showRank />
+          </RevealSection>
         ))}
       </div>
 
-      {/* All other opportunities */}
       {rest.length > 0 && (
-        <div style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-            <div>
-              <h2 style={{ fontSize: 20, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>Toutes les opportunités</h2>
-              <p style={{ color: t.textTertiary, fontSize: 13, margin: "4px 0 0" }}>{rest.length} opportunités supplémentaires classées par score</p>
+        <div style={{ marginTop: 48 }}>
+          <RevealSection>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+              <div>
+                <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Toutes les opportunités</h2>
+                <p style={{ color: t.textTertiary, fontSize: 13, margin: "6px 0 0" }}>{rest.length} opportunités supplémentaires</p>
+              </div>
+              <button onClick={() => setShowAll(!showAll)} style={{
+                background: t.accentDim, color: t.accent, border: `1px solid ${t.borderAccent}`, borderRadius: 10,
+                padding: "10px 22px", cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", transition: "all 0.2s ease",
+              }}>
+                {showAll ? "Réduire" : `Voir les ${rest.length}`}
+              </button>
             </div>
-            <button onClick={() => setShowAll(!showAll)} style={{ background: t.accentBg, color: t.accent, border: `1px solid ${t.accentBorder}`, borderRadius: 10, padding: "8px 18px", cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", transition: "all 0.2s ease" }}>
-              {showAll ? "Réduire" : `Voir les ${rest.length} opportunités`}
-            </button>
-          </div>
+          </RevealSection>
 
           {showAll && (
             <div style={{ display: "grid", gap: 8 }}>
               {rest.map((opp, i) => (
-                <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "14px 18px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 14 }}
-                  onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "30"; }}
-                  onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: t.textTertiary, width: 28, textAlign: "center", fontFamily: "'IBM Plex Mono', monospace", opacity: 0.4 }}>{i + 11}</div>
-                  <ScoreRing score={opp.score} size={40} strokeWidth={3} dark={dark} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 4, lineHeight: 1.3 }}>{opp.name}</div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-                      <Tag dark={dark}>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-                      <Tag dark={dark}>{opp.type}</Tag>
-                      <WeekBadge type={opp.weekTrend} dark={dark} />
-                    </div>
-                  </div>
-                  <div style={{ textAlign: "right", flexShrink: 0 }}>
-                    <TrendBadge value={opp.trend} dark={dark} />
-                    <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 3 }}>{opp.market}</div>
-                  </div>
-                  <div style={{ color: t.textTertiary, fontSize: 16, flexShrink: 0 }}>→</div>
-                </div>
+                <RevealSection key={opp.id} delay={Math.min(i * 0.02, 0.4)}>
+                  <OpportunityRow opp={opp} index={i + 11} onSelect={onSelect} showRank />
+                </RevealSection>
               ))}
             </div>
           )}
@@ -734,446 +1141,229 @@ function TopView({ opportunities, onSelect, onSwitchView, dark }) {
   );
 }
 
-function CategoryView({ opportunities, onSelect, dark, initialCat }) {
-  const t = dark ? tokens.dark : tokens.light;
+function CategoryView({ opportunities, onSelect, initialCat }) {
   const [activeCat, setActiveCat] = useState(initialCat || "all");
   const filtered = activeCat === "all" ? opportunities : opportunities.filter(o => o.category === activeCat);
   const sorted = [...filtered].sort((a, b) => b.score - a.score);
 
   return (
     <div>
-      <div style={{ marginBottom: 24 }}>
-        <h2 style={{ fontSize: 22, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>Catégories</h2>
-        <p style={{ color: t.textTertiary, fontSize: 13, margin: "6px 0 0", lineHeight: 1.5 }}>
-          Explore les opportunités par secteur d'activité.
-        </p>
-      </div>
-
-      {/* Category Pills */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
-        {CATEGORIES.map(cat => {
-          const active = activeCat === cat.id;
-          const count = cat.id === "all" ? opportunities.length : opportunities.filter(o => o.category === cat.id).length;
-          return (
-            <button key={cat.id} onClick={() => setActiveCat(cat.id)} style={{
-              background: active ? t.accentBg : t.bgCard,
-              color: active ? t.accent : t.textSecondary,
-              border: `1px solid ${active ? t.accentBorder : t.border}`,
-              borderRadius: 10, padding: "8px 16px", cursor: "pointer", fontSize: 13, fontWeight: 600,
-              transition: "all 0.2s ease", display: "flex", alignItems: "center", gap: 6,
-              fontFamily: "inherit",
-            }}>
-              <span>{cat.icon}</span> {cat.label}
-              <span style={{ background: active ? t.accent + "20" : t.bgTertiary, padding: "1px 6px", borderRadius: 4, fontSize: 11, fontWeight: 700 }}>{count}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Category Stats */}
-      {activeCat !== "all" && (
-        <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 14, padding: 20, marginBottom: 20, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 16, boxShadow: t.shadow }}>
-          <div>
-            <div style={{ fontSize: 11, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>Opportunités</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: t.text, fontFamily: "'Fraunces', Georgia, serif" }}>{sorted.length}</div>
-          </div>
-          <div>
-            <div style={{ fontSize: 11, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>Score moyen</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: t.accent, fontFamily: "'Fraunces', Georgia, serif" }}>{Math.round(sorted.reduce((a, b) => a + b.score, 0) / sorted.length)}</div>
-          </div>
-          <div>
-            <div style={{ fontSize: 11, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>Meilleur score</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: t.green, fontFamily: "'Fraunces', Georgia, serif" }}>{sorted[0]?.score || "—"}</div>
-          </div>
+      <RevealSection>
+        <div style={{ marginBottom: 28 }}>
+          <h2 style={{ fontSize: 26, fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Catégories</h2>
+          <p style={{ color: t.textTertiary, fontSize: 14, margin: "8px 0 0", lineHeight: 1.6 }}>Explore les opportunités par secteur d'activité.</p>
         </div>
+      </RevealSection>
+
+      <RevealSection>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
+          {CATEGORIES.map(cat => {
+            const active = activeCat === cat.id;
+            const count = cat.id === "all" ? opportunities.length : opportunities.filter(o => o.category === cat.id).length;
+            return (
+              <button key={cat.id} onClick={() => setActiveCat(cat.id)} style={{
+                background: active ? t.accentDim : t.bgCard,
+                color: active ? t.accent : t.textSecondary,
+                border: `1px solid ${active ? t.borderAccent : t.border}`,
+                borderRadius: 10, padding: "10px 18px", cursor: "pointer", fontSize: 13, fontWeight: 600,
+                transition: "all 0.2s ease", display: "flex", alignItems: "center", gap: 8, fontFamily: "inherit",
+              }}>
+                <CategoryIcon id={cat.id} size={16} color={active ? t.accent : t.textTertiary} />
+                {cat.label}
+                <span style={{ background: active ? `${t.accent}20` : "rgba(255,255,255,0.06)", padding: "2px 8px", borderRadius: 6, fontSize: 11, fontWeight: 700 }}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      </RevealSection>
+
+      {activeCat !== "all" && (
+        <RevealSection>
+          <GlassCard style={{ padding: 22, marginBottom: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 16 }} hover={false}>
+            <div>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>Opportunités</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: t.text, fontFamily: "'JetBrains Mono', monospace" }}>{sorted.length}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>Score moyen</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: t.accent, fontFamily: "'JetBrains Mono', monospace" }}>{Math.round(sorted.reduce((a, b) => a + b.score, 0) / sorted.length)}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>Meilleur score</div>
+              <div style={{ fontSize: 28, fontWeight: 800, color: t.green, fontFamily: "'JetBrains Mono', monospace" }}>{sorted[0]?.score || "—"}</div>
+            </div>
+          </GlassCard>
+        </RevealSection>
       )}
 
-      {/* Opportunity Cards */}
-      <div style={{ display: "grid", gap: 12 }}>
-        {sorted.map(opp => (
-          <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 14, padding: "18px 20px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 16 }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "40"; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-            <ScoreRing score={opp.score} dark={dark} />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, marginBottom: 6, lineHeight: 1.3 }}>{opp.name}</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-                <Tag dark={dark}>{opp.type}</Tag>
-                <Tag dark={dark}>{opp.market}</Tag>
-                <WeekBadge type={opp.weekTrend} dark={dark} />
-              </div>
-            </div>
-            <div style={{ textAlign: "right", flexShrink: 0 }}>
-              <TrendBadge value={opp.trend} dark={dark} />
-              <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 4 }}>{opp.mentions} mentions</div>
-            </div>
-            <div style={{ color: t.textTertiary, fontSize: 18, flexShrink: 0 }}>→</div>
-          </div>
+      <div style={{ display: "grid", gap: 10 }}>
+        {sorted.map((opp, i) => (
+          <RevealSection key={opp.id} delay={Math.min(i * 0.03, 0.4)}>
+            <OpportunityRow opp={opp} onSelect={onSelect} />
+          </RevealSection>
         ))}
       </div>
     </div>
   );
 }
 
-function DetailView({ opportunity: opp, onBack, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function DetailView({ opportunity: opp, onBack }) {
   const cat = CATEGORIES.find(c => c.id === opp.category);
 
   return (
     <div>
-      {/* Back */}
-      <button onClick={onBack} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, padding: 0, marginBottom: 20, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
-        ← Retour
-      </button>
+      <RevealSection>
+        <button onClick={onBack} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 14, fontWeight: 600, padding: 0, marginBottom: 24, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 8 }}>
+          <Icons.arrowLeft size={16} color={t.accent} />
+          Retour
+        </button>
+      </RevealSection>
 
-      {/* Header Card */}
-      <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 16, padding: 28, boxShadow: t.shadow, marginBottom: 20 }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-start" }}>
-          <ScoreRing score={opp.score} size={72} strokeWidth={4.5} dark={dark} />
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
-              <Tag dark={dark} color={t.accent}>{cat?.label}</Tag>
-              <Tag dark={dark}>{opp.type}</Tag>
-              <WeekBadge type={opp.weekTrend} dark={dark} />
-            </div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: t.text, margin: "0 0 8px", lineHeight: 1.3, fontFamily: "'Fraunces', Georgia, serif" }}>{opp.name}</h1>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 16, fontSize: 13 }}>
-              <span style={{ color: t.textSecondary }}>Marché : <strong style={{ color: t.text }}>{opp.market}</strong></span>
-              <span style={{ color: t.textSecondary }}>Tendance : <TrendBadge value={opp.trend} dark={dark} /></span>
-              <span style={{ color: t.textSecondary }}>Mentions : <strong style={{ color: t.text }}>{opp.mentions.toLocaleString()}</strong></span>
+      <RevealSection>
+        <GlassCard style={{ padding: 32, marginBottom: 20 }} hover={false} glow>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
+            <ScoreRing score={opp.score} size={80} strokeWidth={4.5} />
+            <div style={{ flex: 1, minWidth: 200 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 10 }}>
+                <Tag color={t.accent}>{cat?.label}</Tag>
+                <Tag>{opp.type}</Tag>
+                <WeekBadge type={opp.weekTrend} />
+              </div>
+              <h1 style={{ fontSize: "clamp(22px, 4vw, 30px)", fontWeight: 800, color: t.text, margin: "0 0 12px", lineHeight: 1.3, letterSpacing: "-0.02em" }}>{opp.name}</h1>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 20, fontSize: 14 }}>
+                <span style={{ color: t.textSecondary }}>Marché : <strong style={{ color: t.text }}>{opp.market}</strong></span>
+                <span style={{ color: t.textSecondary }}>Tendance : <TrendBadge value={opp.trend} /></span>
+                <span style={{ color: t.textSecondary }}>Mentions : <strong style={{ color: t.text }}>{opp.mentions.toLocaleString()}</strong></span>
+              </div>
             </div>
           </div>
+        </GlassCard>
+      </RevealSection>
+
+      <RevealSection delay={0.1}>
+        <GlassCard style={{ padding: 28, marginBottom: 20 }} hover={false}>
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 18px" }}>Détail du score</h3>
+          <ScoreBreakdown scores={opp.scores} />
+          <div style={{ marginTop: 16, padding: "12px 16px", background: "rgba(255,255,255,0.03)", borderRadius: 10, border: `1px solid ${t.border}`, fontSize: 13, color: t.textTertiary, lineHeight: 1.6 }}>
+            Score calculé sur 5 critères : demande marché (25pts), croissance (25pts), concurrence (20pts), monétisation (15pts) et faisabilité (15pts).
+          </div>
+        </GlassCard>
+      </RevealSection>
+
+      <RevealSection delay={0.15}>
+        <GlassCard style={{ padding: 28, marginBottom: 20 }} hover={false}>
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Problématique identifiée</h3>
+          <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.problem}</p>
+          <div style={{ marginTop: 14, fontSize: 12, color: t.textTertiary }}>Sources : {opp.sources}</div>
+        </GlassCard>
+      </RevealSection>
+
+      <RevealSection delay={0.2}>
+        <div style={{
+          background: t.accentDim, border: `1px solid ${t.borderAccent}`, borderRadius: 16, padding: 28, marginBottom: 20,
+          boxShadow: "0 0 40px rgba(245,158,11,0.05)",
+        }}>
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: t.accent, margin: "0 0 14px" }}>Solution proposée</h3>
+          <p style={{ color: t.text, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.solution}</p>
         </div>
-      </div>
+      </RevealSection>
 
-      {/* Score Breakdown */}
-      <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 16, padding: 24, boxShadow: t.shadow, marginBottom: 20 }}>
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: t.text, margin: "0 0 16px", fontFamily: "'Fraunces', Georgia, serif" }}>Détail du score</h3>
-        <ScoreBreakdown scores={opp.scores} dark={dark} />
-        <div style={{ marginTop: 14, padding: "10px 14px", background: t.bgTertiary, borderRadius: 10, fontSize: 12, color: t.textSecondary, lineHeight: 1.6 }}>
-          Score calculé sur 5 critères : demande marché (25pts), vitesse de croissance (25pts), niveau de concurrence (20pts), potentiel de monétisation (15pts) et faisabilité technique (15pts).
+      <RevealSection delay={0.25}>
+        <GlassCard style={{ padding: 28, marginBottom: 28 }} hover={false}>
+          <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Paysage concurrentiel</h3>
+          <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.competitors}</p>
+        </GlassCard>
+      </RevealSection>
+
+      <RevealSection delay={0.3}>
+        <div style={{
+          position: "relative", borderRadius: 20, padding: "40px 32px", textAlign: "center", overflow: "hidden",
+          border: `1px solid ${t.borderAccent}`,
+        }}>
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)" }} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <h3 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 10px", letterSpacing: "-0.02em" }}>Cette opportunité vous intéresse ?</h3>
+            <p style={{ color: t.textSecondary, fontSize: 15, margin: "0 0 24px", lineHeight: 1.6 }}>
+              On vous accompagne pour transformer cette opportunité en projet concret.
+            </p>
+            <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 32px", borderRadius: 12,
+              fontSize: 15, fontWeight: 700, textDecoration: "none", cursor: "pointer", border: "none", fontFamily: "inherit",
+              transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+              Prendre rendez-vous <Icons.arrowRight size={16} color="#000" />
+            </a>
+          </div>
         </div>
-      </div>
-
-      {/* Problem */}
-      <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 16, padding: 24, boxShadow: t.shadow, marginBottom: 20 }}>
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: t.text, margin: "0 0 12px", fontFamily: "'Fraunces', Georgia, serif" }}>Problématique identifiée</h3>
-        <p style={{ color: t.textSecondary, fontSize: 14, lineHeight: 1.7, margin: 0 }}>{opp.problem}</p>
-        <div style={{ marginTop: 12, fontSize: 12, color: t.textTertiary }}>
-          Sources : {opp.sources}
-        </div>
-      </div>
-
-      {/* Solution */}
-      <div style={{ background: t.accentBg, border: `1px solid ${t.accentBorder}`, borderRadius: 16, padding: 24, marginBottom: 20 }}>
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: t.accent, margin: "0 0 12px", fontFamily: "'Fraunces', Georgia, serif" }}>Début de solution proposée</h3>
-        <p style={{ color: t.text, fontSize: 14, lineHeight: 1.7, margin: 0 }}>{opp.solution}</p>
-      </div>
-
-      {/* Competition */}
-      <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 16, padding: 24, boxShadow: t.shadow, marginBottom: 20 }}>
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: t.text, margin: "0 0 12px", fontFamily: "'Fraunces', Georgia, serif" }}>Paysage concurrentiel</h3>
-        <p style={{ color: t.textSecondary, fontSize: 14, lineHeight: 1.7, margin: 0 }}>{opp.competitors}</p>
-      </div>
-
-      {/* CTA */}
-      <div style={{ background: `linear-gradient(135deg, ${t.accentBg}, ${t.bgCard})`, border: `1px solid ${t.accentBorder}`, borderRadius: 16, padding: 28, textAlign: "center" }}>
-        <div style={{ fontSize: 18, fontWeight: 700, color: t.text, marginBottom: 8, fontFamily: "'Fraunces', Georgia, serif" }}>Cette opportunité vous intéresse ?</div>
-        <p style={{ color: t.textSecondary, fontSize: 14, marginBottom: 18, lineHeight: 1.5 }}>
-          On vous accompagne pour transformer cette opportunité en projet concret — de l'idée au lancement.
-        </p>
-        <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.accent, color: "#FFFFFF", padding: "12px 28px", borderRadius: 10, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s ease", cursor: "pointer", border: "none", fontFamily: "inherit" }}
-          onMouseEnter={e => e.currentTarget.style.background = t.accentLight}
-          onMouseLeave={e => e.currentTarget.style.background = t.accent}>
-          Prendre rendez-vous →
-        </a>
-      </div>
+      </RevealSection>
     </div>
   );
 }
 
-// ─── CONTACT PAGE ───
-function ContactView({ dark }) {
-  const t = dark ? tokens.dark : tokens.light;
+function ContactView({ onNavigate }) {
   return (
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
-      <div style={{ textAlign: "center", marginBottom: 32 }}>
-        <h2 style={{ fontSize: 26, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>On vous accompagne</h2>
-        <p style={{ color: t.textSecondary, fontSize: 14, margin: "10px 0 0", lineHeight: 1.6 }}>
-          Vous avez repéré une opportunité ? On vous aide à la transformer en business — de la stratégie au lancement.
-        </p>
-      </div>
-
-      <div style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 16, padding: 28, boxShadow: t.shadow, marginBottom: 24 }}>
-        <div style={{ display: "grid", gap: 20, marginBottom: 24 }}>
-          {[
-            { icon: "◎", title: "Validation de l'idée", desc: "On analyse le marché, la concurrence et la viabilité de votre opportunité." },
-            { icon: "△", title: "Stratégie de lancement", desc: "Plan d'action, MVP, acquisition des premiers clients — tout est structuré." },
-            { icon: "⬡", title: "Accompagnement continu", desc: "Suivi hebdomadaire pour itérer, optimiser et scaler votre projet." },
-          ].map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: t.accentBg, border: `1px solid ${t.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: t.accent, flexShrink: 0 }}>{item.icon}</div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 3 }}>{item.title}</div>
-                <div style={{ fontSize: 13, color: t.textSecondary, lineHeight: 1.5 }}>{item.desc}</div>
-              </div>
-            </div>
-          ))}
+      <RevealSection>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>On vous accompagne</h2>
+          <p style={{ color: t.textSecondary, fontSize: 16, margin: "14px 0 0", lineHeight: 1.6 }}>
+            Vous avez repéré une opportunité ? On vous aide à la transformer en business.
+          </p>
         </div>
+      </RevealSection>
 
-        <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
-          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-          background: t.accent, color: "#FFFFFF", padding: "14px 28px", borderRadius: 12,
-          fontSize: 15, fontWeight: 600, textDecoration: "none", cursor: "pointer",
-          transition: "all 0.2s ease", width: "100%", border: "none", fontFamily: "inherit",
-        }}
-          onMouseEnter={e => e.currentTarget.style.background = t.accentLight}
-          onMouseLeave={e => e.currentTarget.style.background = t.accent}>
-          Réserver un appel découverte →
-        </a>
-      </div>
-
-      <div style={{ textAlign: "center", fontSize: 12, color: t.textTertiary, lineHeight: 1.6 }}>
-        Appel gratuit de 30 minutes · Sans engagement · On discute de votre projet
-      </div>
-    </div>
-  );
-}
-
-// ─── HOME VIEW ───
-function HomeView({ opportunities, onSelect, onNavigate, dark }) {
-  const t = dark ? tokens.dark : tokens.light;
-  const sorted = [...opportunities].sort((a, b) => b.score - a.score);
-  const top5 = sorted.slice(0, 5);
-  const avgScore = Math.round(opportunities.reduce((a, b) => a + b.score, 0) / opportunities.length);
-  const newOpps = opportunities.filter(o => o.weekTrend === "new");
-  const risingOpps = opportunities.filter(o => o.weekTrend === "up");
-  const totalMentions = opportunities.reduce((a, b) => a + b.mentions, 0);
-  const catCounts = CATEGORIES.filter(c => c.id !== "all").map(c => ({
-    ...c,
-    count: opportunities.filter(o => o.category === c.id).length,
-    avgScore: Math.round(opportunities.filter(o => o.category === c.id).reduce((a, b) => a + b.score, 0) / opportunities.filter(o => o.category === c.id).length),
-    best: [...opportunities.filter(o => o.category === c.id)].sort((a, b) => b.score - a.score)[0],
-  }));
-
-  const Btn = ({ children, onClick, primary }) => (
-    <button onClick={onClick} style={{
-      background: primary ? t.accent : t.bgCard,
-      color: primary ? "#FFF" : t.textSecondary,
-      border: `1px solid ${primary ? t.accent : t.border}`,
-      borderRadius: 10, padding: "10px 22px", cursor: "pointer", fontSize: 13, fontWeight: 600,
-      transition: "all 0.2s ease", fontFamily: "inherit",
-    }}
-      onMouseEnter={e => { if (primary) e.currentTarget.style.background = t.accentLight; else e.currentTarget.style.borderColor = t.accent + "50"; }}
-      onMouseLeave={e => { if (primary) e.currentTarget.style.background = t.accent; else e.currentTarget.style.borderColor = t.border; }}>
-      {children}
-    </button>
-  );
-
-  return (
-    <div>
-      {/* Hero */}
-      <div style={{ textAlign: "center", padding: "20px 0 36px" }}>
-        <h1 style={{ fontSize: 32, fontWeight: 800, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif", lineHeight: 1.2 }}>
-          Votre radar d'opportunités business
-        </h1>
-        <p style={{ color: t.textSecondary, fontSize: 15, margin: "12px auto 0", maxWidth: 520, lineHeight: 1.6 }}>
-          Chaque semaine, notre IA analyse des milliers de signaux pour détecter les meilleures opportunités de marché. Trouvez votre prochaine idée.
-        </p>
-      </div>
-
-      {/* Stats Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12, marginBottom: 32 }}>
-        {[
-          { label: "Opportunités", value: opportunities.length, color: t.accent },
-          { label: "Score moyen", value: avgScore, color: t.blue },
-          { label: "Nouvelles", value: newOpps.length, sub: "cette semaine", color: t.green },
-          { label: "En hausse", value: risingOpps.length, sub: "cette semaine", color: t.yellow },
-          { label: "Mentions", value: totalMentions.toLocaleString(), color: t.textSecondary },
-          { label: "Secteurs", value: catCounts.length, color: t.accent },
-        ].map((s, i) => (
-          <div key={i} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "16px 18px", boxShadow: t.shadow }}>
-            <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, marginBottom: 6 }}>{s.label}</div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: s.color, fontFamily: "'Fraunces', Georgia, serif" }}>{s.value}</div>
-            {s.sub && <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 2 }}>{s.sub}</div>}
-          </div>
-        ))}
-      </div>
-
-      {/* Alert Banner */}
-      {newOpps.length > 0 && (
-        <div onClick={() => onSelect(newOpps.sort((a,b) => b.score - a.score)[0])} style={{ background: t.accentBg, border: `1px solid ${t.accentBorder}`, borderRadius: 14, padding: "18px 22px", marginBottom: 32, cursor: "pointer", transition: "all 0.2s ease" }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = t.accent}
-          onMouseLeave={e => e.currentTarget.style.borderColor = t.accentBorder}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.accent, display: "inline-block", animation: "pulse 2s ease-in-out infinite" }} />
-            <span style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: t.accent }}>Alerte opportunité</span>
-          </div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: t.text, marginBottom: 4 }}>
-            {newOpps.sort((a,b) => b.score - a.score)[0].name}
-          </div>
-          <div style={{ fontSize: 13, color: t.textSecondary, lineHeight: 1.5 }}>
-            Score {newOpps.sort((a,b) => b.score - a.score)[0].score}/100 · {newOpps.sort((a,b) => b.score - a.score)[0].trend} de croissance · Cliquez pour découvrir →
-          </div>
-        </div>
-      )}
-
-      {/* Top 5 Preview */}
-      <div style={{ marginBottom: 36 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>Top 5 de la semaine</h2>
-          <button onClick={() => onNavigate("top")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit" }}>Voir le Top 10 →</button>
-        </div>
-        <div style={{ display: "grid", gap: 10 }}>
-          {top5.map((opp, i) => (
-            <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "14px 18px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 14 }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "40"; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-              <div style={{ fontSize: 18, fontWeight: 800, color: t.textTertiary, width: 28, textAlign: "center", fontFamily: "'Fraunces', Georgia, serif", opacity: 0.4 }}>{i + 1}</div>
-              <ScoreRing score={opp.score} size={42} strokeWidth={3} dark={dark} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 4, lineHeight: 1.3 }}>{opp.name}</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  <Tag dark={dark}>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-                  <Tag dark={dark}>{opp.type}</Tag>
-                  <WeekBadge type={opp.weekTrend} dark={dark} />
+      <RevealSection delay={0.1}>
+        <GlassCard style={{ padding: 32, marginBottom: 28 }} hover={false} glow>
+          <div style={{ display: "grid", gap: 24, marginBottom: 28 }}>
+            {[
+              { icon: <Icons.radar size={22} color={t.accent} />, title: "Validation de l'idée", desc: "On analyse le marché, la concurrence et la viabilité de votre opportunité." },
+              { icon: <Icons.sparkle size={22} color={t.accent} />, title: "Stratégie de lancement", desc: "Plan d'action, MVP, acquisition des premiers clients — tout est structuré." },
+              { icon: <Icons.trendUp size={22} color={t.accent} />, title: "Accompagnement continu", desc: "Suivi hebdomadaire pour itérer, optimiser et scaler votre projet." },
+            ].map((item, i) => (
+              <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: t.accentDim, border: `1px solid ${t.borderAccent}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {item.icon}
                 </div>
-              </div>
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <TrendBadge value={opp.trend} dark={dark} />
-                <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 3 }}>{opp.market}</div>
-              </div>
-              <div style={{ color: t.textTertiary, fontSize: 16, flexShrink: 0 }}>→</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Sectors Overview */}
-      <div style={{ marginBottom: 36 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: 0, fontFamily: "'Fraunces', Georgia, serif" }}>Par secteur</h2>
-          <button onClick={() => onNavigate("categories")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit" }}>Voir toutes les catégories →</button>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12 }}>
-          {catCounts.map(cat => (
-            <div key={cat.id} onClick={() => onNavigate("categories", cat.id)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 14, padding: 20, cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "40"; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 9, background: t.accentBg, border: `1px solid ${t.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: t.accent }}>{cat.icon}</div>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: t.text }}>{cat.label}</div>
-                    <div style={{ fontSize: 12, color: t.textTertiary }}>{cat.count} opportunités</div>
-                  </div>
+                <div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: t.text, marginBottom: 4 }}>{item.title}</div>
+                  <div style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.6 }}>{item.desc}</div>
                 </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>Score moy.</div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: t.blue, fontFamily: "'Fraunces', Georgia, serif" }}>{cat.avgScore}</div>
-                </div>
-              </div>
-              {cat.best && (
-                <div style={{ background: t.bgSecondary, borderRadius: 8, padding: "10px 12px" }}>
-                  <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>Meilleure opportunité</div>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: t.text, lineHeight: 1.3 }}>{cat.best.name}</div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 6 }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: t.green, fontFamily: "'IBM Plex Mono', monospace" }}>{cat.best.score}/100</span>
-                    <TrendBadge value={cat.best.trend} dark={dark} />
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* New this week */}
-      {newOpps.length > 0 && (
-        <div style={{ marginBottom: 36 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: "0 0 16px", fontFamily: "'Fraunces', Georgia, serif" }}>
-            Nouvelles cette semaine
-            <span style={{ background: t.accentBg, color: t.accent, border: `1px solid ${t.accentBorder}`, padding: "2px 8px", borderRadius: 6, fontSize: 12, fontWeight: 700, marginLeft: 10 }}>{newOpps.length}</span>
-          </h2>
-          <div style={{ display: "grid", gap: 10 }}>
-            {newOpps.sort((a, b) => b.score - a.score).map(opp => (
-              <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "14px 18px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 14 }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.accent + "40"; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-                <ScoreRing score={opp.score} size={40} strokeWidth={3} dark={dark} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 4, lineHeight: 1.3 }}>{opp.name}</div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    <Tag dark={dark}>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-                    <Tag dark={dark}>{opp.type}</Tag>
-                    <WeekBadge type="new" dark={dark} />
-                  </div>
-                </div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}>
-                  <TrendBadge value={opp.trend} dark={dark} />
-                  <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 3 }}>{opp.market}</div>
-                </div>
-                <div style={{ color: t.textTertiary, fontSize: 16, flexShrink: 0 }}>→</div>
               </div>
             ))}
           </div>
-        </div>
-      )}
 
-      {/* Rising */}
-      {risingOpps.length > 0 && (
-        <div style={{ marginBottom: 36 }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: "0 0 16px", fontFamily: "'Fraunces', Georgia, serif" }}>
-            En hausse
-            <span style={{ background: t.greenBg, color: t.green, border: `1px solid ${t.greenBorder}`, padding: "2px 8px", borderRadius: 6, fontSize: 12, fontWeight: 700, marginLeft: 10 }}>{risingOpps.length}</span>
-          </h2>
-          <div style={{ display: "grid", gap: 10 }}>
-            {risingOpps.sort((a, b) => b.score - a.score).map(opp => (
-              <div key={opp.id} onClick={() => onSelect(opp)} style={{ background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 12, padding: "14px 18px", cursor: "pointer", transition: "all 0.25s ease", boxShadow: t.shadow, display: "flex", alignItems: "center", gap: 14 }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.borderColor = t.green + "40"; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.borderColor = t.border; }}>
-                <ScoreRing score={opp.score} size={40} strokeWidth={3} dark={dark} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: t.text, marginBottom: 4, lineHeight: 1.3 }}>{opp.name}</div>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    <Tag dark={dark}>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-                    <Tag dark={dark}>{opp.type}</Tag>
-                    <WeekBadge type="up" dark={dark} />
-                  </div>
-                </div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}>
-                  <TrendBadge value={opp.trend} dark={dark} />
-                  <div style={{ fontSize: 11, color: t.textTertiary, marginTop: 3 }}>{opp.market}</div>
-                </div>
-                <div style={{ color: t.textTertiary, fontSize: 16, flexShrink: 0 }}>→</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+          <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "16px 32px", borderRadius: 12,
+            fontSize: 16, fontWeight: 700, textDecoration: "none", cursor: "pointer",
+            transition: "all 0.3s ease", width: "100%", border: "none", fontFamily: "inherit",
+            boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+            Réserver un appel découverte <Icons.arrowRight size={18} color="#000" />
+          </a>
+        </GlassCard>
+      </RevealSection>
 
-      {/* CTA banner */}
-      <div style={{ background: `linear-gradient(135deg, ${t.accentBg}, ${t.bgCard})`, border: `1px solid ${t.accentBorder}`, borderRadius: 16, padding: 28, textAlign: "center" }}>
-        <div style={{ fontSize: 20, fontWeight: 700, color: t.text, marginBottom: 8, fontFamily: "'Fraunces', Georgia, serif" }}>Une opportunité vous parle ?</div>
-        <p style={{ color: t.textSecondary, fontSize: 14, marginBottom: 18, lineHeight: 1.5, maxWidth: 440, margin: "0 auto 18px" }}>
-          On vous accompagne de l'idée au lancement — stratégie, MVP, acquisition clients.
-        </p>
-        <div style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap" }}>
-          <Btn onClick={() => onNavigate("top")} primary={false}>Explorer le Top 10</Btn>
-          <Btn onClick={() => onNavigate("contact")} primary={true}>Prendre rendez-vous →</Btn>
+      <RevealSection delay={0.2}>
+        <div style={{ textAlign: "center", fontSize: 13, color: t.textTertiary, lineHeight: 1.6 }}>
+          Appel gratuit de 30 minutes · Sans engagement · On discute de votre projet
         </div>
-      </div>
+      </RevealSection>
     </div>
   );
 }
 
 // ─── MAIN APP ───
 export default function Trendora() {
-  const [dark, setDark] = useState(false);
   const [view, setView] = useState("home");
   const [selectedOpp, setSelectedOpp] = useState(null);
   const [initialCat, setInitialCat] = useState(null);
-  const t = dark ? tokens.dark : tokens.light;
+  const scrollProgress = useScrollProgress();
 
   const handleSelect = useCallback((opp) => {
     setSelectedOpp(opp);
@@ -1201,38 +1391,59 @@ export default function Trendora() {
   ];
 
   return (
-    <div style={{ background: t.bg, minHeight: "100vh", transition: "background 0.3s ease, color 0.3s ease" }}>
+    <div style={{ background: t.bg, minHeight: "100vh", color: t.text, position: "relative" }}>
+      <StellarOrb progress={scrollProgress} />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Source+Sans+3:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: ${t.bg}; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         ::selection { background: ${t.accent}30; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: ${t.border}; border-radius: 3px; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @media (max-width: 640px) {
+          .nav-desktop { display: none !important; }
+          .nav-mobile { display: flex !important; }
+        }
+        @media (min-width: 641px) {
+          .nav-mobile { display: none !important; }
+        }
       `}</style>
 
       {/* ─── HEADER ─── */}
-      <header style={{ background: t.bg + "E6", borderBottom: `1px solid ${t.border}`, backdropFilter: "blur(16px)", position: "sticky", top: 0, zIndex: 50, transition: "all 0.3s ease" }}>
+      <header style={{
+        background: "rgba(10,10,10,0.8)",
+        borderBottom: `1px solid ${t.border}`,
+        backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+        position: "sticky", top: 0, zIndex: 50,
+      }}>
         <div style={{ maxWidth: 880, margin: "0 auto", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setView("home"); setSelectedOpp(null); }}>
-              <div style={{ width: 32, height: 32, borderRadius: 9, background: `linear-gradient(135deg, ${t.accent}, ${t.accentLight})`, display: "flex", alignItems: "center", justifyContent: "center", color: "#FFF", fontSize: 14, fontWeight: 800 }}>T</div>
-              <span style={{ fontSize: 18, fontWeight: 700, color: t.text, fontFamily: "'Fraunces', Georgia, serif", letterSpacing: "-0.01em" }}>Trendora</span>
+              <div style={{
+                width: 34, height: 34, borderRadius: 10,
+                background: "linear-gradient(135deg, #F59E0B, #D97706)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "#000", fontSize: 15, fontWeight: 900,
+                boxShadow: "0 0 20px rgba(245,158,11,0.2)",
+              }}>T</div>
+              <span style={{ fontSize: 19, fontWeight: 800, color: t.text, letterSpacing: "-0.02em" }}>Trendora</span>
             </div>
-            <nav style={{ display: "flex", gap: 4 }}>
+            <nav className="nav-desktop" style={{ display: "flex", gap: 4 }}>
               {navItems.map(item => {
                 const active = view === item.id || (view === "detail" && item.id === "home");
                 return (
                   <button key={item.id} onClick={() => handleNavigate(item.id)} style={{
-                    background: active ? t.accentBg : "transparent",
+                    background: active ? t.accentDim : "transparent",
                     color: active ? t.accent : t.textSecondary,
-                    border: `1px solid ${active ? t.accentBorder : "transparent"}`,
-                    borderRadius: 8, padding: "6px 14px", cursor: "pointer", fontSize: 13, fontWeight: 600,
+                    border: `1px solid ${active ? t.borderAccent : "transparent"}`,
+                    borderRadius: 8, padding: "7px 16px", cursor: "pointer", fontSize: 13, fontWeight: 600,
                     transition: "all 0.2s ease", fontFamily: "inherit",
-                  }}>
+                  }}
+                    onMouseEnter={!active ? (e) => { e.currentTarget.style.color = t.text; } : undefined}
+                    onMouseLeave={!active ? (e) => { e.currentTarget.style.color = t.textSecondary; } : undefined}>
                     {item.label}
                   </button>
                 );
@@ -1240,57 +1451,74 @@ export default function Trendora() {
             </nav>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <ThemeToggle dark={dark} setDark={setDark} />
-            <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer"
-              onClick={(e) => { e.preventDefault(); handleNavigate("contact"); }}
-              style={{
-                background: t.accent, color: "#FFF", padding: "8px 18px", borderRadius: 10,
-                fontSize: 13, fontWeight: 600, textDecoration: "none", cursor: "pointer",
-                transition: "all 0.2s ease", border: "none", fontFamily: "inherit",
-                display: "flex", alignItems: "center", gap: 6,
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = t.accentLight}
-              onMouseLeave={e => e.currentTarget.style.background = t.accent}>
-              On vous accompagne
-            </a>
-          </div>
+          <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer"
+            onClick={(e) => { e.preventDefault(); handleNavigate("contact"); }}
+            style={{
+              background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "9px 20px", borderRadius: 10,
+              fontSize: 13, fontWeight: 700, textDecoration: "none", cursor: "pointer",
+              transition: "all 0.3s ease", border: "none", fontFamily: "inherit",
+              display: "flex", alignItems: "center", gap: 6,
+              boxShadow: "0 0 20px rgba(245,158,11,0.15)",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.3)"; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 20px rgba(245,158,11,0.15)"; }}>
+            On vous accompagne
+          </a>
         </div>
+
+        {/* Mobile nav */}
+        <nav className="nav-mobile" style={{ display: "none", padding: "0 24px 12px", gap: 4 }}>
+          {navItems.map(item => {
+            const active = view === item.id || (view === "detail" && item.id === "home");
+            return (
+              <button key={item.id} onClick={() => handleNavigate(item.id)} style={{
+                flex: 1, background: active ? t.accentDim : "transparent",
+                color: active ? t.accent : t.textSecondary,
+                border: `1px solid ${active ? t.borderAccent : "transparent"}`,
+                borderRadius: 8, padding: "8px 12px", cursor: "pointer", fontSize: 12, fontWeight: 600,
+                transition: "all 0.2s ease", fontFamily: "inherit",
+              }}>
+                {item.label}
+              </button>
+            );
+          })}
+        </nav>
       </header>
 
       {/* ─── WEEK BANNER ─── */}
-      {view !== "contact" && (
-        <div style={{ background: t.bgSecondary, borderBottom: `1px solid ${t.borderLight}`, padding: "10px 24px", transition: "all 0.3s ease" }}>
+      {view !== "contact" && view !== "home" && (
+        <div style={{ borderBottom: `1px solid ${t.border}`, padding: "10px 24px" }}>
           <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: t.green, display: "inline-block" }} />
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: t.green, display: "inline-block", boxShadow: `0 0 8px ${t.green}40` }} />
               <span style={{ color: t.textSecondary, fontWeight: 500 }}>{WEEK_LABEL}</span>
               <span style={{ color: t.textTertiary }}>·</span>
               <span style={{ color: t.textTertiary }}>{OPPORTUNITIES.length} opportunités analysées</span>
             </div>
-            <span style={{ color: t.textTertiary, fontFamily: "'IBM Plex Mono', monospace", fontSize: 11 }}>
-              Prochain refresh : lundi
+            <span style={{ color: t.textTertiary, fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>
+              <Icons.calendar size={12} color={t.textTertiary} /> Prochain refresh : lundi
             </span>
           </div>
         </div>
       )}
 
       {/* ─── MAIN CONTENT ─── */}
-      <main style={{ maxWidth: 880, margin: "0 auto", padding: "32px 24px 64px" }}>
-        <div key={view + (selectedOpp?.id || "")} style={{ animation: "fadeUp 0.35s ease" }}>
-          {view === "home" && <HomeView opportunities={OPPORTUNITIES} onSelect={handleSelect} onNavigate={handleNavigate} dark={dark} />}
-          {view === "top" && <TopView opportunities={OPPORTUNITIES} onSelect={handleSelect} onSwitchView={() => handleNavigate("categories")} dark={dark} />}
-          {view === "categories" && <CategoryView opportunities={OPPORTUNITIES} onSelect={handleSelect} dark={dark} initialCat={initialCat} />}
-          {view === "detail" && selectedOpp && <DetailView opportunity={selectedOpp} onBack={handleBack} dark={dark} />}
-          {view === "contact" && <ContactView dark={dark} />}
-        </div>
+      <main style={{ maxWidth: view === "home" ? 1200 : 880, margin: "0 auto", padding: view === "home" ? "0 0 64px" : "32px 24px 64px", transition: "max-width 0.3s ease" }}>
+        {view === "home" && <HomeView opportunities={OPPORTUNITIES} onSelect={handleSelect} onNavigate={handleNavigate} />}
+        {view === "top" && <TopView opportunities={OPPORTUNITIES} onSelect={handleSelect} />}
+        {view === "categories" && <CategoryView opportunities={OPPORTUNITIES} onSelect={handleSelect} initialCat={initialCat} />}
+        {view === "detail" && selectedOpp && <DetailView opportunity={selectedOpp} onBack={handleBack} />}
+        {view === "contact" && <ContactView onNavigate={handleNavigate} />}
       </main>
 
       {/* ─── FOOTER ─── */}
-      <footer style={{ borderTop: `1px solid ${t.borderLight}`, padding: "20px 24px", transition: "all 0.3s ease" }}>
-        <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: t.textTertiary, flexWrap: "wrap", gap: 8 }}>
-          <span>Trendora — Radar d'opportunités business propulsé par IA</span>
-          <span>Sources : Google Trends · Reddit · Product Hunt · Twitter/X</span>
+      <footer style={{ borderTop: `1px solid ${t.border}`, padding: "24px 24px" }}>
+        <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: t.textTertiary, flexWrap: "wrap", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #F59E0B, #D97706)", display: "flex", alignItems: "center", justifyContent: "center", color: "#000", fontSize: 9, fontWeight: 900 }}>T</div>
+            <span>Trendora — Radar d'opportunités business propulsé par IA</span>
+          </div>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>Google Trends · Reddit · Product Hunt · Twitter/X</span>
         </div>
       </footer>
     </div>
