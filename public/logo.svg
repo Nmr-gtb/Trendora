@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" fill="white">
+  <!-- Barre horizontale du T avec bords arrondis -->
+  <rect x="40" y="20" width="160" height="36" rx="18" ry="18"/>
+  <!-- Barre verticale du T -->
+  <rect x="96" y="20" width="48" height="160"/>
+  <!-- Point -->
+  <circle cx="168" cy="168" r="18"/>
+</svg>

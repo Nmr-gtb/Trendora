@@ -12,8 +12,8 @@ const t = {
   borderHover: "rgba(255,255,255,0.16)",
   borderAccent: "rgba(129,140,248,0.3)",
   text: "#F5F5F7",
-  textSecondary: "#A1A1A6",
-  textTertiary: "#6E6E73",
+  textSecondary: "#C8C8CC",
+  textTertiary: "#8E8E93",
   accent: "#818CF8",
   accentLight: "#A5B4FC",
   accentDim: "rgba(129,140,248,0.12)",
@@ -598,6 +598,18 @@ function FloatingShapes() {
   );
 }
 
+// ─── RESPONSIVE HOOK ───
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" ? window.innerWidth < breakpoint : false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    window.addEventListener("resize", check);
+    check();
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 // ─── FADE-UP ANIMATION ───
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -663,16 +675,16 @@ function WeekBadge({ type }) {
   };
   const c = config[type] || config.stable;
   return (
-    <span style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}`, padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, letterSpacing: "0.02em" }}>
+    <span style={{ background: c.bg, color: c.color, border: `1px solid ${c.border}`, padding: "4px 11px", borderRadius: 20, fontSize: 12, fontWeight: 600, letterSpacing: "0.02em" }}>
       {c.label}
     </span>
   );
 }
 
 function Tag({ children, color }) {
-  const c = color || t.textTertiary;
+  const c = color || t.textSecondary;
   return (
-    <span style={{ color: c, background: `${c}10`, border: `1px solid ${c}18`, padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 500 }}>
+    <span style={{ color: c, background: `${c}14`, border: `1px solid ${c}20`, padding: "4px 11px", borderRadius: 20, fontSize: 12, fontWeight: 500 }}>
       {children}
     </span>
   );
@@ -688,7 +700,7 @@ function ScoreBreakdown({ scores }) {
         return (
           <div key={key}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-              <span style={{ fontSize: 13, color: t.textSecondary, fontWeight: 500 }}>{meta.label}</span>
+              <span style={{ fontSize: 14, color: t.textSecondary, fontWeight: 500 }}>{meta.label}</span>
               <span style={{ fontSize: 13, fontWeight: 700, color, fontFamily: "'JetBrains Mono', monospace" }}>{val}/{meta.max}</span>
             </div>
             <div style={{ height: 4, borderRadius: 2, background: "rgba(255,255,255,0.06)", overflow: "hidden" }}>
@@ -736,27 +748,43 @@ function GlassCard({ children, style, onClick, hover = true, glow = false }) {
 }
 
 function OpportunityRow({ opp, index, onSelect, showRank = false }) {
+  const isMobile = useIsMobile();
   return (
-    <GlassCard onClick={() => onSelect(opp)} style={{ padding: "18px 22px", display: "flex", alignItems: "center", gap: 16 }}>
-      {showRank && (
-        <div style={{ fontSize: 18, fontWeight: 800, color: t.textTertiary, width: 28, textAlign: "center", fontFamily: "'JetBrains Mono', monospace", opacity: 0.4 }}>{index}</div>
-      )}
-      <ScoreRing score={opp.score} />
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 15, fontWeight: 600, color: t.text, marginBottom: 6, lineHeight: 1.4 }}>{opp.name}</div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-          <Tag>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
-          <Tag>{opp.type}</Tag>
-          <WeekBadge type={opp.weekTrend} />
+    <GlassCard onClick={() => onSelect(opp)} style={{ padding: isMobile ? "16px 16px" : "18px 22px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 12 : 16 }}>
+        {showRank && (
+          <div style={{ fontSize: 16, fontWeight: 800, color: t.textTertiary, width: 24, textAlign: "center", fontFamily: "'JetBrains Mono', monospace", opacity: 0.5, flexShrink: 0 }}>{index}</div>
+        )}
+        <ScoreRing score={opp.score} size={isMobile ? 44 : 52} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: isMobile ? 14 : 15, fontWeight: 600, color: t.text, marginBottom: 6, lineHeight: 1.4 }}>{opp.name}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+            <Tag>{CATEGORIES.find(c => c.id === opp.category)?.label}</Tag>
+            <Tag>{opp.type}</Tag>
+            <WeekBadge type={opp.weekTrend} />
+          </div>
         </div>
+        {!isMobile && (
+          <>
+            <div style={{ textAlign: "right", flexShrink: 0 }}>
+              <TrendBadge value={opp.trend} />
+              <div style={{ fontSize: 12, color: t.textTertiary, marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>{opp.market}</div>
+            </div>
+            <div style={{ color: t.textTertiary, flexShrink: 0, marginLeft: 4 }}>
+              <Icons.arrowRight size={16} color={t.textTertiary} />
+            </div>
+          </>
+        )}
       </div>
-      <div style={{ textAlign: "right", flexShrink: 0 }}>
-        <TrendBadge value={opp.trend} />
-        <div style={{ fontSize: 12, color: t.textTertiary, marginTop: 4, fontFamily: "'JetBrains Mono', monospace" }}>{opp.market}</div>
-      </div>
-      <div style={{ color: t.textTertiary, flexShrink: 0, marginLeft: 4 }}>
-        <Icons.arrowRight size={16} color={t.textTertiary} />
-      </div>
+      {isMobile && (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 10, paddingTop: 10, borderTop: `1px solid ${t.border}` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <TrendBadge value={opp.trend} />
+            <span style={{ fontSize: 12, color: t.textTertiary, fontFamily: "'JetBrains Mono', monospace" }}>{opp.market}</span>
+          </div>
+          <Icons.arrowRight size={14} color={t.textTertiary} />
+        </div>
+      )}
     </GlassCard>
   );
 }
@@ -785,7 +813,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
           <FadeUp custom={0}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 24, padding: "6px 16px", marginBottom: 28 }}>
               <Icons.circle size={8} color="rgba(251,113,133,0.8)" />
-              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", letterSpacing: "0.04em" }}>Propulsé par l'intelligence artificielle</span>
+              <span style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", letterSpacing: "0.04em" }}>Propulsé par l'intelligence artificielle</span>
             </div>
           </FadeUp>
 
@@ -802,7 +830,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
           </FadeUp>
 
           <FadeUp custom={2}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "clamp(16px, 2vw, 20px)", margin: "0 auto 44px", maxWidth: 560, lineHeight: 1.6, fontWeight: 300, letterSpacing: "0.02em" }}>
+            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(17px, 2.2vw, 21px)", margin: "0 auto 44px", maxWidth: 560, lineHeight: 1.7, fontWeight: 400, letterSpacing: "0.01em" }}>
               Chaque semaine, notre IA analyse des milliers de signaux pour détecter les meilleures opportunités de marché.
             </p>
           </FadeUp>
@@ -864,7 +892,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                 Comment ça marche
               </span>
             </h2>
-            <p style={{ color: t.textTertiary, fontSize: 16, margin: "12px 0 0", lineHeight: 1.6 }}>3 étapes, chaque semaine, automatiquement</p>
+            <p style={{ color: t.textSecondary, fontSize: 16, margin: "12px 0 0", lineHeight: 1.6 }}>3 étapes, chaque semaine, automatiquement</p>
           </div>
         </FadeUp>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
@@ -882,7 +910,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                   <span style={{ fontSize: 40, fontWeight: 900, color: "rgba(255,255,255,0.04)", fontFamily: "'JetBrains Mono', monospace" }}>{item.step}</span>
                 </div>
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: "0 0 10px" }}>{item.title}</h3>
-                <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+                <p style={{ fontSize: 15, color: t.textSecondary, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
               </GlassCard>
             </FadeUp>
           ))}
@@ -1256,7 +1284,7 @@ function DetailView({ opportunity: opp, onBack }) {
       <FadeUp custom={2}>
         <GlassCard style={{ padding: 28, marginBottom: 20 }} hover={false}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Problématique identifiée</h3>
-          <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.problem}</p>
+          <p style={{ color: t.textSecondary, fontSize: 16, lineHeight: 1.8, margin: 0 }}>{opp.problem}</p>
           <div style={{ marginTop: 14, fontSize: 12, color: t.textTertiary }}>Sources : {opp.sources}</div>
         </GlassCard>
       </FadeUp>
@@ -1267,14 +1295,14 @@ function DetailView({ opportunity: opp, onBack }) {
           boxShadow: "0 0 40px rgba(129,140,248,0.05)",
         }}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.accent, margin: "0 0 14px" }}>Solution proposée</h3>
-          <p style={{ color: t.text, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.solution}</p>
+          <p style={{ color: t.text, fontSize: 16, lineHeight: 1.8, margin: 0 }}>{opp.solution}</p>
         </div>
       </FadeUp>
 
       <FadeUp custom={4}>
         <GlassCard style={{ padding: 28, marginBottom: 28 }} hover={false}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Paysage concurrentiel</h3>
-          <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.competitors}</p>
+          <p style={{ color: t.textSecondary, fontSize: 16, lineHeight: 1.8, margin: 0 }}>{opp.competitors}</p>
         </GlassCard>
       </FadeUp>
 
@@ -1340,7 +1368,7 @@ function ContactView({ onNavigate }) {
                 </div>
                 <div>
                   <div style={{ fontSize: 16, fontWeight: 700, color: t.text, marginBottom: 4 }}>{item.title}</div>
-                  <div style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.6 }}>{item.desc}</div>
+                  <div style={{ fontSize: 15, color: t.textSecondary, lineHeight: 1.6 }}>{item.desc}</div>
                 </div>
               </div>
             ))}
@@ -1432,13 +1460,7 @@ export default function Trendora() {
         <div style={{ maxWidth: 880, margin: "0 auto", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setView("home"); setSelectedOpp(null); }}>
-              <div style={{
-                width: 34, height: 34, borderRadius: 10,
-                background: "linear-gradient(135deg, #818CF8, #6366F1)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "#fff", fontSize: 15, fontWeight: 900,
-                boxShadow: "0 0 20px rgba(129,140,248,0.25)",
-              }}>T</div>
+              <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Trendora" style={{ width: 30, height: 25 }} />
               <span style={{ fontSize: 19, fontWeight: 800, color: t.text, letterSpacing: "-0.02em" }}>Trendora</span>
             </div>
             <nav className="nav-desktop" style={{ display: "flex", gap: 4 }}>
@@ -1525,7 +1547,7 @@ export default function Trendora() {
       <footer style={{ borderTop: `1px solid ${t.border}`, padding: "24px 24px", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: t.textTertiary, flexWrap: "wrap", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #818CF8, #6366F1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 9, fontWeight: 900 }}>T</div>
+            <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Trendora" style={{ width: 18, height: 15, opacity: 0.5 }} />
             <span>Trendora — Radar d'opportunités business propulsé par IA</span>
           </div>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>Google Trends · Reddit · Product Hunt · Twitter/X</span>
