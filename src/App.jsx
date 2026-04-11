@@ -1,22 +1,25 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// ─── DESIGN TOKENS (Dark Only) ───
+// ─── DESIGN TOKENS (Dark Only — #030303) ───
 const t = {
-  bg: "#0A0A0A",
-  bgAlt: "#111111",
+  bg: "#030303",
+  bgAlt: "#0A0A0A",
   bgCard: "rgba(255,255,255,0.03)",
   bgCardHover: "rgba(255,255,255,0.06)",
   bgGlass: "rgba(255,255,255,0.04)",
   border: "rgba(255,255,255,0.08)",
   borderHover: "rgba(255,255,255,0.16)",
-  borderAccent: "rgba(245,158,11,0.3)",
+  borderAccent: "rgba(129,140,248,0.3)",
   text: "#F5F5F7",
   textSecondary: "#A1A1A6",
   textTertiary: "#6E6E73",
-  accent: "#F59E0B",
-  accentLight: "#FBBF24",
-  accentDim: "rgba(245,158,11,0.12)",
-  accentGlow: "rgba(245,158,11,0.08)",
+  accent: "#818CF8",
+  accentLight: "#A5B4FC",
+  accentDim: "rgba(129,140,248,0.12)",
+  accentGlow: "rgba(129,140,248,0.08)",
+  rose: "#FB7185",
+  roseDim: "rgba(251,113,133,0.12)",
   green: "#34D399",
   greenDim: "rgba(52,211,153,0.12)",
   blue: "#60A5FA",
@@ -26,7 +29,7 @@ const t = {
   red: "#F87171",
   shadow: "0 1px 2px rgba(0,0,0,0.4)",
   shadowHover: "0 8px 32px rgba(0,0,0,0.5)",
-  glowAccent: "0 0 60px rgba(245,158,11,0.06), 0 0 120px rgba(245,158,11,0.03)",
+  glowAccent: "0 0 60px rgba(129,140,248,0.06), 0 0 120px rgba(129,140,248,0.03)",
 };
 
 // ─── DATA ───
@@ -526,6 +529,7 @@ const Icons = {
   trendUp: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>,
   check: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>,
   calendar: (props) => <svg width={props.size||16} height={props.size||16} viewBox="0 0 24 24" fill="none" stroke={props.color||"currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
+  circle: (props) => <svg width={props.size||8} height={props.size||8} viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill={props.color||"currentColor"}/></svg>,
 };
 
 const CategoryIcon = ({ id, size = 20, color }) => {
@@ -534,87 +538,88 @@ const CategoryIcon = ({ id, size = 20, color }) => {
   return <IconComp size={size} color={color || t.accent} />;
 };
 
-// ─── HOOKS ───
-function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          setProgress(docHeight > 0 ? scrollY / docHeight : 0);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return progress;
-}
-
-function useScrollReveal(threshold = 0.15) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.unobserve(el); } },
-      { threshold }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, visible];
-}
-
-// ─── STELLAR ORB ───
-function StellarOrb({ progress }) {
-  // Moves from left (-20%) to right (120%) as user scrolls
-  const x = -20 + progress * 140;
-  // Slight vertical wave using sine
-  const yWave = Math.sin(progress * Math.PI * 2) * 8;
-  // Subtle size pulse
-  const scale = 1 + Math.sin(progress * Math.PI) * 0.15;
-  // Opacity: fade in then fade out at extremes
-  const opacity = 0.12 + Math.sin(progress * Math.PI) * 0.08;
-
+// ─── FLOATING GEOMETRIC SHAPES ───
+function ElegantShape({ delay = 0, width = 400, height = 100, rotate = 0, gradient, style: posStyle }) {
   return (
-    <div style={{
-      position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
-      pointerEvents: "none", zIndex: 0, overflow: "hidden",
-    }}>
-      {/* Main orb */}
+    <motion.div
+      initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
+      animate={{ opacity: 1, y: 0, rotate }}
+      transition={{
+        duration: 2.4,
+        delay,
+        ease: [0.23, 0.86, 0.39, 0.96],
+        opacity: { duration: 1.2 },
+      }}
+      style={{ position: "absolute", ...posStyle }}
+    >
+      <motion.div
+        animate={{ y: [0, 15, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        style={{ width, height, position: "relative" }}
+      >
+        <div style={{
+          position: "absolute", inset: 0, borderRadius: 9999,
+          background: `linear-gradient(to right, ${gradient}, transparent)`,
+          backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)",
+          border: "2px solid rgba(255,255,255,0.15)",
+          boxShadow: "0 8px 32px 0 rgba(255,255,255,0.1)",
+        }}>
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: 9999,
+            background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), transparent 70%)",
+          }} />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function FloatingShapes() {
+  return (
+    <div style={{ position: "fixed", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: 0 }}>
+      {/* Subtle background gradient */}
       <div style={{
-        position: "absolute",
-        top: `calc(18% + ${yWave}px)`,
-        left: `${x}%`,
-        width: 600, height: 600,
-        borderRadius: "50%",
-        background: `radial-gradient(circle, rgba(245,158,11,${opacity}) 0%, rgba(245,158,11,${opacity * 0.4}) 30%, rgba(217,119,6,${opacity * 0.15}) 55%, transparent 75%)`,
-        filter: `blur(80px)`,
-        transform: `scale(${scale})`,
-        transition: "left 0.15s linear, top 0.15s linear, transform 0.3s ease-out",
-        willChange: "left, top, transform",
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.05) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251,113,133,0.05) 0%, transparent 50%)",
+        filter: "blur(40px)",
       }} />
-      {/* Secondary smaller orb — trailing, cooler color */}
-      <div style={{
-        position: "absolute",
-        top: `calc(30% + ${-yWave * 0.6}px)`,
-        left: `${x - 15}%`,
-        width: 300, height: 300,
-        borderRadius: "50%",
-        background: `radial-gradient(circle, rgba(96,165,250,${opacity * 0.5}) 0%, rgba(96,165,250,${opacity * 0.15}) 40%, transparent 70%)`,
-        filter: "blur(60px)",
-        transform: `scale(${scale * 0.8})`,
-        transition: "left 0.25s linear, top 0.25s linear",
-        willChange: "left, top",
-      }} />
+
+      <ElegantShape delay={0.3} width={600} height={140} rotate={12}
+        gradient="rgba(99,102,241,0.15)" style={{ left: "-10%", top: "15%" }} />
+      <ElegantShape delay={0.5} width={500} height={120} rotate={-15}
+        gradient="rgba(251,113,133,0.15)" style={{ right: "-5%", top: "70%" }} />
+      <ElegantShape delay={0.4} width={300} height={80} rotate={-8}
+        gradient="rgba(139,92,246,0.15)" style={{ left: "5%", bottom: "5%" }} />
+      <ElegantShape delay={0.6} width={200} height={60} rotate={20}
+        gradient="rgba(245,158,11,0.15)" style={{ right: "15%", top: "10%" }} />
+      <ElegantShape delay={0.7} width={150} height={40} rotate={-25}
+        gradient="rgba(6,182,212,0.15)" style={{ left: "20%", top: "5%" }} />
     </div>
+  );
+}
+
+// ─── FADE-UP ANIMATION ───
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, delay: 0.1 + (i || 0) * 0.15, ease: [0.25, 0.4, 0.25, 1] },
+  }),
+};
+
+function FadeUp({ children, style, delay = 0, custom = 0 }) {
+  return (
+    <motion.div
+      custom={custom}
+      variants={fadeUpVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      style={style}
+      transition={{ delay }}
+    >
+      {children}
+    </motion.div>
   );
 }
 
@@ -653,7 +658,7 @@ function TrendBadge({ value }) {
 function WeekBadge({ type }) {
   const config = {
     new: { label: "Nouveau", bg: t.accentDim, color: t.accent, border: t.borderAccent },
-    up: { label: "En hausse", bg: t.greenDim, color: t.green, border: `rgba(52,211,153,0.2)` },
+    up: { label: "En hausse", bg: t.greenDim, color: t.green, border: "rgba(52,211,153,0.2)" },
     stable: { label: "Stable", bg: "rgba(255,255,255,0.04)", color: t.textTertiary, border: t.border },
   };
   const c = config[type] || config.stable;
@@ -716,7 +721,7 @@ function GlassCard({ children, style, onClick, hover = true, glow = false }) {
         e.currentTarget.style.borderColor = t.borderHover;
         e.currentTarget.style.background = t.bgCardHover;
         e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.boxShadow = glow ? `0 0 80px rgba(245,158,11,0.1), ${t.shadowHover}` : t.shadowHover;
+        e.currentTarget.style.boxShadow = glow ? `0 0 80px rgba(129,140,248,0.1), ${t.shadowHover}` : t.shadowHover;
       } : undefined}
       onMouseLeave={hover && onClick ? (e) => {
         e.currentTarget.style.borderColor = t.border;
@@ -725,20 +730,6 @@ function GlassCard({ children, style, onClick, hover = true, glow = false }) {
         e.currentTarget.style.boxShadow = glow ? t.glowAccent : t.shadow;
       } : undefined}
     >
-      {children}
-    </div>
-  );
-}
-
-function RevealSection({ children, style, delay = 0 }) {
-  const [ref, visible] = useScrollReveal(0.1);
-  return (
-    <div ref={ref} style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(30px)",
-      transition: `opacity 0.7s cubic-bezier(0.4,0,0.2,1) ${delay}s, transform 0.7s cubic-bezier(0.4,0,0.2,1) ${delay}s`,
-      ...style,
-    }}>
       {children}
     </div>
   );
@@ -789,53 +780,42 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
   return (
     <div>
       {/* ─── HERO ─── */}
-      <div style={{ position: "relative", textAlign: "center", padding: "80px 20px 100px", overflow: "hidden" }}>
-        {/* Aurora Background */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 0,
-          background: `
-            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245,158,11,0.12) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 40% at 30% 50%, rgba(245,158,11,0.06) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 40% at 70% 50%, rgba(96,165,250,0.04) 0%, transparent 50%)
-          `,
-        }} />
-        {/* Grain */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 1, opacity: 0.03, pointerEvents: "none" }}>
-          <svg width="100%" height="100%"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
-        </div>
-
+      <div style={{ position: "relative", textAlign: "center", padding: "100px 20px 120px", overflow: "hidden" }}>
         <div style={{ position: "relative", zIndex: 2, maxWidth: 800, margin: "0 auto" }}>
-          <RevealSection>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.accentDim, border: `1px solid ${t.borderAccent}`, borderRadius: 24, padding: "6px 16px", marginBottom: 24, fontSize: 13, color: t.accent, fontWeight: 600 }}>
-              <Icons.sparkle size={14} color={t.accent} />
-              Propulsé par l'intelligence artificielle
+          <FadeUp custom={0}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 24, padding: "6px 16px", marginBottom: 28 }}>
+              <Icons.circle size={8} color="rgba(251,113,133,0.8)" />
+              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", letterSpacing: "0.04em" }}>Propulsé par l'intelligence artificielle</span>
             </div>
-          </RevealSection>
+          </FadeUp>
 
-          <RevealSection delay={0.1}>
-            <h1 style={{ fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 800, color: t.text, margin: "0 0 20px", lineHeight: 1.1, letterSpacing: "-0.03em", fontFamily: "'Inter', system-ui, sans-serif" }}>
-              Votre radar<br />
-              <span style={{ background: "linear-gradient(135deg, #F59E0B, #FBBF24, #F59E0B)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <FadeUp custom={1}>
+            <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 800, margin: "0 0 20px", lineHeight: 1.1, letterSpacing: "-0.03em", fontFamily: "'Inter', system-ui, sans-serif" }}>
+              <span style={{ backgroundImage: "linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0.8))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Votre radar
+              </span>
+              <br />
+              <span style={{ backgroundImage: "linear-gradient(to right, #A5B4FC, rgba(255,255,255,0.9), #FDA4AF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 d'opportunités business
               </span>
             </h1>
-          </RevealSection>
+          </FadeUp>
 
-          <RevealSection delay={0.2}>
-            <p style={{ color: t.textSecondary, fontSize: "clamp(16px, 2vw, 20px)", margin: "0 auto 40px", maxWidth: 560, lineHeight: 1.6, fontWeight: 400 }}>
+          <FadeUp custom={2}>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "clamp(16px, 2vw, 20px)", margin: "0 auto 44px", maxWidth: 560, lineHeight: 1.6, fontWeight: 300, letterSpacing: "0.02em" }}>
               Chaque semaine, notre IA analyse des milliers de signaux pour détecter les meilleures opportunités de marché.
             </p>
-          </RevealSection>
+          </FadeUp>
 
-          <RevealSection delay={0.3}>
+          <FadeUp custom={3}>
             <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
               <button onClick={() => onNavigate("top")} style={{
-                background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 32px", borderRadius: 12,
+                background: "linear-gradient(135deg, #818CF8, #6366F1)", color: "#fff", padding: "14px 32px", borderRadius: 12,
                 fontSize: 15, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "inherit",
-                transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+                transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(129,140,248,0.25)",
               }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(129,140,248,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(129,140,248,0.25)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                 Explorer le Top 10
               </button>
               <button onClick={() => onNavigate("contact")} style={{
@@ -848,12 +828,15 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                 Prendre rendez-vous
               </button>
             </div>
-          </RevealSection>
+          </FadeUp>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #030303, transparent 30%, transparent 70%, rgba(3,3,3,0.8))", pointerEvents: "none" }} />
       </div>
 
       {/* ─── STATS ─── */}
-      <RevealSection style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
+      <FadeUp style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12 }}>
           {[
             { label: "Opportunités", value: opportunities.length, color: t.accent },
@@ -870,23 +853,27 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
             </GlassCard>
           ))}
         </div>
-      </RevealSection>
+      </FadeUp>
 
       {/* ─── HOW IT WORKS ─── */}
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 64px" }}>
-        <RevealSection>
+        <FadeUp>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Comment ça marche</h2>
+            <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+              <span style={{ backgroundImage: "linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0.8))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Comment ça marche
+              </span>
+            </h2>
             <p style={{ color: t.textTertiary, fontSize: 16, margin: "12px 0 0", lineHeight: 1.6 }}>3 étapes, chaque semaine, automatiquement</p>
           </div>
-        </RevealSection>
+        </FadeUp>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
           {[
             { icon: <Icons.radar size={28} color={t.accent} />, step: "01", title: "Analyse IA", desc: "Notre IA scanne des milliers de sources : Reddit, Google Trends, Product Hunt, forums spécialisés et réseaux sociaux." },
-            { icon: <Icons.sparkle size={28} color={t.accent} />, step: "02", title: "Scoring multi-critères", desc: "Chaque opportunité est évaluée sur 5 axes : demande, croissance, concurrence, monétisation et faisabilité." },
-            { icon: <Icons.trendUp size={28} color={t.accent} />, step: "03", title: "Top classement", desc: "Les meilleures opportunités sont classées et mises à jour chaque lundi avec les données fraîches." },
+            { icon: <Icons.sparkle size={28} color={t.rose} />, step: "02", title: "Scoring multi-critères", desc: "Chaque opportunité est évaluée sur 5 axes : demande, croissance, concurrence, monétisation et faisabilité." },
+            { icon: <Icons.trendUp size={28} color={t.green} />, step: "03", title: "Top classement", desc: "Les meilleures opportunités sont classées et mises à jour chaque lundi avec les données fraîches." },
           ].map((item, i) => (
-            <RevealSection key={i} delay={i * 0.15}>
+            <FadeUp key={i} custom={i}>
               <GlassCard style={{ padding: 28, height: "100%" }} hover={false} glow={i === 0}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
                   <div style={{ width: 48, height: 48, borderRadius: 12, background: t.accentDim, border: `1px solid ${t.borderAccent}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -897,7 +884,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                 <h3 style={{ fontSize: 18, fontWeight: 700, color: t.text, margin: "0 0 10px" }}>{item.title}</h3>
                 <p style={{ fontSize: 14, color: t.textSecondary, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
               </GlassCard>
-            </RevealSection>
+            </FadeUp>
           ))}
         </div>
       </div>
@@ -905,11 +892,11 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
       {/* ─── ALERT BANNER ─── */}
       {newOpps.length > 0 && (
         <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
-          <RevealSection>
+          <FadeUp>
             <GlassCard onClick={() => onSelect(newOpps.sort((a,b) => b.score - a.score)[0])} glow style={{ padding: "22px 28px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
-                <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.accent, display: "inline-block", animation: "pulse 2s ease-in-out infinite", boxShadow: `0 0 12px ${t.accent}60` }} />
-                <span style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: t.accent }}>Alerte opportunité</span>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: t.rose, display: "inline-block", animation: "pulse 2s ease-in-out infinite", boxShadow: `0 0 12px ${t.rose}60` }} />
+                <span style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: t.rose }}>Alerte opportunité</span>
               </div>
               <div style={{ fontSize: 18, fontWeight: 700, color: t.text, marginBottom: 6 }}>
                 {newOpps.sort((a,b) => b.score - a.score)[0].name}
@@ -919,42 +906,42 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                 <Icons.arrowRight size={14} color={t.accent} />
               </div>
             </GlassCard>
-          </RevealSection>
+          </FadeUp>
         </div>
       )}
 
       {/* ─── TOP 5 ─── */}
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
-        <RevealSection>
+        <FadeUp>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
             <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Top 5 de la semaine</h2>
             <button onClick={() => onNavigate("top")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
               Voir le Top 10 <Icons.arrowRight size={14} color={t.accent} />
             </button>
           </div>
-        </RevealSection>
+        </FadeUp>
         <div style={{ display: "grid", gap: 10 }}>
           {top5.map((opp, i) => (
-            <RevealSection key={opp.id} delay={i * 0.05}>
+            <FadeUp key={opp.id} custom={i * 0.3}>
               <OpportunityRow opp={opp} index={i + 1} onSelect={onSelect} showRank />
-            </RevealSection>
+            </FadeUp>
           ))}
         </div>
       </div>
 
       {/* ─── SECTORS ─── */}
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
-        <RevealSection>
+        <FadeUp>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
             <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Par secteur</h2>
             <button onClick={() => onNavigate("categories")} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
               Toutes les catégories <Icons.arrowRight size={14} color={t.accent} />
             </button>
           </div>
-        </RevealSection>
+        </FadeUp>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 14 }}>
           {catCounts.map((cat, i) => (
-            <RevealSection key={cat.id} delay={i * 0.08}>
+            <FadeUp key={cat.id} custom={i * 0.3}>
               <GlassCard onClick={() => onNavigate("categories", cat.id)} style={{ padding: 22 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -982,7 +969,7 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                   </div>
                 )}
               </GlassCard>
-            </RevealSection>
+            </FadeUp>
           ))}
         </div>
       </div>
@@ -990,17 +977,17 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
       {/* ─── NEW THIS WEEK ─── */}
       {newOpps.length > 0 && (
         <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
-          <RevealSection>
+          <FadeUp>
             <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 20px", display: "flex", alignItems: "center", gap: 10 }}>
               Nouvelles cette semaine
               <span style={{ background: t.accentDim, color: t.accent, border: `1px solid ${t.borderAccent}`, padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{newOpps.length}</span>
             </h2>
-          </RevealSection>
+          </FadeUp>
           <div style={{ display: "grid", gap: 10 }}>
             {newOpps.sort((a, b) => b.score - a.score).map((opp, i) => (
-              <RevealSection key={opp.id} delay={i * 0.05}>
+              <FadeUp key={opp.id} custom={i * 0.2}>
                 <OpportunityRow opp={opp} onSelect={onSelect} />
-              </RevealSection>
+              </FadeUp>
             ))}
           </div>
         </div>
@@ -1009,17 +996,17 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
       {/* ─── RISING ─── */}
       {risingOpps.length > 0 && (
         <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 48px" }}>
-          <RevealSection>
+          <FadeUp>
             <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 20px", display: "flex", alignItems: "center", gap: 10 }}>
               En hausse
-              <span style={{ background: t.greenDim, color: t.green, border: `1px solid rgba(52,211,153,0.2)`, padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{risingOpps.length}</span>
+              <span style={{ background: t.greenDim, color: t.green, border: "1px solid rgba(52,211,153,0.2)", padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 700 }}>{risingOpps.length}</span>
             </h2>
-          </RevealSection>
+          </FadeUp>
           <div style={{ display: "grid", gap: 10 }}>
             {risingOpps.sort((a, b) => b.score - a.score).map((opp, i) => (
-              <RevealSection key={opp.id} delay={i * 0.05}>
+              <FadeUp key={opp.id} custom={i * 0.2}>
                 <OpportunityRow opp={opp} onSelect={onSelect} />
-              </RevealSection>
+              </FadeUp>
             ))}
           </div>
         </div>
@@ -1027,14 +1014,18 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
 
       {/* ─── CTA ─── */}
       <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px 64px" }}>
-        <RevealSection>
+        <FadeUp>
           <div style={{
             position: "relative", borderRadius: 20, padding: "48px 32px", textAlign: "center", overflow: "hidden",
             border: `1px solid ${t.borderAccent}`,
           }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)" }} />
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(129,140,248,0.08) 0%, transparent 70%)" }} />
             <div style={{ position: "relative", zIndex: 1 }}>
-              <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, color: t.text, margin: "0 0 12px", letterSpacing: "-0.02em" }}>Une opportunité vous parle ?</h2>
+              <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 800, margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+                <span style={{ backgroundImage: "linear-gradient(to right, #A5B4FC, #FFFFFF, #FDA4AF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  Une opportunité vous parle ?
+                </span>
+              </h2>
               <p style={{ color: t.textSecondary, fontSize: 16, margin: "0 auto 28px", maxWidth: 480, lineHeight: 1.6 }}>
                 On vous accompagne de l'idée au lancement — stratégie, MVP, acquisition clients.
               </p>
@@ -1049,18 +1040,18 @@ function HomeView({ opportunities, onSelect, onNavigate }) {
                   Explorer le Top 10
                 </button>
                 <button onClick={() => onNavigate("contact")} style={{
-                  background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 28px", borderRadius: 12,
+                  background: "linear-gradient(135deg, #818CF8, #6366F1)", color: "#fff", padding: "14px 28px", borderRadius: 12,
                   fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "inherit",
-                  transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+                  transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(129,140,248,0.25)",
                 }}
-                  onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(129,140,248,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(129,140,248,0.25)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Prendre rendez-vous
                 </button>
               </div>
             </div>
           </div>
-        </RevealSection>
+        </FadeUp>
       </div>
     </div>
   );
@@ -1076,7 +1067,7 @@ function TopView({ opportunities, onSelect }) {
 
   return (
     <div>
-      <RevealSection>
+      <FadeUp>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 32 }}>
           {[
             { label: "Opportunités", value: opportunities.length, color: t.accent },
@@ -1090,28 +1081,32 @@ function TopView({ opportunities, onSelect }) {
             </GlassCard>
           ))}
         </div>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection>
+      <FadeUp>
         <div style={{ marginBottom: 24 }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Top 10 de la semaine</h2>
+          <h2 style={{ fontSize: 26, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, #FFFFFF, #A5B4FC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Top 10 de la semaine
+            </span>
+          </h2>
           <p style={{ color: t.textTertiary, fontSize: 14, margin: "8px 0 0", lineHeight: 1.6 }}>
             Les opportunités business les mieux scorées — analyse IA mise à jour chaque lundi.
           </p>
         </div>
-      </RevealSection>
+      </FadeUp>
 
       <div style={{ display: "grid", gap: 10 }}>
         {top10.map((opp, i) => (
-          <RevealSection key={opp.id} delay={i * 0.04}>
+          <FadeUp key={opp.id} custom={i * 0.2}>
             <OpportunityRow opp={opp} index={i + 1} onSelect={onSelect} showRank />
-          </RevealSection>
+          </FadeUp>
         ))}
       </div>
 
       {rest.length > 0 && (
         <div style={{ marginTop: 48 }}>
-          <RevealSection>
+          <FadeUp>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
               <div>
                 <h2 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: 0 }}>Toutes les opportunités</h2>
@@ -1124,14 +1119,14 @@ function TopView({ opportunities, onSelect }) {
                 {showAll ? "Réduire" : `Voir les ${rest.length}`}
               </button>
             </div>
-          </RevealSection>
+          </FadeUp>
 
           {showAll && (
             <div style={{ display: "grid", gap: 8 }}>
               {rest.map((opp, i) => (
-                <RevealSection key={opp.id} delay={Math.min(i * 0.02, 0.4)}>
+                <FadeUp key={opp.id} custom={Math.min(i * 0.1, 1.5)}>
                   <OpportunityRow opp={opp} index={i + 11} onSelect={onSelect} showRank />
-                </RevealSection>
+                </FadeUp>
               ))}
             </div>
           )}
@@ -1148,14 +1143,18 @@ function CategoryView({ opportunities, onSelect, initialCat }) {
 
   return (
     <div>
-      <RevealSection>
+      <FadeUp>
         <div style={{ marginBottom: 28 }}>
-          <h2 style={{ fontSize: 26, fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>Catégories</h2>
+          <h2 style={{ fontSize: 26, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, #FFFFFF, #FDA4AF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Catégories
+            </span>
+          </h2>
           <p style={{ color: t.textTertiary, fontSize: 14, margin: "8px 0 0", lineHeight: 1.6 }}>Explore les opportunités par secteur d'activité.</p>
         </div>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection>
+      <FadeUp>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28 }}>
           {CATEGORIES.map(cat => {
             const active = activeCat === cat.id;
@@ -1175,10 +1174,10 @@ function CategoryView({ opportunities, onSelect, initialCat }) {
             );
           })}
         </div>
-      </RevealSection>
+      </FadeUp>
 
       {activeCat !== "all" && (
-        <RevealSection>
+        <FadeUp>
           <GlassCard style={{ padding: 22, marginBottom: 24, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 16 }} hover={false}>
             <div>
               <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>Opportunités</div>
@@ -1193,14 +1192,14 @@ function CategoryView({ opportunities, onSelect, initialCat }) {
               <div style={{ fontSize: 28, fontWeight: 800, color: t.green, fontFamily: "'JetBrains Mono', monospace" }}>{sorted[0]?.score || "—"}</div>
             </div>
           </GlassCard>
-        </RevealSection>
+        </FadeUp>
       )}
 
       <div style={{ display: "grid", gap: 10 }}>
         {sorted.map((opp, i) => (
-          <RevealSection key={opp.id} delay={Math.min(i * 0.03, 0.4)}>
+          <FadeUp key={opp.id} custom={Math.min(i * 0.1, 1.5)}>
             <OpportunityRow opp={opp} onSelect={onSelect} />
-          </RevealSection>
+          </FadeUp>
         ))}
       </div>
     </div>
@@ -1212,14 +1211,14 @@ function DetailView({ opportunity: opp, onBack }) {
 
   return (
     <div>
-      <RevealSection>
+      <FadeUp>
         <button onClick={onBack} style={{ background: "none", border: "none", color: t.accent, cursor: "pointer", fontSize: 14, fontWeight: 600, padding: 0, marginBottom: 24, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 8 }}>
           <Icons.arrowLeft size={16} color={t.accent} />
           Retour
         </button>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection>
+      <FadeUp>
         <GlassCard style={{ padding: 32, marginBottom: 20 }} hover={false} glow>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 24, alignItems: "flex-start" }}>
             <ScoreRing score={opp.score} size={80} strokeWidth={4.5} />
@@ -1229,7 +1228,11 @@ function DetailView({ opportunity: opp, onBack }) {
                 <Tag>{opp.type}</Tag>
                 <WeekBadge type={opp.weekTrend} />
               </div>
-              <h1 style={{ fontSize: "clamp(22px, 4vw, 30px)", fontWeight: 800, color: t.text, margin: "0 0 12px", lineHeight: 1.3, letterSpacing: "-0.02em" }}>{opp.name}</h1>
+              <h1 style={{ fontSize: "clamp(22px, 4vw, 30px)", fontWeight: 800, margin: "0 0 12px", lineHeight: 1.3, letterSpacing: "-0.02em" }}>
+                <span style={{ backgroundImage: "linear-gradient(to right, #FFFFFF, #A5B4FC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                  {opp.name}
+                </span>
+              </h1>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 20, fontSize: 14 }}>
                 <span style={{ color: t.textSecondary }}>Marché : <strong style={{ color: t.text }}>{opp.market}</strong></span>
                 <span style={{ color: t.textSecondary }}>Tendance : <TrendBadge value={opp.trend} /></span>
@@ -1238,9 +1241,9 @@ function DetailView({ opportunity: opp, onBack }) {
             </div>
           </div>
         </GlassCard>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.1}>
+      <FadeUp custom={1}>
         <GlassCard style={{ padding: 28, marginBottom: 20 }} hover={false}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 18px" }}>Détail du score</h3>
           <ScoreBreakdown scores={opp.scores} />
@@ -1248,57 +1251,61 @@ function DetailView({ opportunity: opp, onBack }) {
             Score calculé sur 5 critères : demande marché (25pts), croissance (25pts), concurrence (20pts), monétisation (15pts) et faisabilité (15pts).
           </div>
         </GlassCard>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.15}>
+      <FadeUp custom={2}>
         <GlassCard style={{ padding: 28, marginBottom: 20 }} hover={false}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Problématique identifiée</h3>
           <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.problem}</p>
           <div style={{ marginTop: 14, fontSize: 12, color: t.textTertiary }}>Sources : {opp.sources}</div>
         </GlassCard>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.2}>
+      <FadeUp custom={3}>
         <div style={{
           background: t.accentDim, border: `1px solid ${t.borderAccent}`, borderRadius: 16, padding: 28, marginBottom: 20,
-          boxShadow: "0 0 40px rgba(245,158,11,0.05)",
+          boxShadow: "0 0 40px rgba(129,140,248,0.05)",
         }}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.accent, margin: "0 0 14px" }}>Solution proposée</h3>
           <p style={{ color: t.text, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.solution}</p>
         </div>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.25}>
+      <FadeUp custom={4}>
         <GlassCard style={{ padding: 28, marginBottom: 28 }} hover={false}>
           <h3 style={{ fontSize: 16, fontWeight: 700, color: t.text, margin: "0 0 14px" }}>Paysage concurrentiel</h3>
           <p style={{ color: t.textSecondary, fontSize: 15, lineHeight: 1.8, margin: 0 }}>{opp.competitors}</p>
         </GlassCard>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.3}>
+      <FadeUp custom={5}>
         <div style={{
           position: "relative", borderRadius: 20, padding: "40px 32px", textAlign: "center", overflow: "hidden",
           border: `1px solid ${t.borderAccent}`,
         }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(129,140,248,0.08) 0%, transparent 70%)" }} />
           <div style={{ position: "relative", zIndex: 1 }}>
-            <h3 style={{ fontSize: 22, fontWeight: 800, color: t.text, margin: "0 0 10px", letterSpacing: "-0.02em" }}>Cette opportunité vous intéresse ?</h3>
+            <h3 style={{ fontSize: 22, fontWeight: 800, margin: "0 0 10px", letterSpacing: "-0.02em" }}>
+              <span style={{ backgroundImage: "linear-gradient(to right, #A5B4FC, #FFFFFF, #FDA4AF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Cette opportunité vous intéresse ?
+              </span>
+            </h3>
             <p style={{ color: t.textSecondary, fontSize: 15, margin: "0 0 24px", lineHeight: 1.6 }}>
               On vous accompagne pour transformer cette opportunité en projet concret.
             </p>
             <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
-              background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "14px 32px", borderRadius: 12,
+              background: "linear-gradient(135deg, #818CF8, #6366F1)", color: "#fff", padding: "14px 32px", borderRadius: 12,
               fontSize: 15, fontWeight: 700, textDecoration: "none", cursor: "pointer", border: "none", fontFamily: "inherit",
-              transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+              transition: "all 0.3s ease", boxShadow: "0 0 30px rgba(129,140,248,0.25)",
             }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-              Prendre rendez-vous <Icons.arrowRight size={16} color="#000" />
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(129,140,248,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(129,140,248,0.25)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+              Prendre rendez-vous <Icons.arrowRight size={16} color="#fff" />
             </a>
           </div>
         </div>
-      </RevealSection>
+      </FadeUp>
     </div>
   );
 }
@@ -1306,22 +1313,26 @@ function DetailView({ opportunity: opp, onBack }) {
 function ContactView({ onNavigate }) {
   return (
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
-      <RevealSection>
+      <FadeUp>
         <div style={{ textAlign: "center", marginBottom: 36 }}>
-          <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 800, color: t.text, margin: 0, letterSpacing: "-0.02em" }}>On vous accompagne</h2>
+          <h2 style={{ fontSize: "clamp(26px, 4vw, 36px)", fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, #A5B4FC, #FFFFFF, #FDA4AF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              On vous accompagne
+            </span>
+          </h2>
           <p style={{ color: t.textSecondary, fontSize: 16, margin: "14px 0 0", lineHeight: 1.6 }}>
             Vous avez repéré une opportunité ? On vous aide à la transformer en business.
           </p>
         </div>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.1}>
+      <FadeUp custom={1}>
         <GlassCard style={{ padding: 32, marginBottom: 28 }} hover={false} glow>
           <div style={{ display: "grid", gap: 24, marginBottom: 28 }}>
             {[
               { icon: <Icons.radar size={22} color={t.accent} />, title: "Validation de l'idée", desc: "On analyse le marché, la concurrence et la viabilité de votre opportunité." },
-              { icon: <Icons.sparkle size={22} color={t.accent} />, title: "Stratégie de lancement", desc: "Plan d'action, MVP, acquisition des premiers clients — tout est structuré." },
-              { icon: <Icons.trendUp size={22} color={t.accent} />, title: "Accompagnement continu", desc: "Suivi hebdomadaire pour itérer, optimiser et scaler votre projet." },
+              { icon: <Icons.sparkle size={22} color={t.rose} />, title: "Stratégie de lancement", desc: "Plan d'action, MVP, acquisition des premiers clients — tout est structuré." },
+              { icon: <Icons.trendUp size={22} color={t.green} />, title: "Accompagnement continu", desc: "Suivi hebdomadaire pour itérer, optimiser et scaler votre projet." },
             ].map((item, i) => (
               <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: t.accentDim, border: `1px solid ${t.borderAccent}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -1337,23 +1348,23 @@ function ContactView({ onNavigate }) {
 
           <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer" style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-            background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "16px 32px", borderRadius: 12,
+            background: "linear-gradient(135deg, #818CF8, #6366F1)", color: "#fff", padding: "16px 32px", borderRadius: 12,
             fontSize: 16, fontWeight: 700, textDecoration: "none", cursor: "pointer",
             transition: "all 0.3s ease", width: "100%", border: "none", fontFamily: "inherit",
-            boxShadow: "0 0 30px rgba(245,158,11,0.2)",
+            boxShadow: "0 0 30px rgba(129,140,248,0.25)",
           }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(245,158,11,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.2)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-            Réserver un appel découverte <Icons.arrowRight size={18} color="#000" />
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 50px rgba(129,140,248,0.4)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(129,140,248,0.25)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+            Réserver un appel découverte <Icons.arrowRight size={18} color="#fff" />
           </a>
         </GlassCard>
-      </RevealSection>
+      </FadeUp>
 
-      <RevealSection delay={0.2}>
+      <FadeUp custom={2}>
         <div style={{ textAlign: "center", fontSize: 13, color: t.textTertiary, lineHeight: 1.6 }}>
           Appel gratuit de 30 minutes · Sans engagement · On discute de votre projet
         </div>
-      </RevealSection>
+      </FadeUp>
     </div>
   );
 }
@@ -1363,7 +1374,6 @@ export default function Trendora() {
   const [view, setView] = useState("home");
   const [selectedOpp, setSelectedOpp] = useState(null);
   const [initialCat, setInitialCat] = useState(null);
-  const scrollProgress = useScrollProgress();
 
   const handleSelect = useCallback((opp) => {
     setSelectedOpp(opp);
@@ -1392,12 +1402,12 @@ export default function Trendora() {
 
   return (
     <div style={{ background: t.bg, minHeight: "100vh", color: t.text, position: "relative" }}>
-      <StellarOrb progress={scrollProgress} />
+      <FloatingShapes />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: ${t.bg}; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        ::selection { background: ${t.accent}30; }
+        ::selection { background: rgba(129,140,248,0.3); }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
@@ -1414,7 +1424,7 @@ export default function Trendora() {
 
       {/* ─── HEADER ─── */}
       <header style={{
-        background: "rgba(10,10,10,0.8)",
+        background: "rgba(3,3,3,0.8)",
         borderBottom: `1px solid ${t.border}`,
         backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
         position: "sticky", top: 0, zIndex: 50,
@@ -1424,10 +1434,10 @@ export default function Trendora() {
             <div style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => { setView("home"); setSelectedOpp(null); }}>
               <div style={{
                 width: 34, height: 34, borderRadius: 10,
-                background: "linear-gradient(135deg, #F59E0B, #D97706)",
+                background: "linear-gradient(135deg, #818CF8, #6366F1)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                color: "#000", fontSize: 15, fontWeight: 900,
-                boxShadow: "0 0 20px rgba(245,158,11,0.2)",
+                color: "#fff", fontSize: 15, fontWeight: 900,
+                boxShadow: "0 0 20px rgba(129,140,248,0.25)",
               }}>T</div>
               <span style={{ fontSize: 19, fontWeight: 800, color: t.text, letterSpacing: "-0.02em" }}>Trendora</span>
             </div>
@@ -1454,14 +1464,14 @@ export default function Trendora() {
           <a href="https://calendly.com/mur-noe-celony/30min" target="_blank" rel="noopener noreferrer"
             onClick={(e) => { e.preventDefault(); handleNavigate("contact"); }}
             style={{
-              background: "linear-gradient(135deg, #F59E0B, #D97706)", color: "#000", padding: "9px 20px", borderRadius: 10,
+              background: "linear-gradient(135deg, #818CF8, #6366F1)", color: "#fff", padding: "9px 20px", borderRadius: 10,
               fontSize: 13, fontWeight: 700, textDecoration: "none", cursor: "pointer",
               transition: "all 0.3s ease", border: "none", fontFamily: "inherit",
               display: "flex", alignItems: "center", gap: 6,
-              boxShadow: "0 0 20px rgba(245,158,11,0.15)",
+              boxShadow: "0 0 20px rgba(129,140,248,0.2)",
             }}
-            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(245,158,11,0.3)"; }}
-            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 20px rgba(245,158,11,0.15)"; }}>
+            onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 0 30px rgba(129,140,248,0.35)"; }}
+            onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 0 20px rgba(129,140,248,0.2)"; }}>
             On vous accompagne
           </a>
         </div>
@@ -1503,7 +1513,7 @@ export default function Trendora() {
       )}
 
       {/* ─── MAIN CONTENT ─── */}
-      <main style={{ maxWidth: view === "home" ? 1200 : 880, margin: "0 auto", padding: view === "home" ? "0 0 64px" : "32px 24px 64px", transition: "max-width 0.3s ease" }}>
+      <main style={{ maxWidth: view === "home" ? 1200 : 880, margin: "0 auto", padding: view === "home" ? "0 0 64px" : "32px 24px 64px", transition: "max-width 0.3s ease", position: "relative", zIndex: 1 }}>
         {view === "home" && <HomeView opportunities={OPPORTUNITIES} onSelect={handleSelect} onNavigate={handleNavigate} />}
         {view === "top" && <TopView opportunities={OPPORTUNITIES} onSelect={handleSelect} />}
         {view === "categories" && <CategoryView opportunities={OPPORTUNITIES} onSelect={handleSelect} initialCat={initialCat} />}
@@ -1512,10 +1522,10 @@ export default function Trendora() {
       </main>
 
       {/* ─── FOOTER ─── */}
-      <footer style={{ borderTop: `1px solid ${t.border}`, padding: "24px 24px" }}>
+      <footer style={{ borderTop: `1px solid ${t.border}`, padding: "24px 24px", position: "relative", zIndex: 1 }}>
         <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: t.textTertiary, flexWrap: "wrap", gap: 12 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #F59E0B, #D97706)", display: "flex", alignItems: "center", justifyContent: "center", color: "#000", fontSize: 9, fontWeight: 900 }}>T</div>
+            <div style={{ width: 20, height: 20, borderRadius: 5, background: "linear-gradient(135deg, #818CF8, #6366F1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 9, fontWeight: 900 }}>T</div>
             <span>Trendora — Radar d'opportunités business propulsé par IA</span>
           </div>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11 }}>Google Trends · Reddit · Product Hunt · Twitter/X</span>
