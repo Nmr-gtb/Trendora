@@ -77,7 +77,7 @@ async function updateTrends() {
   // Demander à Claude de générer les mises à jour
   const response = await client.messages.create({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 8000,
+    max_tokens: 16000,
     messages: [
       {
         role: "user",
@@ -95,11 +95,11 @@ CONTEXTE :
   - faisabilite (max 15) : facilité à lancer un MVP
 
 TACHE :
-1. Génère 3 NOUVELLES opportunités business réalistes et actuelles (pas des copies des existantes).
-   Chaque nouvelle opportunité doit être dans une catégorie différente.
+1. Génère 15 NOUVELLES opportunités business réalistes et actuelles (pas des copies des existantes).
+   Répartis-les équitablement entre les 5 catégories (3 par catégorie).
    weekTrend = "new" pour les nouvelles.
 
-2. Choisis 5 opportunités existantes au hasard qui passent de "stable" à "up" ou de "new" à "up".
+2. Choisis 10 opportunités existantes au hasard qui passent de "stable" à "up" ou de "new" à "up".
 
 Voici les noms existants (ne les duplique PAS) :
 ${existingNames.map((n) => `- ${n}`).join("\n")}
@@ -126,7 +126,7 @@ Réponds UNIQUEMENT avec un JSON valide, pas de markdown, pas de texte autour. F
       "weekTrend": "new"
     }
   ],
-  "trending_up_ids": [2, 7, 15, 22, 36]
+  "trending_up_ids": [2, 7, 15, 22, 36, 41, 45, 48, 50, 53]
 }`,
       },
     ],
