@@ -1188,5 +1188,49 @@ export const OPPORTUNITIES = [
     "solution": "Chatbot IA intégré aux outils de l'entreprise qui crée des parcours de formation personnalisés et accompagne l'apprentissage en temps réel. Cible les entreprises 100+ employés à 15-25€/employé/mois. L'IA analyse les lacunes de compétences, propose du contenu adapté au poste et niveau, répond aux questions pendant l'apprentissage et mesure la progression. Intégration Slack/Teams et analytics pour les managers RH.",
     "competitors": "Coursera for Business, LinkedIn Learning dominent mais avec approche catalogue classique. Peu d'acteurs avec IA conversationnelle vraiment personnalisée et intégrée au workflow.",
     "weekTrend": "new"
+  },
+  {
+    "id": 55,
+    "name": "Repurposing de contenu IA",
+    "category": "marketing",
+    "score": 88,
+    "scores": {
+      "demande": 23,
+      "croissance": 22,
+      "concurrence": 16,
+      "monetisation": 14,
+      "faisabilite": 13
+    },
+    "trend": "+260%",
+    "market": "€2.4B",
+    "type": "SaaS",
+    "mentions": 1420,
+    "sources": "Reddit, Twitter/X, Product Hunt, Google Trends",
+    "problem": "Un consultant enregistre 1 podcast d'1 heure avec 10 idées géniales dedans. Transformer ce podcast en posts LinkedIn, tweets, newsletter et Reels lui prend 2 jours. Du coup il ne le fait pas, et son podcast meurt sur Spotify avec 200 écoutes. Les créateurs de contenu perdent un temps colossal à décliner manuellement leur contenu sur chaque plateforme, alors que la matière première existe déjà.",
+    "solution": "Un SaaS où tu uploades ton podcast, ta vidéo YouTube ou ton article. L'IA écoute tout, repère les meilleurs moments, et génère automatiquement 10 posts LinkedIn prêts à publier, 20 tweets, 1 newsletter, et 5 idées de Reels/Shorts. Tu copies-colles ou tu planifies directement. 1 heure de contenu = 1 mois de présence sur les réseaux. Pour un consultant qui facture 1500€/jour, gagner 2 jours par mois = 3000€ économisés. Pricing : 49€/mois. Cible : consultants, coachs, freelances, créateurs de contenu.",
+    "competitors": "Opus Clip fait du découpage vidéo, Castmagic transcrit les podcasts, mais aucun ne génère un kit complet multi-plateforme prêt à publier en un clic. Le marché est fragmenté avec des outils mono-format.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 56,
+    "name": "Kits marketing immobilier IA",
+    "category": "immobilier",
+    "score": 85,
+    "scores": {
+      "demande": 22,
+      "croissance": 20,
+      "concurrence": 17,
+      "monetisation": 13,
+      "faisabilite": 13
+    },
+    "trend": "+190%",
+    "market": "€1.8B",
+    "type": "SaaS",
+    "mentions": 980,
+    "sources": "Reddit, Forums Immobilier, Google Trends",
+    "problem": "Un agent immobilier débutant signe son premier mandat. Il doit créer une annonce qui vend, retoucher les photos, faire une fiche PDF pro, un post Instagram, une vidéo de visite. Il ne sait pas faire. Il pond une annonce moche, et son bien reste 6 mois sans visite. Les 40 000 agents en France n'ont pas les moyens d'un graphiste interne, surtout les indépendants.",
+    "solution": "L'agent rentre l'adresse et uploade ses photos brutes. L'IA génère automatiquement un texte d'annonce vendeur, des photos retouchées (luminosité, ciel bleu), une fiche PDF avec son logo, un post Instagram + Reel, et une description SEO pour SeLoger/LeBonCoin. En 5 minutes, il a un kit complet pro. Un agent gagne 3000-8000€ de commission par vente — s'il vend 1 bien de plus par mois grâce à un meilleur marketing, 39€/mois c'est ridicule. Cible : agents indépendants et petites agences.",
+    "competitors": "Quelques outils de retouche photo immobilière (Nodalview, Homestaging3D) mais aucun ne propose un kit marketing complet avec texte + visuels + réseaux sociaux + SEO généré par IA en une seule plateforme.",
+    "weekTrend": "new"
   }
 ];
