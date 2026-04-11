@@ -102,7 +102,6 @@ function ElegantShape({ delay = 0, width = 400, height = 100, rotate = 0, gradie
         <div style={{
           position: "absolute", inset: 0, borderRadius: 9999,
           background: `linear-gradient(to right, ${gradient}, transparent)`,
-          backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)",
           border: "2px solid rgba(255,255,255,0.15)",
           boxShadow: "0 8px 32px 0 rgba(255,255,255,0.1)",
         }}>
@@ -122,8 +121,7 @@ function FloatingShapes() {
       {/* Subtle background gradient */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.05) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251,113,133,0.05) 0%, transparent 50%)",
-        filter: "blur(40px)",
+        background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.04) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251,113,133,0.04) 0%, transparent 50%)",
       }} />
 
       <ElegantShape delay={0.3} width={600} height={140} rotate={12}
@@ -187,13 +185,10 @@ const fadeUpVariants = {
 function FadeUp({ children, style, delay = 0, custom = 0 }) {
   return (
     <motion.div
-      custom={custom}
-      variants={fadeUpVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.1 + delay + (custom || 0) * 0.15, ease: [0.25, 0.4, 0.25, 1] }}
       style={style}
-      transition={{ delay }}
     >
       {children}
     </motion.div>
@@ -393,9 +388,9 @@ function HomeView({ opportunities, onSelect, onNavigate, isFav, toggleFav }) {
   }));
 
   return (
-    <div>
+    <div style={{ position: "relative", zIndex: 1 }}>
       {/* ─── HERO ─── */}
-      <div style={{ position: "relative", textAlign: "center", padding: "100px 20px 120px", overflow: "hidden" }}>
+      <div style={{ position: "relative", textAlign: "center", padding: "100px 20px 120px", overflow: "clip" }}>
         <div style={{ position: "relative", zIndex: 2, maxWidth: 800, margin: "0 auto" }}>
           <FadeUp custom={0}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: t.bgCard, border: `1px solid ${t.border}`, borderRadius: 24, padding: "6px 16px", marginBottom: 28 }}>
