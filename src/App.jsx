@@ -746,6 +746,73 @@ function TopView({ opportunities, onSelect, isFav, toggleFav }) {
   );
 }
 
+function NewView({ opportunities, onSelect, isFav, toggleFav }) {
+  const newest = [...opportunities].slice(-15).reverse();
+  const newThisWeek = newest.filter(o => o.weekTrend === "new");
+  const catBreakdown = CATEGORIES.filter(c => c.id !== "all").map(c => ({
+    ...c,
+    count: newest.filter(o => o.category === c.id).length,
+  })).filter(c => c.count > 0);
+
+  return (
+    <div>
+      <FadeUp>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12, marginBottom: 32 }}>
+          {[
+            { label: "Dernières ajoutées", value: newest.length, color: t.accent },
+            { label: "Nouvelles cette semaine", value: newThisWeek.length, color: t.green },
+            { label: "Score le plus haut", value: newest.length > 0 ? Math.max(...newest.map(o => o.score)) : 0, color: t.rose },
+            { label: "Secteurs couverts", value: catBreakdown.length, color: t.blue },
+          ].map((s, i) => (
+            <GlassCard key={i} style={{ padding: "16px 20px" }} hover={false}>
+              <div style={{ fontSize: 10, color: t.textTertiary, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 26, fontWeight: 800, color: s.color, fontFamily: "'JetBrains Mono', monospace" }}>{s.value}</div>
+            </GlassCard>
+          ))}
+        </div>
+      </FadeUp>
+
+      <FadeUp>
+        <div style={{ marginBottom: 24 }}>
+          <h2 style={{ fontSize: 26, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>
+            <span style={{ backgroundImage: "linear-gradient(to right, #34D399, #A5B4FC)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Nouveautés
+            </span>
+          </h2>
+          <p style={{ color: t.textTertiary, fontSize: 14, margin: "8px 0 0", lineHeight: 1.6 }}>
+            Les 15 dernières opportunités ajoutées au radar — fraîchement détectées par notre IA.
+          </p>
+        </div>
+      </FadeUp>
+
+      {catBreakdown.length > 1 && (
+        <FadeUp>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
+            {catBreakdown.map(c => (
+              <div key={c.id} style={{
+                display: "flex", alignItems: "center", gap: 6, background: t.bgCard,
+                border: `1px solid ${t.border}`, borderRadius: 20, padding: "5px 14px",
+              }}>
+                <CategoryIcon id={c.id} size={14} />
+                <span style={{ fontSize: 12, color: t.textSecondary, fontWeight: 600 }}>{c.label}</span>
+                <span style={{ fontSize: 11, color: t.accent, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{c.count}</span>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+      )}
+
+      <div style={{ display: "grid", gap: 10 }}>
+        {newest.map((opp, i) => (
+          <FadeUp key={opp.id} custom={i * 0.15}>
+            <OpportunityRow opp={opp} index={i + 1} onSelect={onSelect} showRank isFav={isFav(opp.id)} toggleFav={toggleFav} />
+          </FadeUp>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function CategoryView({ opportunities, onSelect, initialCat, isFav, toggleFav }) {
   const [activeCat, setActiveCat] = useState(initialCat || "all");
   const filtered = activeCat === "all" ? opportunities : opportunities.filter(o => o.category === activeCat);
@@ -1064,6 +1131,7 @@ export default function Trendora() {
   const navItems = [
     { id: "home", label: "Accueil" },
     { id: "top", label: "Top 10" },
+    { id: "new", label: "Nouveautés" },
     { id: "categories", label: "Catégories" },
     { id: "favorites", label: "Favoris", badge: favCount },
   ];
@@ -1187,6 +1255,7 @@ export default function Trendora() {
       <main style={{ maxWidth: view === "home" ? 1200 : 880, margin: "0 auto", padding: view === "home" ? "0 0 64px" : "32px 24px 64px", transition: "max-width 0.3s ease", position: "relative", zIndex: 1 }}>
         {view === "home" && <HomeView opportunities={OPPORTUNITIES} onSelect={handleSelect} onNavigate={handleNavigate} isFav={isFav} toggleFav={toggleFav} />}
         {view === "top" && <TopView opportunities={OPPORTUNITIES} onSelect={handleSelect} isFav={isFav} toggleFav={toggleFav} />}
+        {view === "new" && <NewView opportunities={OPPORTUNITIES} onSelect={handleSelect} isFav={isFav} toggleFav={toggleFav} />}
         {view === "categories" && <CategoryView opportunities={OPPORTUNITIES} onSelect={handleSelect} initialCat={initialCat} isFav={isFav} toggleFav={toggleFav} />}
         {view === "detail" && selectedOpp && <DetailView opportunity={selectedOpp} onBack={handleBack} isFav={isFav} toggleFav={toggleFav} />}
         {view === "favorites" && <FavoritesView opportunities={OPPORTUNITIES} onSelect={handleSelect} favorites={favorites} toggleFav={toggleFav} isFav={isFav} />}
