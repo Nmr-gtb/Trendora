@@ -117,7 +117,7 @@ function ElegantShape({ delay = 0, width = 400, height = 100, rotate = 0, gradie
 
 function FloatingShapes() {
   return (
-    <div style={{ position: "fixed", inset: 0, overflow: "hidden", pointerEvents: "none", zIndex: -1 }}>
+    <div style={{ position: "fixed", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: -1 }}>
       {/* Subtle background gradient */}
       <div style={{
         position: "absolute", inset: 0,
