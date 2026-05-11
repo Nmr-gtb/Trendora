@@ -1,4 +1,4 @@
-export const WEEK_LABEL = "Semaine du 11 mai 2026";
+export const WEEK_LABEL = "Semaine du 18 mai 2026";
 
 export const OPPORTUNITIES = [
   {
@@ -65,7 +65,7 @@ export const OPPORTUNITIES = [
     "problem": "Les restaurateurs indépendants jonglent entre gestion des stocks, création de menus, commandes fournisseurs et rentabilité des plats — tout ça souvent sur papier ou Excel. Le gaspillage alimentaire est un problème majeur (10-15% de perte en moyenne). Il n'existe pas d'outil simple et abordable qui combine ces fonctions avec de l'intelligence prédictive.",
     "solution": "Une app qui utilise l'IA pour optimiser toute la chaîne : menus générés selon la saison et les marges, gestion prédictive des stocks pour réduire le gaspillage, commandes fournisseurs automatisées, dashboard de rentabilité par plat en temps réel. Cible : restaurateurs indépendants et petites chaînes. Pricing suggéré : 69€/mois.",
     "competitors": "Quelques outils de gestion (Zenchef, Lightspeed) mais aucun avec IA prédictive sur les stocks et menus.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 4,
@@ -175,7 +175,7 @@ export const OPPORTUNITIES = [
     "problem": "Les délais pour voir un dermatologue en France dépassent souvent 6 mois. Les patients cherchent des réponses en ligne sur des forums peu fiables. Les médecins généralistes manquent d'outils pour le pré-diagnostic dermatologique. Le marché de la télédermatologie explose mais les solutions actuelles manquent de spécialisation.",
     "solution": "Plateforme de pré-diagnostic dermatologique par IA : le patient envoie une photo, l'IA analyse et oriente (urgence, RDV dermato, conseil), connexion avec un réseau de dermatologues pour téléconsultation rapide, suivi de l'évolution des lésions dans le temps. Cible : patients, médecins généralistes, dermatologues. Pricing suggéré : B2B — 149€/mois par cabinet.",
     "competitors": "Quelques acteurs (Skin Analytics, DermoSafe) mais marché francophone quasi vierge.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 9,
@@ -395,7 +395,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs et petites boîtes ne savent pas si leur produit est conforme au RGPD. Les audits juridiques coûtent cher. Les plugins de cookies ne suffisent pas — il faut aussi vérifier le stockage des données, les sous-traitants, les durées de conservation.",
     "solution": "Une API qui scanne un site ou une app et génère un rapport de conformité RGPD automatique : cookies, trackers, politique de confidentialité, flux de données, sous-traitants détectés. Rapport PDF + plan d'action. Cible : développeurs, startups, PME. Pricing suggéré : 29€/mois.",
     "competitors": "Cookiebot, OneTrust sont orientés grands groupes et très chers.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 19,
@@ -417,7 +417,7 @@ export const OPPORTUNITIES = [
     "problem": "La plupart des sites ont des problèmes UX qui font fuir les utilisateurs mais les fondateurs ne les voient pas. Un audit UX professionnel coûte 2000-5000€. Les outils d'analytics montrent le quoi mais pas le pourquoi.",
     "solution": "Un outil qui analyse automatiquement l'UX d'un site : screenshot de chaque page, analyse IA des patterns problématiques, score UX par page, recommandations priorisées avec maquettes de correction. Cible : fondateurs, product managers, freelances. Pricing suggéré : 39€/mois.",
     "competitors": "Hotjar et Crazy Egg montrent les données. L'analyse IA avec recommandations est le différenciateur.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 20,
@@ -549,7 +549,7 @@ export const OPPORTUNITIES = [
     "problem": "Les pharmacies gèrent leur stock avec les logiciels des grossistes, qui ne communiquent pas entre eux. Les ruptures sont fréquentes, les péremptions génèrent des pertes, et la gestion multi-fournisseurs est chronophage.",
     "solution": "Un outil de gestion de stock intelligent : prédiction IA des besoins, alerte péremption, comparaison automatique des prix entre grossistes, commande optimisée multi-fournisseurs. Cible : pharmacies indépendantes. Pricing suggéré : 89€/mois.",
     "competitors": "Les logiciels de gestion officinale sont limités en IA prédictive.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 26,
@@ -593,7 +593,7 @@ export const OPPORTUNITIES = [
     "problem": "Quand un patient reçoit un diagnostic grave ou incertain, obtenir un second avis médical est long (6-12 semaines), coûteux et compliqué.",
     "solution": "Une plateforme de second avis : le patient upload son dossier médical, l'IA pré-analyse et oriente vers le bon spécialiste, le médecin rend son avis sous 48-72h. Cible : patients, mutuelles. Pricing suggéré : 150-300€ par avis.",
     "competitors": "Deuxième Avis existe mais le marché reste embryonnaire en France.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 28,
@@ -725,7 +725,7 @@ export const OPPORTUNITIES = [
     "problem": "Les agents rédigent des dizaines d'annonces par mois avec les mêmes formules creuses.",
     "solution": "Un outil qui génère des annonces uniques et vendeuses. Cible : agents et mandataires. Pricing suggéré : 25€/mois.",
     "competitors": "Rien de spécialisé immobilier avec les bonnes données métier.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 34,
@@ -747,7 +747,7 @@ export const OPPORTUNITIES = [
     "problem": "Les SCI familiales n'ont aucun outil adapté.",
     "solution": "Un outil dédié SCI : comptabilité simplifiée, suivi de rentabilité par bien. Cible : gérants de SCI. Pricing suggéré : 19€/mois par SCI.",
     "competitors": "Les logiciels comptables classiques ne gèrent pas les spécificités SCI.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 35,
@@ -857,7 +857,7 @@ export const OPPORTUNITIES = [
     "problem": "La planification pour les petites entreprises se fait sur Excel.",
     "solution": "Un planning visuel intelligent : Gantt simplifié, gestion des dépendances. Cible : chefs de chantier TPE/PME. Pricing suggéré : 39€/mois.",
     "competitors": "MS Project est surdimensionné. Quelques apps existent mais sans IA.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 40,
@@ -923,7 +923,7 @@ export const OPPORTUNITIES = [
     "problem": "Créer une landing page qui convertit demande des compétences en copywriting, design et technique.",
     "solution": "L'utilisateur décrit son offre → l'IA génère une landing page complète. Cible : freelances, solopreneurs, PME. Pricing suggéré : 19€/mois.",
     "competitors": "Carrd, Unbounce existent mais aucun ne fait la stratégie + le copy par IA.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 43,
@@ -967,7 +967,7 @@ export const OPPORTUNITIES = [
     "problem": "Lancer et maintenir une newsletter demande énormément de travail.",
     "solution": "Suggestion de sujets tendance, rédaction assistée avec le ton de l'auteur. Cible : créateurs, solopreneurs. Pricing suggéré : 15€/mois.",
     "competitors": "Substack et Beehiiv dominent la distribution. L'angle création IA est le différenciateur.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 45,
@@ -1033,7 +1033,7 @@ export const OPPORTUNITIES = [
     "problem": "Les freelances et PME savent que le SEO est important mais ne savent pas par où commencer.",
     "solution": "Analyse du site → opportunités de mots-clés → plan de contenu SEO priorisé. Cible : freelances, PME. Pricing suggéré : 29€/mois.",
     "competitors": "SEMrush et Ahrefs dominent les données. L'angle stratégie actionnable IA est libre.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 48,
@@ -1473,7 +1473,7 @@ export const OPPORTUNITIES = [
     "problem": "Les pannes d'équipements coûtent 2000€/jour en moyenne par arrêt de chantier. La maintenance préventive est négligée par manque de suivi. 40% des pannes sont prédictibles mais les signaux faibles ne sont pas détectés.",
     "solution": "Capteurs IoT sur équipements + IA qui prédit les pannes 2-4 semaines à l'avance. Dashboard de suivi, alertes préventives, planification maintenance optimisée. Installation plug-and-play, compatible toutes marques. 99€/mois par équipement suivi. Cible les entreprises de TP et location d'équipements.",
     "competitors": "Caterpillar et Komatsu ont des solutions propriétaires. Uptake et Predii existent mais généralistes. Niche à prendre sur l'aftermarket.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 68,
@@ -1495,7 +1495,7 @@ export const OPPORTUNITIES = [
     "problem": "Les accidents du travail coûtent 100k€ en moyenne dans le BTP. La réglementation sécurité évolue constamment et les PME n'arrivent pas à suivre. Les inspections sécurité sont chronophages et subjectives. 1 entreprise sur 3 n'est pas à jour.",
     "solution": "IA qui scanne les photos de chantier et détecte automatiquement les non-conformités sécurité (EPI manquants, protections défaillantes, etc.). Génération automatique de rapports, suivi des corrections, veille réglementaire. App mobile pour contrôles quotidiens. 199€/mois par chantier. Cible les entreprises BTP et coordinateurs SPS.",
     "competitors": "SafetyCulture (iAuditor) existe mais généraliste. SmartSite émergent. Opportunité sur la spécialisation BTP + détection IA automatique.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 69,
@@ -1605,7 +1605,7 @@ export const OPPORTUNITIES = [
     "problem": "Le debugging représente 50-70% du temps de développement. Les développeurs juniors sont particulièrement perdus face aux erreurs complexes et passent des heures sur Stack Overflow. Même les seniors perdent du temps sur des bugs obscurs ou des erreurs liées à des versions spécifiques de librairies.",
     "solution": "IA qui analyse les erreurs en temps réel avec le contexte complet du projet (stack technique, versions, configuration). Propose des solutions step-by-step personnalisées et apprend des patterns d'erreurs de l'équipe. Plugin IDE avec chat intégré, 19€/mois par développeur. Focus sur les entreprises de développement logiciel et les bootcamps de formation.",
     "competitors": "GitHub Copilot propose des suggestions mais pas de debugging contextuel avancé. Quelques outils comme Error Lens existent mais sans IA sophistiquée. Marché fragmenté avec des solutions partielles.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 74,
@@ -1957,7 +1957,7 @@ export const OPPORTUNITIES = [
     "problem": "L'optimisation des bases de données nécessite une expertise pointue que beaucoup d'équipes n'ont pas. Les performances dégradées coûtent cher en infrastructure et impactent l'expérience utilisateur. Les DBA seniors sont rares et chers, créant un goulot d'étranglement pour les équipes de développement.",
     "solution": "Agent IA qui analyse automatiquement les performances des bases de données (PostgreSQL, MySQL, MongoDB) et propose des optimisations concrètes : index manquants, requêtes lentes, restructuration de schéma. Installation simple via agent, recommandations avec impact estimé et application automatisée optionnelle. Pricing 79€/mois par base de données, 199€/mois pour les fonctionnalités d'optimisation automatique. Cible les développeurs fullstack et les équipes tech des PME.",
     "competitors": "Outils traditionnels comme pgAdmin et MySQL Workbench mais sans IA. SolarWinds Database Performance Analyzer existe but ciblé entreprise avec pricing élevé.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 90,
@@ -2243,7 +2243,7 @@ export const OPPORTUNITIES = [
     "problem": "Les entreprises perdent entre 20-40% de leurs budgets cloud en ressources sous-utilisées ou mal configurées. Les équipes DevOps passent énormément de temps à monitorer et ajuster manuellement les configurations serveur. Les coûts explosent sans visibilité claire sur l'optimisation possible.",
     "solution": "IA qui analyse en temps réel l'utilisation des serveurs cloud et ajuste automatiquement les ressources (CPU, RAM, stockage) selon les patterns d'usage. Intégration avec AWS, Azure, GCP. Modèle freemium puis 2-5% des économies réalisées pour les entreprises. Tableau de bord prédictif des coûts et recommandations d'architecture.",
     "competitors": "Quelques startups émergentes comme Spot.io, mais marché encore peu saturé. AWS et cloud providers développent des outils basiques mais sans IA avancée. Opportunité de se positionner avant les géants.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 103,
@@ -2265,7 +2265,7 @@ export const OPPORTUNITIES = [
     "problem": "Les tests de performance sont complexes à écrire et chronophages pour les développeurs. 70% des applications web ne sont pas testées en charge avant production. Les outils existants nécessitent une expertise technique avancée que beaucoup d'équipes n'ont pas.",
     "solution": "IA qui analyse le code source et génère automatiquement des scripts de tests de performance (JMeter, K6, Gatling). Interface no-code pour paramétrer les scénarios. 49€/mois par développeur avec essai gratuit. Intégration CI/CD et rapports automatiques avec recommandations d'optimisation.",
     "competitors": "LoadRunner et JMeter dominent mais sont complexes. Nouvelles solutions comme Loader.io mais sans IA générative. Niche peu exploitée par les géants.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 104,
@@ -2287,7 +2287,7 @@ export const OPPORTUNITIES = [
     "problem": "La migration d'applications monolithiques vers des microservices est un projet de plusieurs années coûtant des millions. Les entreprises manquent d'expertise pour identifier les bons découpage fonctionnels. 80% des projets de refactoring échouent ou dépassent les budgets.",
     "solution": "IA qui analyse le code legacy et propose automatiquement un découpage en microservices avec estimation des dépendances et impacts. Génération du code de migration et des APIs. Modèle par projet : 50-200K€ selon la taille de l'application. Accompagnement expert inclus.",
     "competitors": "Services de consulting traditionnels très chers. Quelques outils d'analyse statique mais sans IA générative. Marché dominé par les ESN, opportunité de disruption.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 105,
@@ -2309,7 +2309,7 @@ export const OPPORTUNITIES = [
     "problem": "1 employé sur 3 souffre de burn-out avec un coût de 3,2 milliards d'euros par an en France. Les RH détectent les cas trop tard quand les arrêts maladie sont déjà là. Les signaux précurseurs sont difficiles à identifier manuellement à grande échelle.",
     "solution": "IA analysant les données anonymisées d'emails, calendriers, temps de connexion, patterns de travail pour détecter les signaux de sur-stress. Dashboard RH avec alertes précoces et recommandations d'actions. 15-25€/employé/mois pour les entreprises +100 personnes. Interface conforme RGPD.",
     "competitors": "Quelques startups comme Teale ou Moka.care mais focalisées sur la thérapie post-burn-out. Pas de solution prédictive mature sur le marché français.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 106,
@@ -2331,7 +2331,7 @@ export const OPPORTUNITIES = [
     "problem": "90% des gens souffrent de troubles digestifs sans solution personnalisée. Les analyses de microbiote coûtent cher et donnent des résultats difficiles à interpréter. Les médecins manquent d'outils pour exploiter ces données dans leurs recommandations.",
     "solution": "Kit d'analyse microbiote à domicile (149€) couplé à une IA qui génère des recommandations personnalisées de nutrition et compléments. Abonnement 29€/mois pour le suivi. Partenariats avec laboratoires et nutritionnistes. Interface pour professionnels de santé.",
     "competitors": "Nahibu, Second Genome aux US mais prix élevés et peu d'IA. Marché français peu développé, opportunité de first mover avec approche accessible.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 107,
@@ -2353,7 +2353,7 @@ export const OPPORTUNITIES = [
     "problem": "Les protocoles de rééducation sont souvent standardisés alors que chaque patient a des besoins spécifiques. 40% des patients abandonnent leur rééducation par manque de motivation ou d'adaptation. Les kinés manquent d'outils pour personnaliser et tracker l'évolution.",
     "solution": "IA qui analyse les données patients (âge, pathologie, historique) et génère des protocoles de rééducation personnalisés avec exercices adaptés. App patient gamifiée pour le suivi à domicile. 89€/mois par praticien. Intégration avec équipements de mesure connectés.",
     "competitors": "Quelques apps de rééducation basiques comme Remedic mais sans IA avancée de personnalisation. Marché traditionnel peu digitalisé, forte opportunité.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 108,
@@ -2375,7 +2375,7 @@ export const OPPORTUNITIES = [
     "problem": "Les places de parking génèrent 3-8% de rendement annuel mais sont méconnues des investisseurs particuliers. Difficulté à évaluer le potentiel d'une place sans expertise locale. Processus d'achat complexe et opaque.",
     "solution": "Plateforme qui identifie et propose automatiquement les meilleures places de parking à acheter selon les critères d'investissement. IA prédictive basée sur données urbanisme, transports, démographie. Gestion locative incluse. Commission 8% sur les ventes plus 12% sur les loyers.",
     "competitors": "Quelques acteurs comme Yoospace mais sans IA prédictive. Marché de niche peu digitalisé, opportunité de créer la référence.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 109,
@@ -2397,7 +2397,7 @@ export const OPPORTUNITIES = [
     "problem": "Les visites virtuelles professionnelles coûtent 300-800€ et nécessitent un photographe spécialisé. 85% des acheteurs veulent des visites virtuelles mais seuls 30% des biens en proposent. Les agents perdent du temps en visites non qualifiées.",
     "solution": "IA qui transforme 15-20 photos smartphone en visite virtuelle 3D interactive. 29€ par visite virtuelle générée, abonnements agences 199€/mois illimité. Interface simple, génération en moins de 2h. Intégration avec sites d'annonces immobilières.",
     "competitors": "Matterport domine mais très cher, Klapty propose du basique. Pas de solution IA accessible aux agents indépendants français.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 110,
@@ -2419,7 +2419,7 @@ export const OPPORTUNITIES = [
     "problem": "Les frais de notaire représentent 7-8% du prix d'achat immobilier mais les acquéreurs ne savent pas qu'ils sont partiellement négociables. Complexité des optimisations fiscales (LMNP, SCI, etc.) non maîtrisées par 90% des acheteurs.",
     "solution": "IA qui analyse automatiquement chaque dossier d'achat et identifie les optimisations possibles (frais négociables, montages fiscaux). Service de négociation inclus avec notaires partenaires. Commission 20% sur les économies réalisées. Interface simple pour particuliers.",
     "competitors": "Courtiers traditionnels focalisés sur le crédit. Pas de solution automatisée sur l'optimisation notariale, marché de niche à créer.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 111,
@@ -2441,7 +2441,7 @@ export const OPPORTUNITIES = [
     "problem": "15% des ventes immobilières donnent lieu à des litiges pour vices cachés coûtant en moyenne 25K€ aux propriétaires. Les expertises coûtent 800-1500€ et prennent plusieurs semaines. 70% des vices sont détectables visuellement par un œil expert.",
     "solution": "IA de vision computationnelle qui analyse les photos de biens et détecte automatiquement les signes de vices cachés (humidité, fissures, problèmes électriques). Rapport d'expertise automatique en 24h. 149€ par expertise IA, partenariats avec agents et notaires.",
     "competitors": "Expertise traditionnelle uniquement humaine et chère. Quelques startups émergentes mais pas de leader établi. Opportunité de disruption d'un marché traditionnel.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 112,
@@ -2463,7 +2463,7 @@ export const OPPORTUNITIES = [
     "problem": "Les devis BTP sont souvent sous-évalués car les prix des matériaux fluctuent de +30% selon les périodes. Les artisans perdent de l'argent sur 40% de leurs chantiers par mauvaise estimation. Mise à jour manuelle des tarifs chronophage.",
     "solution": "IA qui génère automatiquement des devis précis en intégrant les prix matériaux en temps réel de tous les fournisseurs locaux. Base de données de 50K références mises à jour quotidiennement. 79€/mois par artisan, API pour logiciels métier existants.",
     "competitors": "Logiciels de devis classiques comme Batiprix mais sans IA ni prix temps réel. Forte demande d'innovation dans ce secteur traditionnel.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 113,
@@ -2485,7 +2485,7 @@ export const OPPORTUNITIES = [
     "problem": "Les livraisons BTP sont complexes avec contraintes d'accès chantier, créneaux horaires, équipements de déchargement spécifiques. 25% des livraisons échouent au premier passage. Coûts logistiques représentent 8-12% du CA des négociants.",
     "solution": "IA d'optimisation des tournées qui prend en compte toutes les contraintes spécifiques BTP (gabarit camion, grue, horaires chantier). Interface chauffeurs mobile avec navigation optimisée. Réduction 20-30% des coûts logistiques. 5-8€ par livraison optimisée.",
     "competitors": "Solutions généralistes comme OptiTime mais pas spécialisées BTP. Secteur en retard sur la digitalisation, opportunité de niche.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 114,
@@ -2507,7 +2507,7 @@ export const OPPORTUNITIES = [
     "problem": "Les PME locales n'ont pas le budget pour des vidéos publicitaires professionnelles (5-15K€). 80% voudraient faire de la pub vidéo mais trouvent cela trop complexe et cher. Les templates génériques ne convertissent pas car pas assez personnalisés.",
     "solution": "IA qui génère automatiquement des vidéos publicitaires personnalisées à partir de photos du commerce et informations business. Bibliothèque de templates par secteur. 49€/mois pour 10 vidéos, 149€/mois illimité. Export optimisé Facebook/Instagram/TikTok.",
     "competitors": "Canva propose des templates basiques, Lumen5 existe mais sans focus PME locales. Marché français peu saturé sur ce segment.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 115,
@@ -2529,7 +2529,7 @@ export const OPPORTUNITIES = [
     "problem": "70% des campagnes d'influence marketing ne atteignent pas leurs objectifs par mauvais matching influenceur-marque. Processus de sélection long et subjectif. Difficulté à prédire les performances avant lancement.",
     "solution": "IA qui analyse l'audience des influenceurs et matche automatiquement avec les marques selon la compatibilité prédite. Score de performance estimé avant campagne. Commission 15% sur les collaborations matchées. Interface CRM pour suivi campagnes.",
     "competitors": "Plateformes comme Reech, Influence4You mais sans IA prédictive avancée. Marché en forte croissance avec besoin d'innovation.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 116,
@@ -2551,6 +2551,336 @@ export const OPPORTUNITIES = [
     "problem": "Les entreprises publient du contenu sans stratégie cohérente entre les canaux. 60% des contenus ne génèrent aucun engagement. Création d'une stratégie omnicanal nécessite des compétences rare et coûteuses (consultant à 800€/jour).",
     "solution": "IA qui analyse la marque, concurrents et audience pour générer automatiquement une stratégie de contenu omnicanal sur 6 mois avec calendrier éditorial détaillé. Planning adaptatif selon les performances. 299€/mois par marque avec onboarding inclus.",
     "competitors": "Outils de planning comme Hootsuite mais sans IA stratégique. Consultants traditionnels chers. Opportunité de démocratiser l'expertise stratégique.",
+    "weekTrend": "stable"
+  },
+  {
+    "id": 117,
+    "name": "Plateforme IA de génération automatique d'extensions de navigateur",
+    "category": "tech",
+    "score": 72,
+    "scores": {
+      "demande": 19,
+      "croissance": 20,
+      "concurrence": 15,
+      "monetisation": 10,
+      "faisabilite": 8
+    },
+    "trend": "+180%",
+    "market": "€800M",
+    "type": "SaaS",
+    "mentions": 340,
+    "sources": "GitHub, ProductHunt, Stack Overflow",
+    "problem": "Les développeurs perdent énormément de temps à créer des extensions de navigateur basiques pour des tâches répétitives. Le processus nécessite des compétences techniques spécialisées et plusieurs jours de développement. Les non-développeurs ne peuvent pas créer leurs propres outils de productivité personnalisés.",
+    "solution": "Plateforme qui génère automatiquement des extensions Chrome/Firefox à partir de descriptions en langage naturel. L'utilisateur décrit sa fonctionnalité souhaitée, l'IA génère le code, les manifestes et les interfaces. Ciblage des freelances et PME avec abonnement mensuel à 29€. Template marketplace en complément avec revenus partagés.",
+    "competitors": "Marché naissant avec quelques outils basiques comme Extension Creator Pro, mais aucun acteur dominant utilisant l'IA générative.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 118,
+    "name": "IA de détection automatique des fuites d'eau par analyse acoustique IoT",
+    "category": "tech",
+    "score": 79,
+    "scores": {
+      "demande": 22,
+      "croissance": 19,
+      "concurrence": 14,
+      "monetisation": 13,
+      "faisabilite": 11
+    },
+    "trend": "+150%",
+    "market": "€2.1B",
+    "type": "IoT SaaS",
+    "mentions": 520,
+    "sources": "Google Trends, LinkedIn, Reddit",
+    "problem": "Les fuites d'eau cachées dans les bâtiments causent des dégâts considérables avant détection. Les systèmes actuels sont coûteux et nécessitent une installation complexe. Les assureurs cherchent des solutions préventives pour réduire leurs sinistres liés aux dégâts des eaux.",
+    "solution": "Capteurs IoT bon marché analysant les signatures acoustiques des canalisations par IA pour détecter les fuites naissantes. Installation simple par collage sur tuyaux. Dashboard temps réel avec alertes SMS/mail. Ciblage syndics, bailleurs et assureurs avec abonnement 15€/capteur/mois. Partenariats avec plombiers pour installation.",
+    "competitors": "Concurrence traditionnelle avec Suez Smart Solutions et Veolia, mais positionnement plus accessible et IA différenciatrice.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 119,
+    "name": "Assistant IA pour optimisation automatique des campagnes Google Ads sans expertise",
+    "category": "tech",
+    "score": 81,
+    "scores": {
+      "demande": 24,
+      "croissance": 21,
+      "concurrence": 16,
+      "monetisation": 12,
+      "faisabilite": 8
+    },
+    "trend": "+200%",
+    "market": "€3.5B",
+    "type": "SaaS",
+    "mentions": 680,
+    "sources": "Twitter/X, ProductHunt, Google Trends",
+    "problem": "Les PME gaspillent des milliers d'euros en campagnes Google Ads mal optimisées faute d'expertise. Les agences sont trop chères pour les petits budgets. Les outils Google sont complexes et nécessitent une formation approfondie pour être efficaces.",
+    "solution": "IA qui analyse automatiquement les performances des campagnes et applique les optimisations sans intervention humaine. Connexion directe aux comptes Google Ads, recommandations automatiques sur mots-clés, enchères et créatives. Targeting PME avec budgets publicitaires 1-10k€/mois. Pricing: 99€/mois ou 5% du budget publicitaire optimisé.",
+    "competitors": "Concurrence avec Optmyzr et WordStream mais positionnement plus automatisé et accessible aux non-experts.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 120,
+    "name": "Plateforme IA de diagnostic médical par analyse de la démarche smartphone",
+    "category": "sante",
+    "score": 77,
+    "scores": {
+      "demande": 21,
+      "croissance": 18,
+      "concurrence": 12,
+      "monetisation": 14,
+      "faisabilite": 12
+    },
+    "trend": "+160%",
+    "market": "€1.8B",
+    "type": "MedTech App",
+    "mentions": 430,
+    "sources": "PubMed, LinkedIn, Twitter/X",
+    "problem": "Les troubles neurologiques et orthopédiques sont souvent détectés tardivement. Les examens spécialisés sont coûteux et nécessitent des rendez-vous longs à obtenir. Les médecins généralistes manquent d'outils simples pour un pré-diagnostic fiable des troubles de la marche.",
+    "solution": "Application analysant la démarche via les capteurs smartphone pour détecter précocement Parkinson, sclérose en plaques, arthrose avancée. Algorithmes validés cliniquement, rapports automatiques pour médecins. Ciblage B2B vers cabinets médicaux et cliniques avec licence annuelle 2000€. Version patient freemium avec consultations payantes à 25€.",
+    "competitors": "Concurrence émergente avec quelques startups comme Neura Robotics mais marché encore peu mature.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 121,
+    "name": "IA de prédiction personnalisée des effets secondaires médicamenteux",
+    "category": "sante",
+    "score": 74,
+    "scores": {
+      "demande": 19,
+      "croissance": 17,
+      "concurrence": 13,
+      "monetisation": 13,
+      "faisabilite": 12
+    },
+    "trend": "+140%",
+    "market": "€2.3B",
+    "type": "SaaS Médical",
+    "mentions": 380,
+    "sources": "PubMed, Reddit, LinkedIn",
+    "problem": "Les effets secondaires médicamenteux causent de nombreuses hospitalisations évitables. Les médecins manquent d'outils prédictifs personnalisés pour anticiper les réactions. Les patients arrêtent souvent leurs traitements par peur des effets indésirables non prédits.",
+    "solution": "Plateforme analysant le profil génétique, médical et les interactions médicamenteuses pour prédire les effets secondaires individuels. API pour logiciels médicaux existants et interface web dédiée. Ciblage pharmacies et médecins avec licence mensuelle 150€. Partenariats avec laboratoires pharmaceutiques pour études prédictives.",
+    "competitors": "Quelques acteurs comme Youscript aux États-Unis mais marché européen peu développé.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 122,
+    "name": "Assistant IA pour optimisation des parcours de soins en EHPAD",
+    "category": "sante",
+    "score": 76,
+    "scores": {
+      "demande": 20,
+      "croissance": 19,
+      "concurrence": 11,
+      "monetisation": 14,
+      "faisabilite": 12
+    },
+    "trend": "+170%",
+    "market": "€1.2B",
+    "type": "SaaS Santé",
+    "mentions": 410,
+    "sources": "LinkedIn, Twitter/X, Google Trends",
+    "problem": "Les EHPAD font face à une pénurie de personnel soignant et à une complexification des soins. La planification des soins manque d'optimisation, créant surcharge de travail et qualité dégradée. Les familles demandent plus de transparence sur la prise en charge de leurs proches.",
+    "solution": "IA optimisant automatiquement les plannings de soins selon les besoins résidents, disponibilités staff et réglementations. Dashboard famille temps réel, prédiction des besoins futurs. Ciblage 7500 EHPAD français avec abonnement 200€/mois par établissement. Formation incluse et support dédié pour adoption.",
+    "competitors": "Concurrence avec Medicalib et quelques logiciels spécialisés mais peu d'IA avancée sur ce segment.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 123,
+    "name": "Plateforme IA de valorisation automatique des biens immobiliers par analyse satellite",
+    "category": "immobilier",
+    "score": 83,
+    "scores": {
+      "demande": 23,
+      "croissance": 22,
+      "concurrence": 15,
+      "monetisation": 14,
+      "faisabilite": 9
+    },
+    "trend": "+190%",
+    "market": "€4.2B",
+    "type": "PropTech SaaS",
+    "mentions": 710,
+    "sources": "LinkedIn, Twitter/X, Google Trends",
+    "problem": "L'estimation immobilière traditionnelle est lente, coûteuse et subjective. Les agents manquent de données objectives sur l'environnement des biens. Les banques ont besoin d'estimations rapides et fiables pour les prêts immobiliers.",
+    "solution": "IA analysant images satellites, données cadastrales et évolution urbaine pour estimer automatiquement la valeur des biens. Prise en compte pollution, nuisances, projets urbains futurs. API pour agents immobiliers et banques à 0,50€/estimation. Interface web grand public freemium avec rapports détaillés payants à 29€.",
+    "competitors": "Concurrence avec MeilleursAgents et SeLoger mais différenciation forte sur l'analyse satellite et prédictive.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 124,
+    "name": "Assistant IA pour gestion locative automatisée des locations saisonnières",
+    "category": "immobilier",
+    "score": 78,
+    "scores": {
+      "demande": 22,
+      "croissance": 20,
+      "concurrence": 16,
+      "monetisation": 12,
+      "faisabilite": 8
+    },
+    "trend": "+165%",
+    "market": "€2.8B",
+    "type": "SaaS PropTech",
+    "mentions": 590,
+    "sources": "Airbnb forums, Reddit, LinkedIn",
+    "problem": "Les propriétaires de locations saisonnières passent énormément de temps sur la gestion quotidienne. Optimisation des prix, communication voyageurs, gestion des problèmes nécessitent une présence constante. Beaucoup abandonnent cette activité par manque de temps.",
+    "solution": "IA gérant automatiquement pricing dynamique, messages voyageurs, planification ménage et maintenance. Intégration Airbnb, Booking, gestion des incidents 24/7. Ciblage propriétaires multi-logements avec commission 5% sur revenus locatifs ou abonnement 99€/logement/mois. Conciergerie physique en option dans grandes villes.",
+    "competitors": "Concurrence avec Hostfully et Guesty mais positionnement plus automatisé et accessible aux petits propriétaires.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 125,
+    "name": "IA de détection automatique des opportunités d'investissement immobilier sous-évaluées",
+    "category": "immobilier",
+    "score": 80,
+    "scores": {
+      "demande": 21,
+      "croissance": 21,
+      "concurrence": 14,
+      "monetisation": 13,
+      "faisabilite": 11
+    },
+    "trend": "+175%",
+    "market": "€3.1B",
+    "type": "FinTech Immo",
+    "mentions": 650,
+    "sources": "LinkedIn, Reddit, Twitter/X",
+    "problem": "Les investisseurs immobiliers passent des semaines à analyser le marché pour identifier les bonnes affaires. L'analyse comparative est fastidieuse et subjective. Les meilleures opportunités sont souvent saisies par des investisseurs professionnels ayant plus de ressources.",
+    "solution": "IA scannant automatiquement toutes les annonces immobilières pour identifier les biens sous-évalués selon critères multiples: prix/m², potentiel plus-value, rendement locatif. Alertes temps réel, analyses détaillées avec projections financières. Abonnement premium 149€/mois pour investisseurs particuliers, 500€/mois pour professionnels.",
+    "competitors": "Quelques outils comme Rendement Locatif mais aucune solution IA complète sur ce segment spécifique.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 126,
+    "name": "Plateforme IA de planification automatique des chantiers avec gestion des aléas météo",
+    "category": "btp",
+    "score": 75,
+    "scores": {
+      "demande": 20,
+      "croissance": 18,
+      "concurrence": 13,
+      "monetisation": 12,
+      "faisabilite": 12
+    },
+    "trend": "+155%",
+    "market": "€1.9B",
+    "type": "SaaS BTP",
+    "mentions": 470,
+    "sources": "LinkedIn, Forums BTP, Twitter/X",
+    "problem": "Les retards de chantier coûtent en moyenne 20% du budget prévu aux entreprises BTP. La météo imprévisible perturbe constamment les plannings. Les chefs de chantier manquent d'outils prédictifs pour anticiper et réorganiser le travail efficacement.",
+    "solution": "IA intégrant données météo, disponibilité équipes et matériaux pour optimiser automatiquement les plannings de chantier. Réorganisation automatique en cas d'aléas, suggestions d'activités alternatives. Ciblage entreprises BTP 10-200 salariés avec abonnement 199€/mois par chantier actif. Formation équipes incluse.",
+    "competitors": "Concurrence avec Procore et Batappli mais différenciation forte sur l'IA prédictive météo.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 127,
+    "name": "IA de génération automatique de devis énergétiques conformes RE2020",
+    "category": "btp",
+    "score": 82,
+    "scores": {
+      "demande": 24,
+      "croissance": 21,
+      "concurrence": 14,
+      "monetisation": 13,
+      "faisabilite": 10
+    },
+    "trend": "+220%",
+    "market": "€2.7B",
+    "type": "SaaS BTP",
+    "mentions": 780,
+    "sources": "Google Trends, LinkedIn, Forums BTP",
+    "problem": "La réglementation RE2020 complexifie énormément l'établissement des devis de construction et rénovation. Les artisans perdent des heures à calculer les performances énergétiques. Beaucoup refusent certains chantiers par peur des erreurs de conformité réglementaire.",
+    "solution": "IA générant automatiquement devis détaillés avec calculs thermiques RE2020 à partir de plans et spécifications basiques. Base de données matériaux à jour, vérification conformité automatique. Ciblage 800k artisans français avec abonnement 79€/mois. Partenariats fournisseurs matériaux pour commissions sur ventes générées.",
+    "competitors": "Quelques logiciels techniques comme Pleiades mais positionnement plus accessible et automatisé pour artisans.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 128,
+    "name": "Assistant IA pour optimisation des achats groupés de matériaux BTP",
+    "category": "btp",
+    "score": 71,
+    "scores": {
+      "demande": 18,
+      "croissance": 17,
+      "concurrence": 15,
+      "monetisation": 11,
+      "faisabilite": 10
+    },
+    "trend": "+130%",
+    "market": "€1.4B",
+    "type": "Marketplace BTP",
+    "mentions": 350,
+    "sources": "LinkedIn, Forums BTP, Reddit",
+    "problem": "Les petites entreprises BTP paient leurs matériaux 20-30% plus cher que les gros groupes faute de volume d'achat. L'organisation d'achats groupés est complexe et chronophage. Les fournisseurs ont des stocks excédentaires qu'ils peinent à écouler rapidement.",
+    "solution": "IA matchant automatiquement les besoins matériaux des artisans pour créer des commandes groupées optimisées. Négociation automatique des prix, coordination livraisons. Commission 3% sur transactions, garantie prix et qualité. Ciblage artisans et PME BTP avec onboarding gratuit et support dédié.",
+    "competitors": "Concurrence avec 123Materiaux et BigMat mais approche IA collaborative innovante.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 129,
+    "name": "Générateur IA de campagnes TikTok automatisées pour commerce local",
+    "category": "marketing",
+    "score": 79,
+    "scores": {
+      "demande": 23,
+      "croissance": 20,
+      "concurrence": 16,
+      "monetisation": 11,
+      "faisabilite": 9
+    },
+    "trend": "+210%",
+    "market": "€2.2B",
+    "type": "SaaS Marketing",
+    "mentions": 820,
+    "sources": "TikTok, Twitter/X, LinkedIn",
+    "problem": "Les commerces locaux peinent à créer du contenu TikTok engageant faute de compétences créatives et temps. La production vidéo semble complexe et coûteuse. Beaucoup ratent l'opportunité TikTok par manque de savoir-faire technique et créatif.",
+    "solution": "IA créant automatiquement des vidéos TikTok à partir de photos produits et informations business. Templates tendances, musiques populaires, textes accrocheurs générés automatiquement. Publication automatique avec optimisation horaires. Abonnement 89€/mois pour commerce local, analytics détaillés inclus.",
+    "competitors": "Concurrence naissante avec Later et Hootsuite mais spécialisation TikTok commerce local unique.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 130,
+    "name": "IA d'optimisation automatique des campagnes Meta Ads pour e-commerces",
+    "category": "marketing",
+    "score": 84,
+    "scores": {
+      "demande": 25,
+      "croissance": 22,
+      "concurrence": 17,
+      "monetisation": 12,
+      "faisabilite": 8
+    },
+    "trend": "+195%",
+    "market": "€4.1B",
+    "type": "SaaS Marketing",
+    "mentions": 950,
+    "sources": "Facebook Groups, LinkedIn, Twitter/X",
+    "problem": "Les e-commerces gaspillent 40% de leur budget Facebook/Instagram Ads en ciblages inefficaces. L'optimisation manuelle des campagnes demande une expertise coûteuse. Les changements d'algorithme Meta perturbent constamment les performances publicitaires.",
+    "solution": "IA analysant en temps réel les performances Meta Ads et ajustant automatiquement audiences, créatives et budgets. Machine learning sur données historiques, adaptation aux changements d'algorithme. Ciblage e-commerces avec CA 100k-5M€ annuel. Pricing: 4% du budget publicitaire optimisé avec garantie ROI minimum.",
+    "competitors": "Concurrence avec Madgicx et Revealbot mais positionnement plus accessible aux PME e-commerce.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 131,
+    "name": "Assistant IA pour création automatique de podcasts marketing d'entreprise",
+    "category": "marketing",
+    "score": 73,
+    "scores": {
+      "demande": 19,
+      "croissance": 18,
+      "concurrence": 14,
+      "monetisation": 12,
+      "faisabilite": 10
+    },
+    "trend": "+145%",
+    "market": "€800M",
+    "type": "SaaS Content",
+    "mentions": 420,
+    "sources": "LinkedIn, Twitter/X, Reddit",
+    "problem": "Les entreprises veulent lancer des podcasts pour leur marketing de contenu mais manquent de compétences audio et de temps. La production est perçue comme technique et chronophage. Beaucoup abandonnent après quelques épisodes par manque de régularité.",
+    "solution": "IA transformant contenus écrits existants (articles, présentations) en podcasts avec voix synthétique naturelle et musique adaptée. Génération automatique d'épisodes réguliers, distribution multi-plateformes. Ciblage consultants et PME B2B avec abonnement 149€/mois pour 4 épisodes mensuels. Voix personnalisées en option premium.",
+    "competitors": "Marché émergent avec quelques outils comme Murf mais pas de solution complète podcast d'entreprise.",
     "weekTrend": "new"
   }
 ];
