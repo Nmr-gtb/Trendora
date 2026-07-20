@@ -1,4 +1,4 @@
-export const WEEK_LABEL = "Semaine du 22 juin 2026";
+export const WEEK_LABEL = "Semaine du 27 juillet 2026";
 
 export const OPPORTUNITIES = [
   {
@@ -241,7 +241,7 @@ export const OPPORTUNITIES = [
     "problem": "Les propriétaires bailleurs qui gèrent 2 à 20 biens en direct n'ont pas d'outil adapté. Soit ils paient une agence (7-10% des loyers), soit ils gèrent tout manuellement. Les quittances, les relances de loyer, les déclarations fiscales, la communication avec les locataires — tout est chronophage.",
     "solution": "Un outil tout-en-un pour propriétaires bailleurs : génération automatique de quittances et relances, suivi des paiements avec alerte retard, aide à la déclaration fiscale (revenus fonciers), communication locataire centralisée, gestion des travaux et incidents. Cible : propriétaires de 2 à 20 biens. Pricing suggéré : 12€/mois par bien.",
     "competitors": "Quelques acteurs (Rentila, Ublo) mais UX datée et pas d'IA.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 12,
@@ -263,7 +263,7 @@ export const OPPORTUNITIES = [
     "problem": "La santé mentale au travail est un sujet en explosion. Les entreprises sont obligées par la loi de prévenir les risques psychosociaux mais n'ont pas d'outils pratiques. Les solutions actuelles (EAP, numéros verts) ont des taux d'utilisation inférieurs à 5% car perçues comme stigmatisantes.",
     "solution": "Un chatbot IA anonyme et confidentiel accessible à tous les salariés : check-in quotidien du bien-être, détection précoce des signaux de détresse, orientation vers les ressources adaptées, dashboard anonymisé pour les RH (tendances, pas de données individuelles). Cible : DRH, entreprises de 50 à 5000 salariés. Pricing suggéré : 3€/salarié/mois.",
     "competitors": "Moka.care, Teale existent mais le marché reste très fragmenté et en forte croissance.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 13,
@@ -395,7 +395,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs et petites boîtes ne savent pas si leur produit est conforme au RGPD. Les audits juridiques coûtent cher. Les plugins de cookies ne suffisent pas — il faut aussi vérifier le stockage des données, les sous-traitants, les durées de conservation.",
     "solution": "Une API qui scanne un site ou une app et génère un rapport de conformité RGPD automatique : cookies, trackers, politique de confidentialité, flux de données, sous-traitants détectés. Rapport PDF + plan d'action. Cible : développeurs, startups, PME. Pricing suggéré : 29€/mois.",
     "competitors": "Cookiebot, OneTrust sont orientés grands groupes et très chers.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 19,
@@ -417,7 +417,7 @@ export const OPPORTUNITIES = [
     "problem": "La plupart des sites ont des problèmes UX qui font fuir les utilisateurs mais les fondateurs ne les voient pas. Un audit UX professionnel coûte 2000-5000€. Les outils d'analytics montrent le quoi mais pas le pourquoi.",
     "solution": "Un outil qui analyse automatiquement l'UX d'un site : screenshot de chaque page, analyse IA des patterns problématiques, score UX par page, recommandations priorisées avec maquettes de correction. Cible : fondateurs, product managers, freelances. Pricing suggéré : 39€/mois.",
     "competitors": "Hotjar et Crazy Egg montrent les données. L'analyse IA avec recommandations est le différenciateur.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 20,
@@ -505,7 +505,7 @@ export const OPPORTUNITIES = [
     "problem": "Les urgences hospitalières sont saturées. 40% des passages ne relèvent pas de l'urgence réelle. Les patients attendent des heures sans savoir s'ils devraient plutôt consulter leur médecin.",
     "solution": "Un chatbot IA de pré-triage : le patient décrit ses symptômes, l'IA évalue le niveau d'urgence et oriente (urgences, médecin de garde, téléconsultation, pharmacie). Cible : hôpitaux, ARS, mutuelles. Pricing suggéré : licence B2B 500€/mois.",
     "competitors": "Quelques initiatives publiques mais pas de solution IA clé en main.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 24,
@@ -549,7 +549,7 @@ export const OPPORTUNITIES = [
     "problem": "Les pharmacies gèrent leur stock avec les logiciels des grossistes, qui ne communiquent pas entre eux. Les ruptures sont fréquentes, les péremptions génèrent des pertes, et la gestion multi-fournisseurs est chronophage.",
     "solution": "Un outil de gestion de stock intelligent : prédiction IA des besoins, alerte péremption, comparaison automatique des prix entre grossistes, commande optimisée multi-fournisseurs. Cible : pharmacies indépendantes. Pricing suggéré : 89€/mois.",
     "competitors": "Les logiciels de gestion officinale sont limités en IA prédictive.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 26,
@@ -945,7 +945,7 @@ export const OPPORTUNITIES = [
     "problem": "Surveiller ses concurrents demande de checker manuellement leurs sites, réseaux sociaux, prix.",
     "solution": "Un radar concurrentiel IA : suivi automatique des changements, analyse des stratégies. Cible : fondateurs SaaS. Pricing suggéré : 39€/mois.",
     "competitors": "Crayon, Kompyte sont orientés enterprise à +200€/mois.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 44,
@@ -1033,7 +1033,7 @@ export const OPPORTUNITIES = [
     "problem": "Les freelances et PME savent que le SEO est important mais ne savent pas par où commencer.",
     "solution": "Analyse du site → opportunités de mots-clés → plan de contenu SEO priorisé. Cible : freelances, PME. Pricing suggéré : 29€/mois.",
     "competitors": "SEMrush et Ahrefs dominent les données. L'angle stratégie actionnable IA est libre.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 48,
@@ -1231,7 +1231,7 @@ export const OPPORTUNITIES = [
     "problem": "Un agent immobilier débutant signe son premier mandat. Il doit créer une annonce qui vend, retoucher les photos, faire une fiche PDF pro, un post Instagram, une vidéo de visite. Il ne sait pas faire. Il pond une annonce moche, et son bien reste 6 mois sans visite. Les 40 000 agents en France n'ont pas les moyens d'un graphiste interne, surtout les indépendants.",
     "solution": "L'agent rentre l'adresse et uploade ses photos brutes. L'IA génère automatiquement un texte d'annonce vendeur, des photos retouchées (luminosité, ciel bleu), une fiche PDF avec son logo, un post Instagram + Reel, et une description SEO pour SeLoger/LeBonCoin. En 5 minutes, il a un kit complet pro. Un agent gagne 3000-8000€ de commission par vente — s'il vend 1 bien de plus par mois grâce à un meilleur marketing, 39€/mois c'est ridicule. Cible : agents indépendants et petites agences.",
     "competitors": "Quelques outils de retouche photo immobilière (Nodalview, Homestaging3D) mais aucun ne propose un kit marketing complet avec texte + visuels + réseaux sociaux + SEO généré par IA en une seule plateforme.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 57,
@@ -1275,7 +1275,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs détestent écrire la documentation et elle devient rapidement obsolète. 70% des projets open source et internes manquent de docs à jour. Les équipes perdent des heures à comprendre du code legacy ou des APIs mal documentées.",
     "solution": "IA qui analyse le code en temps réel et génère automatiquement la documentation technique, les README, et les guides API. Met à jour automatiquement quand le code change. Intégration GitHub/GitLab native. Pricing par repo : 15€/mois pour les projets privés, gratuit pour l'open source. Cible les équipes tech de 5-50 personnes.",
     "competitors": "GitBook et Notion existent mais nécessitent écriture manuelle. Mintlify et Gitiles sont émergents mais focalisés sur l'API doc uniquement.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 59,
@@ -1473,7 +1473,7 @@ export const OPPORTUNITIES = [
     "problem": "Les pannes d'équipements coûtent 2000€/jour en moyenne par arrêt de chantier. La maintenance préventive est négligée par manque de suivi. 40% des pannes sont prédictibles mais les signaux faibles ne sont pas détectés.",
     "solution": "Capteurs IoT sur équipements + IA qui prédit les pannes 2-4 semaines à l'avance. Dashboard de suivi, alertes préventives, planification maintenance optimisée. Installation plug-and-play, compatible toutes marques. 99€/mois par équipement suivi. Cible les entreprises de TP et location d'équipements.",
     "competitors": "Caterpillar et Komatsu ont des solutions propriétaires. Uptake et Predii existent mais généralistes. Niche à prendre sur l'aftermarket.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 68,
@@ -1583,7 +1583,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs perdent 30-40% de leur temps à écrire des tests unitaires répétitifs. Cette tâche est cruciale pour la qualité du code mais souvent négligée par manque de temps. Les équipes de développement peinent à maintenir une couverture de tests élevée tout en respectant les délais de livraison.",
     "solution": "Outil IA qui analyse le code source et génère automatiquement des tests unitaires complets avec assertions pertinentes. Extension IDE qui s'intègre à VSCode, IntelliJ et autres éditeurs populaires. Pricing freemium avec 50 générations/mois gratuites, puis 29€/mois par développeur pour usage illimité. Cible les équipes de développement de 5-50 personnes dans les startups et PME tech.",
     "competitors": "Quelques acteurs émergents comme Testim et Mabl se concentrent sur les tests e2e, mais peu d'outils spécialisés dans la génération de tests unitaires par IA. Marché encore largement dominé par les approches manuelles traditionnelles.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 73,
@@ -2243,7 +2243,7 @@ export const OPPORTUNITIES = [
     "problem": "Les entreprises perdent entre 20-40% de leurs budgets cloud en ressources sous-utilisées ou mal configurées. Les équipes DevOps passent énormément de temps à monitorer et ajuster manuellement les configurations serveur. Les coûts explosent sans visibilité claire sur l'optimisation possible.",
     "solution": "IA qui analyse en temps réel l'utilisation des serveurs cloud et ajuste automatiquement les ressources (CPU, RAM, stockage) selon les patterns d'usage. Intégration avec AWS, Azure, GCP. Modèle freemium puis 2-5% des économies réalisées pour les entreprises. Tableau de bord prédictif des coûts et recommandations d'architecture.",
     "competitors": "Quelques startups émergentes comme Spot.io, mais marché encore peu saturé. AWS et cloud providers développent des outils basiques mais sans IA avancée. Opportunité de se positionner avant les géants.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 103,
@@ -2265,7 +2265,7 @@ export const OPPORTUNITIES = [
     "problem": "Les tests de performance sont complexes à écrire et chronophages pour les développeurs. 70% des applications web ne sont pas testées en charge avant production. Les outils existants nécessitent une expertise technique avancée que beaucoup d'équipes n'ont pas.",
     "solution": "IA qui analyse le code source et génère automatiquement des scripts de tests de performance (JMeter, K6, Gatling). Interface no-code pour paramétrer les scénarios. 49€/mois par développeur avec essai gratuit. Intégration CI/CD et rapports automatiques avec recommandations d'optimisation.",
     "competitors": "LoadRunner et JMeter dominent mais sont complexes. Nouvelles solutions comme Loader.io mais sans IA générative. Niche peu exploitée par les géants.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 104,
@@ -4223,7 +4223,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs front-end passent 40-60% de leur temps à convertir manuellement des maquettes en code, processus répétitif et coûteux. Les équipes design-dev ont des frictions constantes sur la fidélité des implémentations. La vélocité de développement est freinée par ces tâches peu créatives.",
     "solution": "Outil IA qui analyse automatiquement les fichiers Figma et génère du code React/Vue propre et maintenable avec gestion d'état, responsive design et tests unitaires. Cible les agences web et startups tech (€99-399/mois selon équipe). Plugin Figma gratuit + SaaS payant avec API pour intégration CI/CD. Collaboration temps réel design-dev intégrée.",
     "competitors": "Concurrence émergente avec Locofy.ai et Anima mais marché encore fragmenté. Avantage possible sur la qualité du code généré et l'intégration workflow existant.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 193,
@@ -4245,7 +4245,7 @@ export const OPPORTUNITIES = [
     "problem": "La création et optimisation d'APIs GraphQL performantes demande une expertise pointue que beaucoup d'équipes n'ont pas. Les problèmes N+1, la gestion du cache et l'optimisation des resolvers sont complexes. 70% des implémentations GraphQL sont sous-optimisées selon les benchmarks.",
     "solution": "IA qui analyse le schéma de données existant et génère automatiquement des endpoints GraphQL optimisés avec DataLoaders, mise en cache intelligente et monitoring des performances. Cible les équipes backend et architects (€149-599/mois). Intégration avec Apollo, Prisma et Hasura. Suggestions d'optimisation temps réel et alertes performance.",
     "competitors": "Espace relativement libre avec quelques outils comme GraphQL Inspector mais rien d'aussi automatisé. Opportunity de devenir standard dans l'écosystème GraphQL.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 194,
@@ -4267,7 +4267,7 @@ export const OPPORTUNITIES = [
     "problem": "L'écriture et maintenance des tests E2E est chronophage et technique, souvent négligée par les équipes. 60% des bugs en production auraient pu être détectés par des tests E2E adéquats. La maintenance des selectors et scénarios lors des évolutions UI est un cauchemar.",
     "solution": "IA qui observe les interactions utilisateur réelles et génère automatiquement des tests E2E robustes avec smart selectors et gestion des données de test. Cible QA engineers et développeurs (€199-799/mois selon nombre de tests). Auto-healing des tests cassés par changements UI mineurs. Dashboard analytics avec métriques de couverture avancées.",
     "competitors": "Mabl et Testim existent mais approche plus ML traditionnelle. Opportunité avec les nouvelles capacités LLM pour compréhension contextuelle des interfaces.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 195,
@@ -4289,7 +4289,7 @@ export const OPPORTUNITIES = [
     "problem": "Les cancers digestifs sont détectés tardivement dans 65% des cas, réduisant drastiquement les chances de survie. Les facteurs de risque alimentaires sont complexes à analyser pour les médecins généralistes. Les patients sous-estiment l'impact de leur alimentation sur les risques cancérigènes.",
     "solution": "IA qui analyse les habitudes alimentaires détaillées via app mobile et croise avec données génétiques, historique familial et biomarqueurs pour scorer le risque de cancers digestifs. Cible médecins généralistes et gastro-entérologues (€299-899/mois selon praticiens). Alertes préventives personnalisées et recommandations nutritionnelles ciblées. Intégration dossiers médicaux existants.",
     "competitors": "Marché émergent avec quelques acteurs comme Nutrino mais focus différent. Réglementation médicale stricte mais marché énorme si validation clinique.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 196,
@@ -4311,7 +4311,7 @@ export const OPPORTUNITIES = [
     "problem": "Les protocoles de chimiothérapie sont souvent standardisés alors que la réponse varie énormément selon le profil génétique et métabolique du patient. 40% des patients subissent des effets secondaires sévères évitables. L'optimisation des doses et timing nécessite une expertise complexe rare.",
     "solution": "IA qui analyse le profil génomique, historique médical, biomarqueurs et réponse aux traitements pour optimiser en temps réel les protocoles de chimio. Cible oncologues et centres de cancérologie (€1999-4999/mois selon taille). Prédiction des effets secondaires et ajustements automatiques. Conformité réglementaire ANSM/EMA intégrée.",
     "competitors": "IBM Watson Oncology a échoué mais nouvelles approches avec Foundation Medicine et Tempus. Marché en consolidation, opportunité avec IA générative nouvelle génération.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 197,
@@ -4333,7 +4333,7 @@ export const OPPORTUNITIES = [
     "problem": "Les parcours de soins en psychiatrie sont complexes avec de nombreux intervenants mal coordonnés. 35% des patients abandonnent leur suivi par manque de fluidité. Les psychiatres peinent à coordonner avec psychologues, médecins généralistes et services sociaux. Les ruptures de parcours coûtent cher au système de santé.",
     "solution": "IA qui coordonne automatiquement les différents intervenants du parcours psychiatrique, optimise les plannings et anticipe les risques de rupture de soins. Cible centres médico-psychologiques et psychiatres libéraux (€399-1299/mois selon structure). Alertes prédictives de décompensation et recommandations d'ajustement de prise en charge personnalisées.",
     "competitors": "Marché peu digitalisé avec solutions partielles comme Maiia. Opportunité importante avec la réforme du remboursement des psychologues en France.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 198,
@@ -4355,7 +4355,7 @@ export const OPPORTUNITIES = [
     "problem": "L'investissement dans l'art est réservé aux très fortunés avec tickets d'entrée de 50K€+. La liquidité est quasi-nulle et l'expertise requise immense. Les frais d'intermédiation sont prohibitifs (20-40%). Les petits investisseurs n'ont pas accès à cette classe d'actifs pourtant décorrélée et performante historiquement.",
     "solution": "Plateforme de tokenisation permettant d'investir dans des œuvres d'art fractionnées à partir de 100€. IA d'évaluation et sélection des œuvres basée sur données historiques et tendances marché. Cible investisseurs particuliers patrimoniaux (frais 2-3% + 20% performance). Marketplace secondaire pour liquidité et authentification blockchain des tokens.",
     "competitors": "Masterworks, Arthena et quelques acteurs émergents mais marché européen encore peu mature. Réglementation complexe mais cadre légal français favorable aux tokens.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 199,
@@ -4377,7 +4377,7 @@ export const OPPORTUNITIES = [
     "problem": "Les DPE sont obligatoires mais souvent peu précis et n'apportent pas de conseils actionnables. Les propriétaires ne savent pas prioriser les travaux de rénovation énergétique. 70% des DPE ne donnent pas d'estimation ROI des améliorations possibles. Les diagnostiqueurs peinent à fournir des conseils personnalisés faute d'outils.",
     "solution": "IA qui génère des DPE enrichis avec simulation 3D du bâtiment, priorisé des travaux selon ROI, estimation des aides disponibles et mise en relation avec artisans qualifiés. Cible diagnostiqueurs immobiliers et agents (€99-299/mois). API pour intégration dans logiciels immobiliers existants. Suivi post-travaux et re-certification automatique.",
     "competitors": "Marché fragmenté avec des outils basiques comme Liciel DPE. Opportunité importante avec durcissement réglementaire et interdiction location passoires énergétiques.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 200,
@@ -4399,7 +4399,7 @@ export const OPPORTUNITIES = [
     "problem": "L'optimisation fiscale des investissements locatifs est complexe avec de nombreux dispositifs (Pinel, LMNP, déficits fonciers...) mal maîtrisés. 60% des investisseurs passent à côté d'optimisations fiscales légales. Les conseils en gestion de patrimoine sont chers et pas toujours objectifs. La législation change constamment.",
     "solution": "IA qui analyse la situation patrimoniale complète et recommande les stratégies d'optimisation fiscale immobilière personnalisées en temps réel. Cible investisseurs particuliers et CGP (€49-199/mois selon patrimoine). Simulation d'impact de chaque décision, alertes changements législatifs et optimisation continue du patrimoine existant.",
     "competitors": "Yomoni, Nalo sur l'épargne mais peu spécialisé immobilier. Expertise fiscale complexe à automatiser mais marché très demandeur.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 201,
@@ -4421,7 +4421,7 @@ export const OPPORTUNITIES = [
     "problem": "Les coûts énergétiques représentent 15-25% des coûts de chantier et fluctuent énormément. Les entreprises BTP négocient individuellement avec des tarifs défavorables. La consommation énergétique des chantiers est mal optimisée faute d'outils de suivi. Les achats groupés d'énergie sont complexes à organiser entre entreprises.",
     "solution": "Plateforme qui regroupe les besoins énergétiques des chantiers BTP pour négocier des tarifs préférentiels et optimise la consommation via IA prédictive. Cible entreprises BTP et maîtres d'ouvrage (commission 3-5% + abonnement €299-999/mois). Monitoring temps réel des consommations et alertes de dérive. Intégration avec équipements connectés de chantier.",
     "competitors": "Marché émergent avec quelques acteurs comme Opéra Energie mais pas de focus BTP spécifique. Réglementation énergétique de plus en plus contraignante.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 202,
@@ -4443,7 +4443,7 @@ export const OPPORTUNITIES = [
     "problem": "La conception des plans d'installation de chantier (PIC) est chronophage et nécessite une expertise pointue souvent manquante. 40% des retards de chantier sont liés à une mauvaise organisation spatiale initiale. Les contraintes de sécurité, logistique et réglementaires sont de plus en plus complexes à intégrer. La coordination entre corps d'état est mal anticipée.",
     "solution": "IA qui génère automatiquement des plans d'installation de chantier optimisés en analysant les plans, contraintes réglementaires, terrain et séquençage des travaux. Cible conducteurs de travaux et bureau d'études (€199-799/mois selon taille projets). Simulation 3D des flux, optimisation sécurité et conformité automatique aux normes. Ajustement temps réel selon avancement.",
     "competitors": "Outils CAO classiques comme AutoCAD mais pas d'IA dédiée PIC. Marché technique mais à forte valeur ajoutée pour optimisation chantiers.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 203,
@@ -4465,7 +4465,7 @@ export const OPPORTUNITIES = [
     "problem": "La rédaction des CCTP et dossiers de consultation des marchés publics BTP est extrêmement technique et chronophage. 60% des appels d'offres publics sont mal rédigés générant contentieux et surcoûts. Les collectivités manquent d'expertise technique BTP. La conformité réglementaire (Code des marchés publics) est complexe et évolutive.",
     "solution": "IA qui génère automatiquement les CCTP, DPGF et pièces techniques des marchés publics BTP à partir du cahier des charges fonctionnel. Cible collectivités, AMO et bureaux d'études publics (€499-1999/mois selon volume). Mise à jour automatique réglementaire, bibliothèque de clauses validées juridiquement et estimation automatique des montants. Workflow validation collaborative intégré.",
     "competitors": "Marché peu digitalisé avec solutions partielles. Opportunité importante avec digitalisation forcée des marchés publics et complexification réglementaire.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 204,
@@ -4487,7 +4487,7 @@ export const OPPORTUNITIES = [
     "problem": "La création de spots radio publicitaires est coûteuse (1000-5000€) et chronophage pour les PME locales. 70% des commerçants locaux renoncent à la radio faute de budget création. Les radios locales peinent à démocratiser leurs offres publicitaires. La personnalisation des messages selon l'audience est inexistante.",
     "solution": "IA qui génère automatiquement des spots radio personnalisés avec voix de synthèse naturelle, musiques et effets adaptés au message et cible. Cible radios locales et régies publicitaires (€199-599/mois + revenus partagés). Bibliothèque de voix locales, A/B testing automatique des créations et optimisation performance temps réel. Interface simple pour commerçants sans compétences techniques.",
     "competitors": "Marché émergent avec des outils comme Murf ou Descript mais pas focus radio locale. Opportunité avec renaissance de l'audio digital et podcasts.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 205,
@@ -4509,7 +4509,7 @@ export const OPPORTUNITIES = [
     "problem": "Les PME locales ne savent pas identifier et collaborer avec les micro-influenceurs pertinents de leur zone géographique. 80% des budgets influence sont captés par les macro-influenceurs au ROI discutable pour les commerces locaux. La gestion des campagnes d'influence est complexe et chronophage. Le matching géographique précis est inexistant sur les plateformes actuelles.",
     "solution": "IA qui identifie automatiquement les micro-influenceurs hyper-locaux pertinents et génère des stratégies d'influence personnalisées pour commerces de proximité. Cible PME locales et agences marketing territorial (€99-399/mois selon zone). Gestion automatisée des campagnes, mesure ROI géolocalisé et base de données influenceurs qualifiés par zone. Paiement à la performance possible.",
     "competitors": "Kolsquare, Upfluence sur macro-influence mais pas focus micro-local. Marché fragmenté avec opportunité sur l'hyper-proximité géographique.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 206,
@@ -4531,6 +4531,336 @@ export const OPPORTUNITIES = [
     "problem": "L'optimisation des campagnes Google Shopping nécessite un monitoring constant et des ajustements complexes que 85% des e-commerçants ne maîtrisent pas. Les variations saisonnières et concurrentielles sont impossibles à anticiper manuellement. Les budgets sont gaspillés sur des produits mal performants. La gestion des flux produits pour Google Shopping est technique.",
     "solution": "IA qui optimise automatiquement les campagnes Google Shopping en ajustant enchères, budgets et ciblages selon saisonnalité, stock et performance. Cible e-commerçants et agences digital (€299-999/mois selon CA). Prédiction des pics de demande, optimisation automatique des flux produits et A/B testing continu des stratégies d'enchères. Dashboard performance temps réel simplifié.",
     "competitors": "Optmyzr, Adzooma proposent de l'automatisation mais pas spécialisés Shopping. Google développe ses propres outils mais marché énorme pour solutions tierces spécialisées.",
+    "weekTrend": "stable"
+  },
+  {
+    "id": 207,
+    "name": "Assistant IA de génération de fiches produits e-commerce optimisées SEO",
+    "category": "tech",
+    "score": 74,
+    "scores": {
+      "demande": 19,
+      "croissance": 17,
+      "concurrence": 14,
+      "monetisation": 12,
+      "faisabilite": 12
+    },
+    "trend": "+95%",
+    "market": "€850M",
+    "type": "SaaS",
+    "mentions": 380,
+    "sources": "Reddit, Twitter/X, Google Trends",
+    "problem": "Les e-commerçants passent des heures à rédiger des fiches produits optimisées SEO pour chaque référence, surtout avec des catalogues de plusieurs milliers de produits. La rédaction manuelle est lente, incohérente en qualité et souvent mal optimisée pour le référencement naturel. Les petites boutiques n'ont pas les moyens d'employer un copywriter dédié à temps plein.",
+    "solution": "Plateforme SaaS qui génère automatiquement des fiches produits complètes (titre, description, meta-tags) à partir d'une photo et de quelques caractéristiques techniques. Cible les e-commerçants Shopify et WooCommerce gérant plus de 200 produits. Pricing à partir de 39€/mois avec quota de fiches, jusqu'à 199€/mois pour les gros catalogues. Intégration directe via plugin pour automatiser la publication.",
+    "competitors": "Jasper et Copy.ai proposent des fonctions génériques mais peu spécialisées e-commerce. Quelques startups françaises comme Nyxeia émergent mais restent peu connues. Le marché est encore fragmenté avec peu d'acteurs dominants spécifiquement dédiés aux fiches produits.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 208,
+    "name": "Plateforme IA de génération automatique de roadmaps produit",
+    "category": "tech",
+    "score": 71,
+    "scores": {
+      "demande": 17,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 11,
+      "faisabilite": 10
+    },
+    "trend": "+80%",
+    "market": "€620M",
+    "type": "SaaS",
+    "mentions": 290,
+    "sources": "Reddit, Product Hunt, LinkedIn",
+    "problem": "Les product managers passent énormément de temps à prioriser les features et construire des roadmaps cohérentes à partir de feedback dispersé (support, ventes, utilisateurs). Les outils actuels (Jira, Notion) nécessitent une saisie manuelle fastidieuse et n'offrent pas d'aide à la priorisation stratégique. Les petites équipes produit manquent de méthodologie et de temps pour structurer une vision claire.",
+    "solution": "Outil qui agrège automatiquement les retours clients depuis Intercom, Slack, et tickets support pour proposer une roadmap priorisée par IA selon impact/effort. Cible les startups et scale-ups avec équipe produit de 1 à 10 personnes. Pricing freemium avec plan payant à 49€/mois par utilisateur. Génère aussi des présentations automatiques pour les comités de direction.",
+    "competitors": "Productboard et Aha! dominent le marché mais restent chers et complexes pour les petites équipes. Peu de solutions intègrent une vraie automatisation IA de la priorisation. Opportunité de se positionner sur le segment low-cost et simplicité.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 209,
+    "name": "IA de détection automatique de vulnérabilités dans le code avant déploiement",
+    "category": "tech",
+    "score": 79,
+    "scores": {
+      "demande": 21,
+      "croissance": 19,
+      "concurrence": 14,
+      "monetisation": 13,
+      "faisabilite": 12
+    },
+    "trend": "+130%",
+    "market": "€1.4B",
+    "type": "SaaS",
+    "mentions": 510,
+    "sources": "Reddit, Hacker News, Google Trends",
+    "problem": "Les équipes de développement découvrent souvent des failles de sécurité trop tard, après déploiement en production, ce qui coûte cher à corriger et expose l'entreprise à des risques. Les outils de sécurité existants génèrent beaucoup de faux positifs et nécessitent une expertise pointue pour être configurés correctement. Les petites équipes tech n'ont pas de budget pour un pentester dédié.",
+    "solution": "Plugin CI/CD qui analyse le code à chaque commit avec un modèle IA entraîné sur des millions de vulnérabilités connues (CVE, OWASP) et propose des correctifs automatiques. Cible les équipes dev de startups tech et scale-ups. Pricing à partir de 99€/mois par repository, avec plan enterprise sur devis. Intégration native GitHub, GitLab, Bitbucket.",
+    "competitors": "Snyk et Semgrep sont les leaders établis mais restent coûteux pour les petites structures. Github Advanced Security intègre des fonctions similaires en natif. Différenciation possible via un pricing plus accessible et une UX simplifiée pour non-experts sécurité.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 210,
+    "name": "Plateforme de suivi IA de l'observance thérapeutique pour maladies chroniques",
+    "category": "sante",
+    "score": 76,
+    "scores": {
+      "demande": 20,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 11
+    },
+    "trend": "+105%",
+    "market": "€980M",
+    "type": "SaaS",
+    "mentions": 340,
+    "sources": "Reddit, Google Trends, LinkedIn",
+    "problem": "Environ 50% des patients atteints de maladies chroniques ne suivent pas correctement leur traitement, ce qui entraîne des complications évitables et des coûts de santé supplémentaires. Les médecins manquent de visibilité entre les consultations pour détecter les décrochages thérapeutiques. Les solutions actuelles se limitent souvent à de simples rappels sans intelligence contextuelle.",
+    "solution": "Application mobile couplée à un dashboard médecin qui utilise l'IA pour prédire les risques de non-observance à partir des habitudes de prise de médicaments et des données déclaratives du patient. Cible les cabinets de médecine générale et spécialistes suivant des patients diabétiques, hypertendus ou cardiaques. Pricing B2B2C via mutuelles et cabinets médicaux, à partir de 15€/patient/mois. Alertes automatiques envoyées au soignant en cas de risque détecté.",
+    "competitors": "Withings et quelques apps de rappel médicamenteux existent mais sans réelle intelligence prédictive. Le marché reste ouvert car peu de solutions combinent IA prédictive et intégration médecin en France.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 211,
+    "name": "Assistant IA pour optimisation des plannings de blocs opératoires",
+    "category": "sante",
+    "score": 78,
+    "scores": {
+      "demande": 20,
+      "croissance": 17,
+      "concurrence": 16,
+      "monetisation": 13,
+      "faisabilite": 12
+    },
+    "trend": "+90%",
+    "market": "€1.1B",
+    "type": "SaaS",
+    "mentions": 260,
+    "sources": "LinkedIn, Google Trends, presse spécialisée",
+    "problem": "Les blocs opératoires souffrent d'une mauvaise gestion des créneaux, entraînant des retards, des annulations d'interventions et une sous-utilisation coûteuse des salles. La planification est souvent faite manuellement sur tableur, sans prise en compte des imprévus (urgences, disponibilité chirurgiens). Cela génère des pertes financières importantes pour les établissements de santé.",
+    "solution": "Logiciel IA qui optimise en temps réel le planning des blocs opératoires en tenant compte des durées historiques d'intervention, disponibilité du personnel et matériel. Cible les cliniques privées et hôpitaux de taille moyenne. Pricing sur devis selon nombre de salles, généralement entre 2000 et 8000€/mois. ROI démontré par la réduction du temps mort en salle.",
+    "competitors": "Quelques éditeurs hospitaliers historiques (Softway Medical, Dedalus) proposent des modules de planification basiques. Peu de solutions spécialisées avec vraie IA prédictive sur ce segment précis en France.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 212,
+    "name": "Plateforme de coaching santé IA pour préparation et suivi post-chirurgie bariatrique",
+    "category": "sante",
+    "score": 72,
+    "scores": {
+      "demande": 18,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 11,
+      "faisabilite": 10
+    },
+    "trend": "+115%",
+    "market": "€540M",
+    "type": "App mobile",
+    "mentions": 210,
+    "sources": "Reddit, Instagram, Google Trends",
+    "problem": "Les patients en parcours de chirurgie bariatrique manquent d'accompagnement continu entre les rares consultations avec le chirurgien ou nutritionniste, ce qui augmente les risques de complications et de reprise de poids. Le suivi actuel repose sur des rendez-vous espacés de plusieurs mois. Les patients se sentent souvent seuls face aux changements alimentaires et psychologiques majeurs post-opération.",
+    "solution": "Application qui accompagne le patient avant et après l'opération avec un coach IA personnalisé (nutrition, activité physique, soutien psychologique) et alerte l'équipe médicale en cas de signal d'alarme. Cible les patients en parcours bariatrique et les cliniques spécialisées en chirurgie de l'obésité. Pricing freemium avec abonnement premium à 19€/mois, ou vente en marque blanche aux cliniques.",
+    "competitors": "Quelques apps généralistes de nutrition existent mais aucune spécialisée sur ce parcours patient spécifique en France. Opportunité de leadership sur un marché de niche à forte valeur ajoutée émotionnelle.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 213,
+    "name": "Plateforme IA d'estimation automatique des charges cachées à l'achat immobilier",
+    "category": "immobilier",
+    "score": 73,
+    "scores": {
+      "demande": 19,
+      "croissance": 17,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 10
+    },
+    "trend": "+88%",
+    "market": "€420M",
+    "type": "SaaS",
+    "mentions": 230,
+    "sources": "Reddit, Google Trends, forums immobilier",
+    "problem": "Les acheteurs immobiliers sous-estiment souvent les charges réelles d'un bien (copropriété, travaux à venir, taxes locales, DPE) et découvrent des coûts cachés après l'achat. Cette mauvaise anticipation crée des tensions financières et des regrets post-achat. Les diagnostics classiques ne donnent pas de vision consolidée du coût réel de possession sur 10 ans.",
+    "solution": "Outil qui agrège les données de copropriété, historique de travaux, fiscalité locale et DPE pour générer une estimation fiable du coût total de possession sur 5 et 10 ans. Cible les particuliers acheteurs et les agences immobilières souhaitant rassurer leurs clients. Pricing freemium pour particuliers, licence B2B pour agences à partir de 199€/mois.",
+    "competitors": "MeilleursAgents et SeLoger donnent des estimations de prix mais pas de projection de charges. Peu d'acteurs se positionnent spécifiquement sur l'anticipation des coûts cachés, marché encore ouvert.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 214,
+    "name": "Assistant IA pour optimisation des successions et transmissions immobilières",
+    "category": "immobilier",
+    "score": 75,
+    "scores": {
+      "demande": 19,
+      "croissance": 16,
+      "concurrence": 16,
+      "monetisation": 13,
+      "faisabilite": 11
+    },
+    "trend": "+70%",
+    "market": "€680M",
+    "type": "SaaS",
+    "mentions": 195,
+    "sources": "LinkedIn, Google Trends, forums notariaux",
+    "problem": "Les familles propriétaires de patrimoine immobilier manquent souvent d'anticipation dans l'organisation de leur succession, ce qui entraîne des droits de succession élevés et des conflits familiaux. Les notaires n'ont pas toujours le temps de proposer des simulations personnalisées en amont. Les solutions actuelles restent très générales et peu orientées immobilier spécifiquement.",
+    "solution": "Plateforme qui simule différents scénarios de transmission (donation, SCI, démembrement) et calcule automatiquement l'impact fiscal pour chaque option. Cible les particuliers avec patrimoine immobilier et les cabinets de gestion de patrimoine. Pricing freemium pour simulation basique, abonnement 29€/mois pour simulations avancées, licence B2B pour professionnels du patrimoine.",
+    "competitors": "Quelques simulateurs fiscaux génériques existent (impots.gouv, notaires.fr) mais sans personnalisation poussée. Les cabinets de gestion de patrimoine restent le principal concurrent indirect via conseil humain payant.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 215,
+    "name": "Marketplace IA de mise en relation propriétaires-artisans pour rénovation avant vente",
+    "category": "immobilier",
+    "score": 70,
+    "scores": {
+      "demande": 17,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 11,
+      "faisabilite": 11
+    },
+    "trend": "+65%",
+    "market": "€310M",
+    "type": "Marketplace",
+    "mentions": 180,
+    "sources": "Reddit, Google Trends, forums immobilier",
+    "problem": "Les propriétaires souhaitant vendre rapidement à bon prix ne savent pas quels travaux prioriser pour maximiser la valeur de revente ni comment trouver rapidement des artisans fiables. Les rénovations mal ciblées font perdre du temps et de l'argent sans réel impact sur le prix de vente. Le manque de coordination entre agents immobiliers et artisans allonge les délais.",
+    "solution": "Plateforme qui recommande par IA les travaux à impact maximal sur le prix de vente selon le marché local, puis met en relation avec des artisans certifiés disponibles rapidement. Cible les propriétaires vendeurs et agences immobilières. Commission de 8% sur les travaux réalisés via la plateforme, plus abonnement B2B pour les agences partenaires.",
+    "competitors": "Travaux.com et Hemea proposent la mise en relation artisans mais sans recommandation IA orientée valorisation de revente. Positionnement de niche encore peu exploité.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 216,
+    "name": "Assistant IA de suivi qualité et réception de chantier par checklist intelligente",
+    "category": "btp",
+    "score": 76,
+    "scores": {
+      "demande": 19,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 12
+    },
+    "trend": "+100%",
+    "market": "€450M",
+    "type": "App mobile",
+    "mentions": 250,
+    "sources": "LinkedIn, Google Trends, forums BTP",
+    "problem": "Les réceptions de chantier sont souvent réalisées de façon peu rigoureuse, entraînant des malfaçons non détectées et des litiges post-livraison entre maîtres d'ouvrage et entreprises. Les checklists papier classiques sont incomplètes et non adaptées à chaque type de projet. Les conducteurs de travaux manquent d'outils standardisés pour documenter précisément l'état de réception.",
+    "solution": "Application qui génère des checklists de réception personnalisées par type de chantier, guide l'utilisateur avec photos annotées par IA pour détecter anomalies visibles, et génère automatiquement le PV de réception. Cible les maîtres d'œuvre, conducteurs de travaux et maîtres d'ouvrage particuliers. Pricing à partir de 39€/mois par utilisateur, licence entreprise sur devis.",
+    "competitors": "Fieldwire et Batiscript proposent du suivi de chantier généraliste mais peu de fonctions spécifiques à la réception avec IA de détection visuelle. Marché de niche avec forte demande non adressée.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 217,
+    "name": "Plateforme IA de gestion prédictive des pénuries de matériaux BTP",
+    "category": "btp",
+    "score": 74,
+    "scores": {
+      "demande": 18,
+      "croissance": 17,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 12
+    },
+    "trend": "+92%",
+    "market": "€560M",
+    "type": "SaaS",
+    "mentions": 220,
+    "sources": "LinkedIn, Google Trends, presse BTP",
+    "problem": "Les entreprises de BTP subissent régulièrement des retards de chantier dus à des pénuries imprévues de matériaux, faute de visibilité sur les tensions d'approvisionnement à venir. La gestion des stocks et commandes reste souvent réactive plutôt que prédictive. Cela génère des surcoûts et des pénalités de retard difficiles à absorber pour les PME du secteur.",
+    "solution": "Plateforme qui analyse les données de marché, tendances de prix et signaux fournisseurs pour prédire les risques de pénurie et recommander les moments optimaux de commande. Cible les entreprises générales de bâtiment et négoces de matériaux. Pricing par abonnement à partir de 149€/mois selon volume d'achats suivis.",
+    "competitors": "Quelques outils de gestion d'approvisionnement génériques existent mais sans spécialisation BTP ni composante prédictive IA. Opportunité claire de différenciation sur ce secteur spécifique.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 218,
+    "name": "Assistant IA de calcul automatique des besoins en main-d'œuvre par chantier",
+    "category": "btp",
+    "score": 71,
+    "scores": {
+      "demande": 17,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 11
+    },
+    "trend": "+78%",
+    "market": "€380M",
+    "type": "SaaS",
+    "mentions": 175,
+    "sources": "LinkedIn, forums BTP, Google Trends",
+    "problem": "Les entreprises du BTP peinent à estimer précisément le nombre d'ouvriers nécessaires par phase de chantier, ce qui entraîne soit du sureffectif coûteux, soit des retards par sous-effectif. Cette estimation repose souvent sur l'expérience personnelle des chefs de chantier, sans outil d'aide à la décision fiable. Les erreurs de dimensionnement impactent directement la rentabilité des projets.",
+    "solution": "Outil qui calcule automatiquement les besoins en main-d'œuvre par corps de métier et par phase à partir des plans et du type de chantier, en s'appuyant sur des données historiques similaires. Cible les entreprises générales et PME du bâtiment de 10 à 100 salariés. Pricing par abonnement à partir de 99€/mois par entreprise.",
+    "competitors": "Les logiciels de gestion de chantier comme Batappli intègrent des fonctions basiques de planification RH mais sans réelle prédiction IA. Positionnement différenciant possible sur la précision des estimations.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 219,
+    "name": "Générateur IA de scripts vidéo courts pour réseaux sociaux B2B",
+    "category": "marketing",
+    "score": 77,
+    "scores": {
+      "demande": 20,
+      "croissance": 19,
+      "concurrence": 14,
+      "monetisation": 12,
+      "faisabilite": 12
+    },
+    "trend": "+140%",
+    "market": "€720M",
+    "type": "SaaS",
+    "mentions": 420,
+    "sources": "Twitter/X, LinkedIn, Google Trends",
+    "problem": "Les entreprises B2B peinent à produire du contenu vidéo court régulier pour LinkedIn et TikTok faute de temps et de compétences en storytelling adapté au format court. La création manuelle de scripts engageants prend des heures et nécessite une expertise marketing rare en interne. Le manque de régularité de publication limite fortement la portée organique sur ces plateformes.",
+    "solution": "Outil qui génère automatiquement des scripts vidéo courts optimisés par plateforme à partir du positionnement de l'entreprise et de l'actualité du secteur, avec suggestions de hooks et structures narratives éprouvées. Cible les équipes marketing B2B de PME et ETI. Pricing à partir de 59€/mois avec quota de scripts, plan agence à 249€/mois.",
+    "competitors": "Copy.ai et Jasper proposent de la génération de contenu générique mais peu spécialisée format vidéo court B2B. Opus Clip se concentre sur le repurposing plutôt que la création originale, laissant un espace pour ce positionnement.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 220,
+    "name": "Plateforme IA de scoring et priorisation automatique des leads B2B",
+    "category": "marketing",
+    "score": 80,
+    "scores": {
+      "demande": 21,
+      "croissance": 19,
+      "concurrence": 15,
+      "monetisation": 13,
+      "faisabilite": 12
+    },
+    "trend": "+110%",
+    "market": "€1.3B",
+    "type": "SaaS",
+    "mentions": 460,
+    "sources": "LinkedIn, Google Trends, Reddit",
+    "problem": "Les équipes commerciales B2B perdent un temps précieux à contacter des leads peu qualifiés, faute de système fiable pour prioriser les prospects les plus susceptibles de convertir. Les CRM classiques offrent un scoring basique basé sur des règles statiques, peu adapté à l'évolution du comportement des prospects. Cela réduit l'efficacité commerciale et augmente le coût d'acquisition client.",
+    "solution": "Plateforme qui analyse en continu les signaux comportementaux (visites site, ouvertures email, engagement réseaux sociaux) pour attribuer un score de conversion dynamique à chaque lead, avec recommandations d'actions commerciales. Cible les équipes sales et marketing B2B de PME et scale-ups. Pricing à partir de 129€/mois selon volume de leads traités, intégration native avec les CRM populaires (HubSpot, Salesforce, Pipedrive).",
+    "competitors": "6sense et Clearbit dominent le segment enterprise avec des prix élevés. Peu de solutions accessibles aux PME avec la même finesse de scoring IA, laissant un espace de marché pour un acteur mid-market.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 221,
+    "name": "Assistant IA de génération automatique de cas clients et témoignages vidéo",
+    "category": "marketing",
+    "score": 69,
+    "scores": {
+      "demande": 16,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 11,
+      "faisabilite": 11
+    },
+    "trend": "+72%",
+    "market": "€290M",
+    "type": "SaaS",
+    "mentions": 160,
+    "sources": "LinkedIn, Google Trends, Product Hunt",
+    "problem": "Les entreprises B2B savent que les témoignages clients sont un levier de conversion puissant mais peinent à en produire régulièrement faute de temps, de budget vidéo et de processus structuré de collecte. Les témoignages écrits classiques génèrent moins de confiance que la vidéo mais restent plus simples à obtenir. Le manque de contenu de preuve sociale limite l'efficacité des pages de vente et campagnes publicitaires.",
+    "solution": "Plateforme qui automatise la collecte de témoignages via un formulaire guidé, transforme les réponses en courtes vidéos avec avatar IA ou montage automatique, et génère plusieurs formats (post LinkedIn, extrait site web, pub). Cible les PME B2B et agences marketing. Pricing à partir de 79€/mois avec quota de témoignages traités par mois.",
+    "competitors": "Testimonial.to et Senja permettent la collecte mais sans transformation vidéo automatisée par IA. Différenciation possible sur l'automatisation complète du format vidéo, encore peu couverte.",
     "weekTrend": "new"
   }
 ];
