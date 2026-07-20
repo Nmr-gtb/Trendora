@@ -76,7 +76,11 @@ async function updateTrends() {
 
   // Demander à Claude de générer les mises à jour
   const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    // claude-sonnet-4 a été retiré le 15/06/2026 (les runs hebdo échouaient en
+    // not_found depuis). Sonnet 5 = remplaçant officiel. Thinking désactivé :
+    // même comportement qu'avant (Sonnet 5 l'active par défaut sinon).
+    model: "claude-sonnet-5",
+    thinking: { type: "disabled" },
     max_tokens: 16000,
     messages: [
       {
@@ -133,7 +137,12 @@ Réponds UNIQUEMENT avec un JSON valide, pas de markdown, pas de texte autour. F
   });
 
   // Parser la réponse
-  const responseText = response.content[0].text.trim();
+  // Chercher le bloc texte par type (ne pas supposer qu'il est en premier).
+  const textBlock = response.content.find((b) => b.type === "text");
+  if (!textBlock) {
+    throw new Error("Réponse Claude sans bloc texte");
+  }
+  const responseText = textBlock.text.trim();
   let updates;
   try {
     updates = JSON.parse(responseText);
