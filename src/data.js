@@ -1,4 +1,4 @@
-export const WEEK_LABEL = "Semaine du 2 novembre 2026";
+export const WEEK_LABEL = "Semaine du 9 novembre 2026";
 
 export const OPPORTUNITIES = [
   {
@@ -65,7 +65,7 @@ export const OPPORTUNITIES = [
     "problem": "Les restaurateurs indépendants jonglent entre gestion des stocks, création de menus, commandes fournisseurs et rentabilité des plats — tout ça souvent sur papier ou Excel. Le gaspillage alimentaire est un problème majeur (10-15% de perte en moyenne). Il n'existe pas d'outil simple et abordable qui combine ces fonctions avec de l'intelligence prédictive.",
     "solution": "Une app qui utilise l'IA pour optimiser toute la chaîne : menus générés selon la saison et les marges, gestion prédictive des stocks pour réduire le gaspillage, commandes fournisseurs automatisées, dashboard de rentabilité par plat en temps réel. Cible : restaurateurs indépendants et petites chaînes. Pricing suggéré : 69€/mois.",
     "competitors": "Quelques outils de gestion (Zenchef, Lightspeed) mais aucun avec IA prédictive sur les stocks et menus.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 4,
@@ -175,7 +175,7 @@ export const OPPORTUNITIES = [
     "problem": "Les délais pour voir un dermatologue en France dépassent souvent 6 mois. Les patients cherchent des réponses en ligne sur des forums peu fiables. Les médecins généralistes manquent d'outils pour le pré-diagnostic dermatologique. Le marché de la télédermatologie explose mais les solutions actuelles manquent de spécialisation.",
     "solution": "Plateforme de pré-diagnostic dermatologique par IA : le patient envoie une photo, l'IA analyse et oriente (urgence, RDV dermato, conseil), connexion avec un réseau de dermatologues pour téléconsultation rapide, suivi de l'évolution des lésions dans le temps. Cible : patients, médecins généralistes, dermatologues. Pricing suggéré : B2B — 149€/mois par cabinet.",
     "competitors": "Quelques acteurs (Skin Analytics, DermoSafe) mais marché francophone quasi vierge.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 9,
@@ -263,7 +263,7 @@ export const OPPORTUNITIES = [
     "problem": "La santé mentale au travail est un sujet en explosion. Les entreprises sont obligées par la loi de prévenir les risques psychosociaux mais n'ont pas d'outils pratiques. Les solutions actuelles (EAP, numéros verts) ont des taux d'utilisation inférieurs à 5% car perçues comme stigmatisantes.",
     "solution": "Un chatbot IA anonyme et confidentiel accessible à tous les salariés : check-in quotidien du bien-être, détection précoce des signaux de détresse, orientation vers les ressources adaptées, dashboard anonymisé pour les RH (tendances, pas de données individuelles). Cible : DRH, entreprises de 50 à 5000 salariés. Pricing suggéré : 3€/salarié/mois.",
     "competitors": "Moka.care, Teale existent mais le marché reste très fragmenté et en forte croissance.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 13,
@@ -307,7 +307,7 @@ export const OPPORTUNITIES = [
     "problem": "Les créateurs de micro-SaaS jonglent entre Stripe, Google Analytics, Crisp et 10 autres outils pour comprendre la santé de leur produit. Aucun dashboard ne centralise MRR, churn, acquisition, support et usage en un seul endroit pour les petits produits.",
     "solution": "Un dashboard tout-en-un pour indie makers : connexion Stripe pour le MRR et churn, intégration analytics pour le trafic, métriques d'usage produit, alertes sur les indicateurs clés, rapport hebdomadaire automatique. Cible : indie hackers et créateurs de micro-SaaS. Pricing suggéré : 19€/mois.",
     "competitors": "Baremetrics et ChartMogul existent mais sont chers et surdimensionnés pour les micro-SaaS.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 15,
@@ -461,7 +461,7 @@ export const OPPORTUNITIES = [
     "problem": "Les apps de nutrition existantes demandent de scanner chaque aliment manuellement. C'est fastidieux, les gens abandonnent après 2 semaines. Les recommandations sont génériques et ne tiennent pas compte des pathologies ou préférences culturelles.",
     "solution": "Une app qui utilise la photo pour identifier les repas, calcule les macros automatiquement, et génère des recommandations personnalisées basées sur les objectifs santé, allergies, préférences culturelles. Coaching IA adaptatif. Cible : personnes soucieuses de leur alimentation. Pricing suggéré : 9.99€/mois.",
     "competitors": "MyFitnessPal domine mais UX datée. L'angle IA + photo + personnalisation est sous-exploité.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 22,
@@ -593,7 +593,7 @@ export const OPPORTUNITIES = [
     "problem": "Quand un patient reçoit un diagnostic grave ou incertain, obtenir un second avis médical est long (6-12 semaines), coûteux et compliqué.",
     "solution": "Une plateforme de second avis : le patient upload son dossier médical, l'IA pré-analyse et oriente vers le bon spécialiste, le médecin rend son avis sous 48-72h. Cible : patients, mutuelles. Pricing suggéré : 150-300€ par avis.",
     "competitors": "Deuxième Avis existe mais le marché reste embryonnaire en France.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 28,
@@ -637,7 +637,7 @@ export const OPPORTUNITIES = [
     "problem": "Les investisseurs immobiliers débutants ne savent pas évaluer la rentabilité réelle d'un bien.",
     "solution": "Un simulateur avancé : estimation du rendement net-net, simulation fiscale (LMNP, Pinel, SCI), projection sur 10-20 ans. Cible : investisseurs particuliers. Pricing suggéré : freemium, 14.99€/mois premium.",
     "competitors": "Quelques simulateurs basiques en ligne mais aucun avec IA et données marché intégrées.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 30,
@@ -747,7 +747,7 @@ export const OPPORTUNITIES = [
     "problem": "Les SCI familiales n'ont aucun outil adapté.",
     "solution": "Un outil dédié SCI : comptabilité simplifiée, suivi de rentabilité par bien. Cible : gérants de SCI. Pricing suggéré : 19€/mois par SCI.",
     "competitors": "Les logiciels comptables classiques ne gèrent pas les spécificités SCI.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 35,
@@ -813,7 +813,7 @@ export const OPPORTUNITIES = [
     "problem": "La RE2020 impose de nouvelles normes thermiques et carbone.",
     "solution": "Un outil simplifié : caractéristiques du projet → calcul conformité. Cible : constructeurs, architectes. Pricing suggéré : 79€/mois.",
     "competitors": "Pleiades, ClimaWin sont complexes et chers. Pas d'offre simplifiée IA.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 38,
@@ -967,7 +967,7 @@ export const OPPORTUNITIES = [
     "problem": "Lancer et maintenir une newsletter demande énormément de travail.",
     "solution": "Suggestion de sujets tendance, rédaction assistée avec le ton de l'auteur. Cible : créateurs, solopreneurs. Pricing suggéré : 15€/mois.",
     "competitors": "Substack et Beehiiv dominent la distribution. L'angle création IA est le différenciateur.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 45,
@@ -1143,7 +1143,7 @@ export const OPPORTUNITIES = [
     "problem": "Les hôpitaux et cliniques perdent des millions d'euros chaque année à cause de pannes d'équipements médicaux critiques imprévisibles. Les coûts de maintenance curative sont 3x plus élevés que la maintenance préventive, et les arrêts d'équipements impactent directement la qualité des soins. Les équipes techniques manquent de visibilité sur l'état réel des machines et planifient mal leur maintenance.",
     "solution": "Plateforme SaaS qui connecte les équipements médicaux via IoT et utilise l'IA pour prédire les pannes avant qu'elles surviennent. Cible les établissements de santé de 50+ lits avec un pricing de 200-500€/mois par équipement connecté. L'outil analyse les données de fonctionnement, alerte en cas d'anomalie et optimise la planification de maintenance. ROI démontrable de 30-40% sur les coûts de maintenance et réduction de 60% des pannes imprévues.",
     "competitors": "Marché encore émergent avec quelques acteurs comme Philips HealthSuite mais principalement sur leurs propres équipements. Peu de solutions cross-constructeurs abordables pour les établissements moyens.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 53,
@@ -1275,7 +1275,7 @@ export const OPPORTUNITIES = [
     "problem": "Les développeurs détestent écrire la documentation et elle devient rapidement obsolète. 70% des projets open source et internes manquent de docs à jour. Les équipes perdent des heures à comprendre du code legacy ou des APIs mal documentées.",
     "solution": "IA qui analyse le code en temps réel et génère automatiquement la documentation technique, les README, et les guides API. Met à jour automatiquement quand le code change. Intégration GitHub/GitLab native. Pricing par repo : 15€/mois pour les projets privés, gratuit pour l'open source. Cible les équipes tech de 5-50 personnes.",
     "competitors": "GitBook et Notion existent mais nécessitent écriture manuelle. Mintlify et Gitiles sont émergents mais focalisés sur l'API doc uniquement.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 59,
@@ -1341,7 +1341,7 @@ export const OPPORTUNITIES = [
     "problem": "La formation chirurgicale manque de cas pratiques sûrs et répétables. Les internes ont moins d'accès aux blocs opératoires depuis COVID. Les erreurs médicales coûtent 1.4M€/an par hôpital en moyenne. Les simulateurs actuels coûtent 100k€+ et sont peu réalistes.",
     "solution": "Plateforme VR de simulation chirurgicale avec haptic feedback, cas cliniques variés et analytics de performance. Modules spécialisés par discipline, évaluation automatique des gestes. Compatible casques VR standard. Pricing par siège : 299€/mois par étudiant en médecine, 499€/mois par praticien. Cible les facultés de médecine et centres hospitaliers.",
     "competitors": "3D Systems et CAE Healthcare dominent mais très chers. FundamentalVR et Immersive Touch émergent. Osso VR focalisé orthopédie.",
-    "weekTrend": "up"
+    "weekTrend": "stable"
   },
   {
     "id": 62,
@@ -1957,7 +1957,7 @@ export const OPPORTUNITIES = [
     "problem": "L'optimisation des bases de données nécessite une expertise pointue que beaucoup d'équipes n'ont pas. Les performances dégradées coûtent cher en infrastructure et impactent l'expérience utilisateur. Les DBA seniors sont rares et chers, créant un goulot d'étranglement pour les équipes de développement.",
     "solution": "Agent IA qui analyse automatiquement les performances des bases de données (PostgreSQL, MySQL, MongoDB) et propose des optimisations concrètes : index manquants, requêtes lentes, restructuration de schéma. Installation simple via agent, recommandations avec impact estimé et application automatisée optionnelle. Pricing 79€/mois par base de données, 199€/mois pour les fonctionnalités d'optimisation automatique. Cible les développeurs fullstack et les équipes tech des PME.",
     "competitors": "Outils traditionnels comme pgAdmin et MySQL Workbench mais sans IA. SolarWinds Database Performance Analyzer existe but ciblé entreprise avec pricing élevé.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 90,
@@ -2221,7 +2221,7 @@ export const OPPORTUNITIES = [
     "problem": "Créer des funnels de vente efficaces sur Instagram, TikTok et Facebook demande de maîtriser de nombreux outils disparates et codes spécifiques à chaque plateforme. Les créateurs et petites entreprises perdent des prospects par manque de suivi automatisé. L'optimisation manuelle des campagnes est chronophage.",
     "solution": "Plateforme qui génère automatiquement des funnels de vente complets adaptés à chaque réseau social : landing pages mobile-first, séquences d'emails, retargeting publicitaire, chatbots de qualification. IA qui optimise les conversions en testant différents messages et timing. Intégration native avec Meta, TikTok et LinkedIn Ads. Pricing 47€/mois jusqu'à 1000 leads, 97€/mois illimité. Cible les créateurs de contenu, coachs en ligne et e-commerces débutant sur les réseaux sociaux.",
     "competitors": "ClickFunnels domine mais peu adapté aux réseaux sociaux. ManyChat pour les chatbots mais pas de vision funnel globale. Opportunité sur l'intégration cross-platform.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 102,
@@ -2947,7 +2947,7 @@ export const OPPORTUNITIES = [
     "problem": "Les équipes veulent automatiser leurs workflows Slack/Teams (notifications, rapports, intégrations) mais Zapier est trop complexe. 70% des tentatives d'automatisation échouent par manque de compétences techniques. Les développeurs n'ont pas le temps pour des 'petites automatisations'.",
     "solution": "Interface conversationnelle où les utilisateurs décrivent leur besoin en langage naturel ('Envoie un résumé des tickets Jira chaque lundi'). L'IA génère automatiquement l'automatisation et l'installe. Templates pré-construits pour cas d'usage courants. Pricing : 29€/mois pour 10 automatisations, 79€ illimité. Cible : équipes product, customer success, RH dans PME/startups.",
     "competitors": "Zapier trop complexe, Microsoft Power Automate limité. Slack Workflow Builder basique sans IA.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 135,
@@ -3431,7 +3431,7 @@ export const OPPORTUNITIES = [
     "problem": "80% des chantiers accusent des retards, impactant budgets et relations client. Les causes sont multiples : météo, retards d'approvisionnement, absences équipes. Les chefs de chantier manquent de visibilité pour anticiper et réagir rapidement aux aléas.",
     "solution": "IA qui agrège données météo, planning livraisons, disponibilités équipes pour prédire les risques de retard 15 jours à l'avance. Alertes automatiques et suggestions de réorganisation. Dashboard temps réel pour promoteurs et maîtres d'ouvrage. Cible entreprises BTP 20-200 salariés. Abonnement 399€/mois par chantier actif.",
     "competitors": "Quelques logiciels de planning existent (Projeqtor) mais sans IA prédictive pour anticiper les aléas multi-facteurs.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 157,
@@ -4421,7 +4421,7 @@ export const OPPORTUNITIES = [
     "problem": "Les coûts énergétiques représentent 15-25% des coûts de chantier et fluctuent énormément. Les entreprises BTP négocient individuellement avec des tarifs défavorables. La consommation énergétique des chantiers est mal optimisée faute d'outils de suivi. Les achats groupés d'énergie sont complexes à organiser entre entreprises.",
     "solution": "Plateforme qui regroupe les besoins énergétiques des chantiers BTP pour négocier des tarifs préférentiels et optimise la consommation via IA prédictive. Cible entreprises BTP et maîtres d'ouvrage (commission 3-5% + abonnement €299-999/mois). Monitoring temps réel des consommations et alertes de dérive. Intégration avec équipements connectés de chantier.",
     "competitors": "Marché émergent avec quelques acteurs comme Opéra Energie mais pas de focus BTP spécifique. Réglementation énergétique de plus en plus contraignante.",
-    "weekTrend": "stable"
+    "weekTrend": "up"
   },
   {
     "id": 202,
@@ -8476,7 +8476,7 @@ export const OPPORTUNITIES = [
     "problem": "Les fondateurs de startups perdent énormément de temps à préparer des dossiers de financement (business plan, pitch deck, projections financières) pour banques et investisseurs. Les données sont dispersées entre tableurs, CRM et outils comptables. Chaque demande nécessite une adaptation manuelle fastidieuse. Les erreurs ou incohérences dans ces dossiers réduisent les chances de succès.",
     "solution": "Plateforme qui connecte les outils comptables et CRM du fondateur pour générer automatiquement des dossiers de financement personnalisés selon le destinataire (banque, VC, BPI). Génère pitch deck, prévisionnel et executive summary cohérents en quelques clics. Ciblage : startups early-stage et PME en levée de fonds, pricing freemium avec abonnement à 79€/mois pour fonctionnalités avancées. Intègre un module de suivi des relances investisseurs.",
     "competitors": "Quelques outils de pitch deck existent (Beautiful.ai, Slidebean) mais aucun ne combine génération financière et narrative automatisée à partir de données réelles. Différenciation par l'intégration directe aux outils comptables.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 387,
@@ -8498,7 +8498,7 @@ export const OPPORTUNITIES = [
     "problem": "Les entreprises utilisant des infrastructures cloud multi-fournisseurs subissent régulièrement des factures anormalement élevées dues à des erreurs de configuration, ressources oubliées ou pics non anticipés. Ces anomalies passent souvent inaperçues pendant plusieurs semaines. Les équipes finops manquent d'outils temps réel pour les détecter avant impact budgétaire majeur.",
     "solution": "Outil qui surveille en continu les dépenses cloud (AWS, GCP, Azure) et alerte automatiquement en cas d'anomalie via IA de détection de patterns. Propose des actions correctives priorisées par impact financier. Cible les équipes finops et DevOps de PME/ETI tech, pricing basé sur un pourcentage des économies réalisées ou abonnement à partir de 150€/mois. Intégration Slack/Teams pour alertes instantanées.",
     "competitors": "CloudHealth et Vantage existent mais sont orientés grandes entreprises avec setup complexe. Opportunité sur le segment PME avec une solution plug-and-play et pricing simplifié.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 388,
@@ -8520,7 +8520,7 @@ export const OPPORTUNITIES = [
     "problem": "Les équipes qui exposent des APIs doivent maintenir manuellement des SDK dans plusieurs langages (Python, JS, Go, Java), ce qui représente une charge de maintenance importante et des incohérences fréquentes entre versions. Les petites équipes n'ont pas les ressources pour ce travail répétitif. Cela freine l'adoption de leurs APIs par les développeurs tiers.",
     "solution": "Plateforme qui génère et maintient automatiquement des SDK synchronisés à partir d'une spécification OpenAPI, avec mise à jour continue via CI/CD. Cible les startups API-first et plateformes SaaS avec écosystème développeur, pricing à partir de 99€/mois selon nombre de langages. Inclut documentation générée et exemples de code testés automatiquement.",
     "competitors": "Speakeasy et Stainless sont positionnés sur ce créneau mais avec coûts élevés pour PME. Opportunité sur un tarif plus accessible et simplicité d'intégration pour petites équipes.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 389,
@@ -8542,7 +8542,7 @@ export const OPPORTUNITIES = [
     "problem": "Les patients ayant subi une chirurgie bariatrique nécessitent un suivi pluridisciplinaire long et complexe (nutritionniste, psychologue, chirurgien) souvent mal coordonné entre professionnels. Le manque de suivi régulier augmente le risque de reprise de poids ou de complications. Les hôpitaux manquent de ressources pour un suivi personnalisé à long terme.",
     "solution": "Application qui coordonne le parcours de soins post-opératoire avec rappels personnalisés, questionnaires de suivi symptômes et mise en relation directe avec l'équipe soignante concernée. Cible cliniques spécialisées en chirurgie bariatrique et mutuelles, pricing B2B2C avec abonnement clinique à partir de 500€/mois. Intègre un module de coaching nutritionnel IA complémentaire.",
     "competitors": "Quelques applications génériques de suivi post-opératoire existent mais aucune spécialisée en bariatrie avec coordination multi-professionnelle. Avantage concurrentiel par la spécialisation et les partenariats cliniques.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 390,
@@ -8564,7 +8564,7 @@ export const OPPORTUNITIES = [
     "problem": "La perte auditive progressive touche des millions de personnes mais reste sous-diagnostiquée faute de dépistage accessible et régulier. Les tests auditifs classiques nécessitent un rendez-vous chez un audioprothésiste, souvent évité par les patients par méconnaissance ou coût. Le diagnostic tardif aggrave les conséquences cognitives et sociales de la perte auditive.",
     "solution": "Application qui réalise un dépistage auditif via des tests sonores calibrés sur smartphone, avec analyse IA des résultats et orientation vers un spécialiste si nécessaire. Cible grand public 50+ et mutuelles pour campagnes de prévention, modèle freemium avec rapport détaillé payant à 9,99€. Partenariats envisagés avec audioprothésistes pour prise de rendez-vous directe.",
     "competitors": "Quelques apps comme Mimi Hearing Test existent mais peu intégrées à un parcours de soin complet. Différenciation par l'orientation vers spécialistes et le suivi longitudinal.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 391,
@@ -8586,7 +8586,7 @@ export const OPPORTUNITIES = [
     "problem": "Les collectivités peinent à trouver rapidement des logements temporaires pour personnes en situation d'urgence sociale (hébergement d'urgence, relogement post-sinistre). Les propriétaires de biens vacants ignorent souvent les dispositifs incitatifs disponibles. Le processus de mise en relation reste largement manuel et chronophage pour les services sociaux.",
     "solution": "Plateforme qui met en relation propriétaires de logements vacants avec collectivités et associations pour du logement social temporaire, avec garanties de loyer et avantages fiscaux mis en avant automatiquement. Cible municipalités, CCAS et propriétaires bailleurs, commission de 5% sur les baux signés ou abonnement collectivité. Inclut un module de gestion administrative simplifiée.",
     "competitors": "Dispositifs publics existent (Louez Solidaire) mais digitalisation limitée. Opportunité sur une plateforme nationale unifiée avec expérience utilisateur moderne.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 392,
@@ -8608,7 +8608,7 @@ export const OPPORTUNITIES = [
     "problem": "Les investisseurs immobiliers particuliers naviguent difficilement entre les régimes fiscaux disponibles (LMNP, SCI IS, nue-propriété, déficit foncier) sans toujours identifier l'option la plus avantageuse pour leur situation. Les erreurs de choix fiscal peuvent coûter plusieurs milliers d'euros par an. Les conseils de professionnels restent coûteux et peu accessibles pour les petits investisseurs.",
     "solution": "Outil qui simule automatiquement l'impact fiscal de chaque régime selon le profil et le patrimoine de l'investisseur, avec recommandation personnalisée et projection sur 10 ans. Cible investisseurs locatifs particuliers et primo-investisseurs, pricing à 29€ par simulation ou abonnement annuel à 149€. Mise à jour automatique selon évolutions législatives.",
     "competitors": "Des simulateurs génériques existent chez certains courtiers mais sans granularité suffisante. Avantage par la précision du calcul et la clarté des recommandations actionnables.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 393,
@@ -8630,7 +8630,7 @@ export const OPPORTUNITIES = [
     "problem": "Les propriétaires hésitent à engager des travaux de rénovation sans savoir précisément quel retour sur investissement cela générera à la revente. Les estimations actuelles sont approximatives et ne tiennent pas compte du marché local spécifique. Cela mène à des décisions de rénovation sous-optimales ou à des dépenses excessives sans gain de valeur correspondant.",
     "solution": "Outil qui simule l'impact financier de différents types de travaux (cuisine, salle de bain, isolation, extension) sur la valeur de revente selon la localisation précise du bien. Cible propriétaires vendeurs et agents immobiliers conseillant leurs clients, pricing freemium avec rapport détaillé à 19€. Utilise des données de transactions comparables en temps réel.",
     "competitors": "Quelques calculateurs génériques existent chez les enseignes de bricolage mais sans granularité géographique. Différenciation par la précision locale et la fiabilité des données.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 394,
@@ -8652,7 +8652,7 @@ export const OPPORTUNITIES = [
     "problem": "La planification du grutage sur chantier reste souvent approximative, menant à des sous-dimensionnements ou surcoûts de location de grues. Les conducteurs de travaux manquent d'outils pour calculer précisément les besoins selon le phasage et les charges à lever. Les erreurs de planification engendrent des retards coûteux et des risques de sécurité.",
     "solution": "Outil qui calcule automatiquement les besoins en grutage selon les plans de chantier, le poids des éléments à lever et les contraintes d'accès, avec recommandation de type et capacité de grue optimale. Cible conducteurs de travaux et entreprises de gros œuvre, pricing à l'abonnement chantier à 99€/mois ou par projet. Intègre comparateur de loueurs de grues partenaires.",
     "competitors": "Peu d'outils spécialisés existent, le calcul se fait généralement manuellement par les bureaux d'études. Opportunité forte de digitalisation d'un processus encore artisanal.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 395,
@@ -8674,7 +8674,7 @@ export const OPPORTUNITIES = [
     "problem": "Le secteur du BTP souffre d'une pénurie chronique de main-d'œuvre qualifiée, notamment chez les jeunes apprentis mal orientés vers des entreprises adaptées à leur profil. Les CFA et entreprises manquent d'outils pour matcher efficacement compétences et besoins réels de terrain. Le taux d'abandon en apprentissage BTP reste élevé faute de bon matching initial.",
     "solution": "Plateforme qui met en relation apprentis et entreprises du BTP selon compétences, localisation et spécialité, avec suivi de progression des compétences via l'IA pendant l'apprentissage. Cible CFA, entreprises artisanales et grands groupes BTP, pricing par abonnement entreprise à 150€/mois ou commission sur placement. Partenariats envisagés avec les branches professionnelles.",
     "competitors": "Des plateformes génériques d'apprentissage existent (Jobready, L'Etudiant) mais peu spécialisées BTP avec suivi de compétences terrain. Avantage par la spécialisation sectorielle complète.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 396,
@@ -8696,7 +8696,7 @@ export const OPPORTUNITIES = [
     "problem": "Les particuliers ayant des travaux de rénovation reçoivent des devis difficiles à comparer et comprennent mal les postes de coûts cachés ou surévalués. Cela mène à des litiges fréquents avec les artisans et un sentiment de défiance généralisé envers le secteur. Les consommateurs manquent d'outils objectifs pour valider la cohérence d'un devis avant signature.",
     "solution": "Outil qui analyse automatiquement les devis de rénovation uploadés par le particulier et détecte les anomalies de prix par rapport aux moyennes du marché local, avec alerte sur postes suspects. Cible particuliers en projet de rénovation, pricing à 15€ par analyse de devis ou abonnement courtage à 39€/mois. Partenariats envisagés avec associations de consommateurs.",
     "competitors": "Quelques comparateurs de devis existent (Travaux.com) mais sans analyse approfondie poste par poste. Différenciation par l'analyse IA détaillée et objective.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 397,
@@ -8718,7 +8718,7 @@ export const OPPORTUNITIES = [
     "problem": "Les éditeurs de sites d'affiliation et comparateurs passent énormément de temps à rédiger et mettre à jour du contenu comparatif produit, souvent dépassé rapidement par les évolutions de prix et caractéristiques. La qualité du contenu généré manuellement est inégale et chronophage à maintenir à grande échelle. Les mises à jour de données produit en temps réel restent un défi majeur.",
     "solution": "Plateforme qui génère automatiquement du contenu comparatif optimisé SEO à partir de flux de données produits, avec mise à jour continue des prix et caractéristiques. Cible éditeurs affiliés et comparateurs de prix, pricing à l'abonnement selon volume de contenu à partir de 199€/mois. Inclut module d'optimisation SEO et de détection de contenu dupliqué.",
     "competitors": "Des outils de génération de contenu IA généralistes existent (Jasper, Copy.ai) mais peu spécialisés sur le format comparatif avec données produit dynamiques. Avantage par la spécialisation verticale.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 398,
@@ -8740,7 +8740,7 @@ export const OPPORTUNITIES = [
     "problem": "Les créateurs de contenu et community managers peinent à identifier les meilleurs moments de publication spécifiques à leur audience, au-delà des recommandations génériques des plateformes. Les algorithmes des réseaux sociaux évoluent constamment, rendant les stratégies de timing rapidement obsolètes. Un mauvais timing de publication peut réduire la portée organique de 50% ou plus.",
     "solution": "Outil qui analyse en continu les patterns d'engagement spécifiques de chaque compte et recommande les créneaux de publication optimaux en temps réel, avec ajustement automatique selon les évolutions d'algorithme détectées. Cible créateurs de contenu et PME avec présence social media active, pricing freemium avec abonnement pro à 29€/mois. Intégration directe avec Buffer, Hootsuite et Later.",
     "competitors": "Buffer et Hootsuite proposent déjà des recommandations basiques de timing. Différenciation par la précision de l'analyse comportementale propre à chaque audience et la détection proactive des changements d'algorithme.",
-    "weekTrend": "new"
+    "weekTrend": "stable"
   },
   {
     "id": 399,
@@ -8762,6 +8762,336 @@ export const OPPORTUNITIES = [
     "problem": "Les infopreneurs et formateurs en ligne passent des dizaines d'heures à concevoir des scripts de webinaires evergreen performants pour la vente de formations. La structure narrative optimale pour maximiser les conversions nécessite une expertise marketing souvent absente chez les créateurs de contenu indépendants. Les scripts génériques sous-performent faute de personnalisation à l'offre et l'audience spécifique.",
     "solution": "Plateforme qui génère des scripts de webinaires de vente structurés selon des frameworks éprouvés (PASTOR, Perfect Webinar), personnalisés à l'offre et l'audience cible du créateur. Cible infopreneurs, coachs et formateurs en ligne, pricing à 49€ par script ou abonnement illimité à 79€/mois. Inclut suggestions d'optimisation basées sur les taux de conversion moyens du secteur.",
     "competitors": "Des outils génériques de copywriting IA existent (Copy.ai, Jasper) mais aucun spécialisé sur le format webinaire de vente avec frameworks éprouvés intégrés. Avantage par la spécialisation et les templates orientés conversion.",
+    "weekTrend": "stable"
+  },
+  {
+    "id": 400,
+    "name": "Assistant IA de génération automatique de rapports de conformité NIS2 pour PME",
+    "category": "tech",
+    "score": 76,
+    "scores": {
+      "demande": 19,
+      "croissance": 20,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 10
+    },
+    "trend": "+140%",
+    "market": "€890M",
+    "type": "SaaS",
+    "mentions": 520,
+    "sources": "LinkedIn, Google Trends, forums cybersécurité",
+    "problem": "La directive NIS2 impose de nouvelles obligations de cybersécurité à des milliers de PME européennes dès 2025, mais la plupart n'ont ni budget ni équipe dédiée pour comprendre et appliquer ces exigences. Les cabinets de conseil spécialisés sont saturés et coûteux. Les PME risquent des sanctions financières lourdes sans accompagnement adapté. Le flou réglementaire autour du périmètre d'application crée une anxiété généralisée chez les dirigeants IT.",
+    "solution": "Plateforme SaaS qui analyse l'infrastructure IT de l'entreprise via questionnaire et connecteurs, puis génère automatiquement un rapport de conformité NIS2 avec plan d'action priorisé. Cible les PME de 50 à 500 salariés dans les secteurs critiques et importants. Pricing en abonnement 199-599€/mois selon la taille. Inclut un suivi trimestriel automatisé des mises à jour réglementaires.",
+    "competitors": "Quelques cabinets de conseil traditionnels proposent des audits manuels coûteux (10-30k€). Des solutions génériques GRC existent mais ne sont pas spécialisées NIS2. Peu d'acteurs 100% IA et abordables sur ce segment naissant.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 401,
+    "name": "Plateforme IA de détection automatique des risques de dépendance aux écrans chez les ados",
+    "category": "tech",
+    "score": 63,
+    "scores": {
+      "demande": 16,
+      "croissance": 17,
+      "concurrence": 14,
+      "monetisation": 9,
+      "faisabilite": 7
+    },
+    "trend": "+95%",
+    "market": "€340M",
+    "type": "App mobile",
+    "mentions": 310,
+    "sources": "Reddit, TikTok, études parentalité",
+    "problem": "Les parents sont de plus en plus inquiets de la dépendance aux écrans et réseaux sociaux de leurs adolescents, sans outils fiables pour objectiver le problème au-delà du simple temps d'écran. Les applications de contrôle parental existantes se concentrent sur le blocage plutôt que la compréhension des patterns comportementaux à risque. Les professionnels de santé manquent de données structurées pour orienter leurs recommandations.",
+    "solution": "Application qui analyse les patterns d'usage du smartphone (fréquence, horaires, types d'interactions) pour générer un score de risque de dépendance et des recommandations personnalisées pour parents et ados. Cible les familles avec abonnement freemium à 9,99€/mois pour les fonctionnalités avancées. Partenariats envisagés avec pédopsychiatres et établissements scolaires.",
+    "competitors": "Qustodio et Family Link dominent le contrôle parental mais sans analyse comportementale poussée. Peu de solutions se positionnent spécifiquement sur la détection de dépendance avec approche clinique.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 402,
+    "name": "Plateforme IA de génération automatique de rapports de durabilité CSRD pour PME",
+    "category": "tech",
+    "score": 79,
+    "scores": {
+      "demande": 21,
+      "croissance": 21,
+      "concurrence": 14,
+      "monetisation": 13,
+      "faisabilite": 10
+    },
+    "trend": "+160%",
+    "market": "€1.1B",
+    "type": "SaaS",
+    "mentions": 610,
+    "sources": "LinkedIn, Google Trends, presse économique",
+    "problem": "La directive CSRD élargit progressivement l'obligation de reporting extra-financier à des milliers d'entreprises de taille moyenne qui n'ont ni expertise ni outils pour collecter et structurer les données ESG requises. Les consultants spécialisés sont rares et facturent des prestations très onéreuses. Les PME sous-traitantes de grands groupes subissent une pression croissante pour fournir ces données sans en avoir la capacité.",
+    "solution": "SaaS qui collecte automatiquement les données ESG via intégrations (RH, achats, énergie) et génère un rapport CSRD conforme avec IA, incluant double matérialité et indicateurs sectoriels. Cible les ETI et PME de la chaîne de sous-traitance, abonnement annuel 3000-12000€ selon la taille. Mises à jour automatiques selon évolutions réglementaires.",
+    "competitors": "Grands cabinets (Deloitte, EY) et solutions comme Sweep ou Greenly couvrent le haut du marché. Peu d'offres abordables et automatisées pour le segment PME/ETI.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 403,
+    "name": "Plateforme IA de coordination du parcours de soins pour patients atteints d'endométriose",
+    "category": "sante",
+    "score": 68,
+    "scores": {
+      "demande": 18,
+      "croissance": 17,
+      "concurrence": 15,
+      "monetisation": 9,
+      "faisabilite": 9
+    },
+    "trend": "+110%",
+    "market": "€420M",
+    "type": "App mobile + B2B2C",
+    "mentions": 380,
+    "sources": "Reddit, Instagram, associations patientes",
+    "problem": "Le parcours de diagnostic de l'endométriose prend en moyenne 7 ans en France faute de coordination entre gynécologues, radiologues et chirurgiens spécialisés. Les patientes naviguent seules entre spécialistes sans suivi centralisé de leurs symptômes et traitements. Les praticiens manquent d'historique structuré pour ajuster les prises en charge complexes et multidisciplinaires.",
+    "solution": "Application de suivi des symptômes et douleurs chroniques couplée à une plateforme de mise en relation avec des centres experts labellisés, facilitant le partage de dossier entre spécialistes. Modèle freemium pour les patientes et abonnement B2B pour les centres de santé (490€/mois). Génère des rapports structurés pour accélérer les diagnostics.",
+    "competitors": "Applications généralistes de suivi des règles comme Clue intègrent des fonctionnalités basiques mais sans coordination médicale. Peu de solutions spécialisées sur la coordination multidisciplinaire de l'endométriose.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 404,
+    "name": "Assistant IA de dépistage précoce de la dépression post-partum par analyse vocale et textuelle",
+    "category": "sante",
+    "score": 71,
+    "scores": {
+      "demande": 18,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 10,
+      "faisabilite": 10
+    },
+    "trend": "+105%",
+    "market": "€510M",
+    "type": "App mobile B2B2C",
+    "mentions": 290,
+    "sources": "Reddit, études santé publique, Google Trends",
+    "problem": "La dépression post-partum touche 1 mère sur 6 mais reste sous-diagnostiquée faute de temps médical et de suivi régulier dans les premiers mois après l'accouchement. Les questionnaires papier type EPDS sont peu utilisés en routine par manque de temps des sages-femmes et médecins. Le délai entre apparition des symptômes et prise en charge aggrave souvent la situation clinique et familiale.",
+    "solution": "Application mobile qui analyse de courts enregistrements vocaux hebdomadaires et réponses textuelles pour détecter des signaux précoces de détresse psychologique, avec alerte automatique au professionnel de santé référent. Déployée via maternités et PMI en marque blanche, pricing B2B2C à 2€/patiente/mois. Intègre des ressources d'auto-aide et orientation vers des psychologues partenaires.",
+    "competitors": "Quelques apps de bien-être mental généralistes existent mais aucune spécialisée post-partum avec détection vocale. Le dépistage reste majoritairement manuel via questionnaires papier.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 405,
+    "name": "Plateforme IA de matching patients-essais cliniques pour maladies rares pédiatriques",
+    "category": "sante",
+    "score": 65,
+    "scores": {
+      "demande": 15,
+      "croissance": 17,
+      "concurrence": 16,
+      "monetisation": 9,
+      "faisabilite": 8
+    },
+    "trend": "+88%",
+    "market": "€280M",
+    "type": "Plateforme B2B2C",
+    "mentions": 180,
+    "sources": "Forums associations de patients, LinkedIn santé",
+    "problem": "Les familles d'enfants atteints de maladies rares passent des années à chercher des essais cliniques pertinents, dispersés entre registres internationaux peu accessibles et mal indexés. Les centres de référence manquent de temps pour effectuer cette veille systématique pour chaque patient. Les laboratoires peinent à recruter suffisamment de participants pour leurs essais, retardant les développements thérapeutiques.",
+    "solution": "Plateforme qui croise le profil génétique et clinique de l'enfant avec les bases d'essais cliniques mondiaux (ClinicalTrials.gov, EU Clinical Trials) pour proposer un matching pertinent et actualisé automatiquement. Gratuit pour les familles, monétisé via abonnement aux centres hospitaliers et laboratoires pharmaceutiques pour le recrutement facilité. Alertes en temps réel sur nouveaux essais correspondants.",
+    "competitors": "Registres publics existent mais sans matching intelligent ni alertes personnalisées. Quelques startups US comme TrialJectory existent mais peu de solutions francophones spécialisées pédiatrie.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 406,
+    "name": "Plateforme IA d'estimation automatique du potentiel de surélévation et extension immobilière",
+    "category": "immobilier",
+    "score": 73,
+    "scores": {
+      "demande": 19,
+      "croissance": 18,
+      "concurrence": 14,
+      "monetisation": 12,
+      "faisabilite": 10
+    },
+    "trend": "+125%",
+    "market": "€650M",
+    "type": "SaaS B2C/B2B",
+    "mentions": 410,
+    "sources": "Google Trends, forums propriétaires, agences immo",
+    "problem": "Face à la pression foncière, de plus en plus de propriétaires envisagent la surélévation ou l'extension plutôt que le déménagement, mais ignorent la faisabilité réglementaire (PLU, droits à construire) et financière de leur projet. Les études préliminaires par architecte coûtent 1500-3000€ sans garantie de faisabilité. Les promoteurs peinent aussi à identifier rapidement les biens à fort potentiel de surélévation en zone tendue.",
+    "solution": "Plateforme qui croise adresse cadastrale, règles d'urbanisme locales et données structurelles pour générer instantanément un rapport de faisabilité de surélévation/extension avec estimation de coûts et gain de valeur. Pricing freemium 0€ pour rapport basique, 49€ pour rapport détaillé avec simulation financière. Version B2B pour promoteurs en marketplace de leads qualifiés.",
+    "competitors": "Quelques simulateurs généralistes d'urbanisme existent (ex: Dromofol) mais sans spécialisation surélévation ni dimension financière intégrée.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 407,
+    "name": "Marketplace IA de mise en relation propriétaires-porteurs de projets d'habitat partagé senior",
+    "category": "immobilier",
+    "score": 62,
+    "scores": {
+      "demande": 15,
+      "croissance": 16,
+      "concurrence": 14,
+      "monetisation": 9,
+      "faisabilite": 8
+    },
+    "trend": "+78%",
+    "market": "€310M",
+    "type": "Marketplace",
+    "mentions": 220,
+    "sources": "Forums seniors, associations habitat partagé",
+    "problem": "Le vieillissement de la population pousse de nombreux seniors à chercher des solutions d'habitat partagé pour rompre l'isolement, mais l'offre reste fragmentée entre colocations informelles et résidences services coûteuses. Les porteurs de projets associatifs d'habitat partagé peinent à trouver des biens adaptés et des financements. Les propriétaires de grandes maisons sous-occupées ignorent souvent cette option de valorisation sociale et économique.",
+    "solution": "Marketplace qui met en relation propriétaires de biens adaptables avec porteurs de projets d'habitat partagé senior (associations, futurs colocataires), incluant matching de compatibilité et accompagnement juridique simplifié. Commission de 3% sur les transactions facilitées plus abonnement pour les associations porteuses de projets. Partenariats avec collectivités locales pour subventionner l'accompagnement.",
+    "competitors": "Quelques réseaux associatifs comme Cohabilis existent mais sans plateforme digitale de matching automatisé à grande échelle.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 408,
+    "name": "Assistant IA d'optimisation du choix entre LMNP, SCI et nue-propriété pour investisseurs",
+    "category": "immobilier",
+    "score": 70,
+    "scores": {
+      "demande": 18,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 12,
+      "faisabilite": 9
+    },
+    "trend": "+92%",
+    "market": "€480M",
+    "type": "SaaS B2C",
+    "mentions": 350,
+    "sources": "Forums investissement, Google Trends",
+    "problem": "Les investisseurs immobiliers particuliers naviguent dans un maquis de statuts fiscaux (LMNP, SCI IS/IR, nue-propriété, déficit foncier) sans comprendre quelle structure optimise réellement leur situation personnelle. Les conseils de gestionnaires de patrimoine sont coûteux et parfois biaisés par des commissions sur produits. Une mauvaise structuration fiscale initiale peut coûter des milliers d'euros sur la durée de l'investissement.",
+    "solution": "Simulateur qui analyse la situation fiscale et patrimoniale complète de l'investisseur pour recommander la structure juridique et fiscale optimale selon ses objectifs (revenus, transmission, plus-value). Pricing one-shot 79€ pour simulation complète ou abonnement 19€/mois avec mises à jour fiscales annuelles. Partenariats d'affiliation avec notaires et experts-comptables pour la mise en œuvre.",
+    "competitors": "Des simulateurs partiels existent chez Pretto ou MeilleursAgents mais aucun ne couvre l'ensemble des structures avec recommandation personnalisée complète.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 409,
+    "name": "Assistant IA de calcul automatique des besoins en ventilation et qualité de l'air pour rénovation",
+    "category": "btp",
+    "score": 64,
+    "scores": {
+      "demande": 16,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 8,
+      "faisabilite": 9
+    },
+    "trend": "+85%",
+    "market": "€290M",
+    "type": "SaaS B2B",
+    "mentions": 240,
+    "sources": "Forums artisans, Google Trends RE2020",
+    "problem": "Les rénovations énergétiques globales créent souvent des problèmes de qualité d'air intérieur par sur-isolation sans ventilation adaptée, un point fréquemment négligé par les artisans non spécialisés. Les règles de dimensionnement VMC sont complexes et varient selon le type de bâtiment et les travaux réalisés. Les erreurs de dimensionnement causent moisissures et problèmes de santé, générant des litiges coûteux.",
+    "solution": "Outil qui calcule automatiquement les besoins de ventilation optimaux à partir des caractéristiques du bâtiment et des travaux prévus, avec recommandations de systèmes et dimensionnement conforme DTU. Cible artisans et bureaux d'études thermiques, abonnement 39€/mois. Génère un rapport technique intégrable aux dossiers RE2020 et CEE.",
+    "competitors": "Logiciels de calcul thermique généralistes (Dialogie, U22) incluent parfois cette fonction mais de façon peu accessible pour petits artisans.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 410,
+    "name": "Plateforme IA de matching sous-traitants BTP par spécialité et disponibilité en temps réel",
+    "category": "btp",
+    "score": 74,
+    "scores": {
+      "demande": 19,
+      "croissance": 18,
+      "concurrence": 14,
+      "monetisation": 12,
+      "faisabilite": 11
+    },
+    "trend": "+115%",
+    "market": "€720M",
+    "type": "Marketplace B2B",
+    "mentions": 390,
+    "sources": "LinkedIn BTP, forums artisans, Google Trends",
+    "problem": "Les entreprises générales de BTP perdent un temps considérable à trouver des sous-traitants disponibles et qualifiés pour des lots spécifiques, souvent via réseau personnel limité ou annuaires obsolètes. Les artisans sous-traitants subissent des creux d'activité faute de visibilité sur les chantiers en recherche de compétences. Les retards de chantier liés à l'indisponibilité de sous-traitants coûtent cher en pénalités et désorganisation.",
+    "solution": "Plateforme de matching temps réel entre entreprises générales et sous-traitants selon spécialité, zone géographique, disponibilité et notation qualité, avec système de réservation et acompte sécurisé. Commission de 4% sur les missions conclues. Intègre vérification automatique des assurances décennales et qualifications.",
+    "competitors": "Des annuaires comme Batiactu ou Pros existent mais sans matching temps réel ni gestion de disponibilité dynamique.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 411,
+    "name": "Assistant IA de génération automatique de notices techniques et DOE de fin de chantier",
+    "category": "btp",
+    "score": 61,
+    "scores": {
+      "demande": 15,
+      "croissance": 14,
+      "concurrence": 16,
+      "monetisation": 8,
+      "faisabilite": 8
+    },
+    "trend": "+70%",
+    "market": "€210M",
+    "type": "SaaS B2B",
+    "mentions": 160,
+    "sources": "Forums maîtrise d'œuvre, LinkedIn BTP",
+    "problem": "La constitution du Dossier des Ouvrages Exécutés (DOE) en fin de chantier est chronophage et souvent bâclée, créant des problèmes lors de la maintenance ultérieure ou de litiges sur garantie décennale. Les entreprises doivent compiler manuellement plans, notices, PV et certificats dispersés entre multiples intervenants. Les maîtres d'ouvrage reçoivent souvent des DOE incomplets ou mal structurés, compliquant la gestion patrimoniale future.",
+    "solution": "Outil qui centralise automatiquement les documents de chantier via upload mobile et génère un DOE structuré et conforme aux normes, avec rappels automatiques aux intervenants pour les pièces manquantes. Cible entreprises générales et maîtres d'œuvre, abonnement 69€/mois par chantier actif. Export compatible avec plateformes de GMAO pour la maintenance ultérieure.",
+    "competitors": "Solutions de gestion documentaire généralistes BTP comme Fieldwire existent mais sans génération automatique spécifique au DOE.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 412,
+    "name": "Assistant IA de génération automatique de contenu vidéo éducatif pour marques B2B complexes",
+    "category": "marketing",
+    "score": 66,
+    "scores": {
+      "demande": 16,
+      "croissance": 18,
+      "concurrence": 14,
+      "monetisation": 9,
+      "faisabilite": 9
+    },
+    "trend": "+130%",
+    "market": "€380M",
+    "type": "SaaS",
+    "mentions": 340,
+    "sources": "LinkedIn, Twitter/X marketing, Google Trends",
+    "problem": "Les entreprises B2B avec des produits ou services complexes (SaaS techniques, industrie, fintech) peinent à créer du contenu vidéo pédagogique de qualité faute de budget production et d'expertise pour vulgariser sans trahir la technicité. Le contenu vidéo generique produit par des agences ne capture pas les nuances techniques nécessaires à la conviction d'acheteurs B2B experts. Les cycles de vente longs nécessitent du contenu éducatif à chaque étape, multipliant les besoins de production.",
+    "solution": "Plateforme qui transforme de la documentation technique existante (specs, whitepapers, transcripts) en scripts vidéo puis vidéos explicatives animées via IA générative, en conservant la précision technique. Cible équipes marketing B2B tech et industrie, abonnement 299-899€/mois selon volume. Bibliothèque de templates sectoriels pour accélérer la production.",
+    "competitors": "Synthesia et Pictory couvrent la génération vidéo généraliste mais sans spécialisation sur la vulgarisation technique B2B complexe.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 413,
+    "name": "Plateforme IA de détection automatique des opportunités de partenariats B2B par analyse de marché",
+    "category": "marketing",
+    "score": 69,
+    "scores": {
+      "demande": 17,
+      "croissance": 18,
+      "concurrence": 15,
+      "monetisation": 10,
+      "faisabilite": 9
+    },
+    "trend": "+105%",
+    "market": "€440M",
+    "type": "SaaS B2B",
+    "mentions": 280,
+    "sources": "LinkedIn, forums growth marketing",
+    "problem": "Les équipes business development passent des heures à identifier manuellement des partenaires stratégiques complémentaires (co-marketing, intégrations, revente) via recherche LinkedIn et veille sectorielle artisanale. Les opportunités de partenariat pertinentes sont souvent manquées faute de veille systématique sur l'écosystème concurrentiel et complémentaire. Les petites structures n'ont pas les ressources pour ce travail de prospection stratégique continu.",
+    "solution": "Plateforme qui analyse l'écosystème sectoriel de l'entreprise (clients communs, complémentarité produit, audience similaire) pour suggérer des partenaires potentiels avec score de pertinence et points de contact suggérés. Abonnement 199€/mois pour PME, 599€/mois pour agences gérant plusieurs comptes clients. Intègre des templates d'approche personnalisés par type de partenariat.",
+    "competitors": "Des outils de sales intelligence comme Crossbeam existent pour le co-selling mais sans dimension découverte proactive de nouveaux partenaires.",
+    "weekTrend": "new"
+  },
+  {
+    "id": 414,
+    "name": "Assistant IA de génération automatique de scripts de vente pour visioconférences B2B",
+    "category": "marketing",
+    "score": 64,
+    "scores": {
+      "demande": 16,
+      "croissance": 16,
+      "concurrence": 15,
+      "monetisation": 9,
+      "faisabilite": 8
+    },
+    "trend": "+88%",
+    "market": "€260M",
+    "type": "SaaS",
+    "mentions": 230,
+    "sources": "LinkedIn sales, forums SDR/BDR",
+    "problem": "Les commerciaux B2B improvisent souvent leurs appels de découverte et démos, générant des taux de conversion inconsistants et une expérience client hétérogène selon le niveau d'expérience du vendeur. La formation commerciale traditionnelle ne s'adapte pas en temps réel au profil et aux réponses du prospect pendant l'appel. Les managers manquent de visibilité sur la qualité réelle des échanges pour coacher efficacement leurs équipes.",
+    "solution": "Outil qui génère des scripts d'appel personnalisés selon le profil du prospect (secteur, taille, signaux d'intérêt) avant chaque visioconférence, avec suggestions de reformulation en temps réel pendant l'appel via plugin navigateur. Abonnement 49€/mois par utilisateur commercial, version équipe avec dashboard manager à partir de 10 sièges. Analyse post-appel pour identifier les axes d'amélioration.",
+    "competitors": "Gong et Chorus analysent les appels a posteriori mais sans génération de script personnalisé en amont ni assistance temps réel pendant l'appel.",
     "weekTrend": "new"
   }
 ];
